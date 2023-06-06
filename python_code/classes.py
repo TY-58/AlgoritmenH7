@@ -32,9 +32,12 @@ class Grid:
         """Taken from https://earthly.dev/blog/csv-python/
         """
 
-    with open("./bwq.csv", 'r') as file:
+    #with open("./bwq.csv", 'r') as file:
 
-      csvreader = csv.reader(file)
+     # csvreader = csv.reader(file)
 
-      for row in csvreader:
-        print(row)
+     # for row in csvreader:
+        #print(row)
+
+if __name__ == '__main__':
+    print("hi")
