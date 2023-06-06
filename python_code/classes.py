@@ -1,4 +1,4 @@
-import csv
+from loaders import load_houses, load_batteries
 
 class Grid:
     """A class that stores all the data to play Crowther's Adventure. It loads
@@ -11,33 +11,41 @@ class Grid:
         # initialize
         self.size: int = size
         self.grid: list[list[int]] = []
+        self.initialize_grid()
 
 
         # import dictionaries from gamefile and Synonyms file
-        self.load_rooms(f"data/{game}Adv.dat")
+        #self.load_houses(f"data/{game}Adv.dat")
 
-        self.load_synonyms()
+        #self.load_synonyms()
 
     def initialize_grid(self) -> None:
         """Function that initializes a grid with the correct sizing. Fills every
         spot with a 0."""
 
-        for height in self.size:
+        for height in range(self.size):
             self.grid.append([])
-            for width in self.size:
+            for width in range(self.size):
                 self.grid[height].append(0)
 
 
-    def load_houses(self) -> None:
-        """Taken from https://earthly.dev/blog/csv-python/
+    def process_houses(self, district: int) -> None:
+        """ Loads
         """
+        houses_data = load_houses(district)
 
-    #with open("./bwq.csv", 'r') as file:
+        return None
 
-     # csvreader = csv.reader(file)
+    def process_batteries(self, district: int) -> None:
+        """ Loads
+        """
+        batteries_data = load_batteries(district)
 
-     # for row in csvreader:
-        #print(row)
+        return None
 
 if __name__ == '__main__':
-    print("hi")
+    grid = Grid(10)
+    print(grid.grid)
+
+    yo = load_houses(1)
+    print(yo)
