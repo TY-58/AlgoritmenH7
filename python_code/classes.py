@@ -79,6 +79,7 @@ class Grid:
 
         else:
             route = []
+            route.append([x_location, y_location])
             while self.battery_found(x_location, y_location) == []:
 
                 directions = self.get_directions(x_location, y_location)
@@ -103,8 +104,6 @@ class Grid:
             self.cables.append(cable)
 
             current_house.connected = True
-
-
 
     def get_directions(self, x_location: int, y_location: int):
         """Get all possible directions from current position"""
@@ -175,16 +174,17 @@ class Cable:
 
         self.id = Cable.cable_id_counter
         self.route = route
+        Cable.cable_id_counter += 1
 
     def cable_length(self):
 
         return len(self.route) - 1
 
     def start_cable(self):
-        return route[0]
+        return self.route[0]
 
     def end_cable(self):
-        return route[-1]
+        return self.route[-1]
 
 
 if __name__ == '__main__':
@@ -192,4 +192,4 @@ if __name__ == '__main__':
     grid_1.process_houses()
     grid_1.process_batteries()
     grid_1.make_route(1)
-    print(grid_1.cables[0].route)
+    print(grid_1.cables[0].cable_length(), grid_1.cables[0].id, grid_1.cables[0].start_cable(), grid_1.cables[0].end_cable())
