@@ -62,7 +62,15 @@ class Grid:
 
     def print_grid(self):
         for row in self.grid:
-            print(row)
+            for place in row:
+                if place == 0:
+                    print(" ", end="")
+                if place == 1:
+                    print("#", end="")
+                if place == 2:
+                    print("+", end="")
+                if place == 3:
+                    print("/", end="")
             print("")
 
     def make_route(self, house_id: int):
@@ -105,6 +113,10 @@ class Grid:
 
             current_house.connected = True
 
+            for coordinate in route:
+                if self.grid[coordinate[1]][coordinate[0]] == 0:
+                    self.grid[coordinate[1]][coordinate[0]] = 3
+
     def get_directions(self, x_location: int, y_location: int):
         """Get all possible directions from current position"""
         directions = []
@@ -136,6 +148,11 @@ class Grid:
             return [x_location+1, y_location]
 
         return []
+
+
+    def lay_cables(self):
+        for house in self.houses:
+            self.make_route(house.id)
 
 class House:
     """Class for houses
@@ -191,5 +208,11 @@ if __name__ == '__main__':
     grid_1 = Grid(51,1)
     grid_1.process_houses()
     grid_1.process_batteries()
-    grid_1.make_route(1)
-    print(grid_1.cables[0].cable_length(), grid_1.cables[0].id, grid_1.cables[0].start_cable(), grid_1.cables[0].end_cable())
+    grid_1.lay_cables()
+    for cable in grid_1.cables:
+        print(cable.cable_length(), cable.start_cable(), cable.end_cable())
+
+    sum = 0
+    for house in grid_1.houses:
+        sum += float(house.max_output)
+    grid_1.print_grid()
