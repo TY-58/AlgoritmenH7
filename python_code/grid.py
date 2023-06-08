@@ -3,6 +3,7 @@ from loaders import load_houses, load_batteries
 from battery import Battery
 from cable import Cable
 from house import House
+from visualize import Gridplot
 
 
 class Grid:
@@ -165,6 +166,9 @@ if __name__ == '__main__':
     grid_1.lay_cables()
     for cable in grid_1.cables:
         print(cable.cable_length(), cable.start_cable(), cable.end_cable())
+
+    #call visualize here since this is where grid information is stored
+    grid_1_visual = Gridplot(grid_1)
 
     sum = 0
     for house in grid_1.houses:
