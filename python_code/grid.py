@@ -171,8 +171,8 @@ if __name__ == '__main__':
     grid_1_visual = Gridplot(grid_1)
     x = grid_1_visual.find_house_cor()
     y = grid_1_visual.find_battery_cor()
-    z = grid_1_visual.find_cable_routes()
-    print(z)
+    grid_1_visual.make_plot()
+    #print(z)
     #print(grid_1_visual.batteries)
     #print(grid_1_visual.cables_routes)
 
