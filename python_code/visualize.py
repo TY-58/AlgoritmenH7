@@ -34,7 +34,7 @@ class Gridplot:
               return cable_routes
 
        def make_plot(self):
-              
+
               plt.style.use('_mpl-gallery')
               
               fig, ax = plt.subplots()
