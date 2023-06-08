@@ -164,13 +164,19 @@ if __name__ == '__main__':
     grid_1.process_houses()
     grid_1.process_batteries()
     grid_1.lay_cables()
-    for cable in grid_1.cables:
-        print(cable.cable_length(), cable.start_cable(), cable.end_cable())
+    #for cable in grid_1.cables:
+        #print(cable.cable_length(), cable.start_cable(), cable.end_cable())
 
     #call visualize here since this is where grid information is stored
     grid_1_visual = Gridplot(grid_1)
+    x = grid_1_visual.find_house_cor()
+    y = grid_1_visual.find_battery_cor()
+    z = grid_1_visual.find_cable_routes()
+    print(z)
+    #print(grid_1_visual.batteries)
+    #print(grid_1_visual.cables_routes)
 
     sum = 0
     for house in grid_1.houses:
         sum += float(house.max_output)
-    grid_1.print_grid()
+    #grid_1.print_grid()
