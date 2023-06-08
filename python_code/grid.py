@@ -111,12 +111,18 @@ class Grid:
 
                 route.append([x_location, y_location])
 
-            route.append(self.battery_found(x_location, y_location))
+            final_location = self.battery_found(x_location, y_location)
+            route.append(final_location)
 
             cable = Cable(route)
             self.cables.append(cable)
 
             current_house.connected = True
+
+            for battery in self.batteries:
+                if battery.location == final_location:
+                    battery.house_connections.append(current_house)
+                    break
 
             for coordinate in route:
                 if self.grid[coordinate[1]][coordinate[0]] == 0:
@@ -180,3 +186,6 @@ if __name__ == '__main__':
     for house in grid_1.houses:
         sum += float(house.max_output)
     #grid_1.print_grid()
+
+    for battery in grid_1.batteries:
+        print(battery.house_connections)

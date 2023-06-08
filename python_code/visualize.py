@@ -8,9 +8,9 @@ class Gridplot:
 
        def __init__(self, grid):
               self.cables_routes = grid.cables
-              self.houses = grid.houses 
+              self.houses = grid.houses
               self.batteries = grid.batteries
-       
+
        def find_house_cor(self):
               house_locations = []
               for house in self.houses:
@@ -31,14 +31,14 @@ class Gridplot:
  #             return cable_routes
 
        def make_plot(self):
-              
+
               plt.style.use('_mpl-gallery')
 
               # make data
               np.random.seed(3)
               x = 0.5 + np.arange(8)
               y = np.random.uniform(2, 7, len(x))
-              
+
               fig, ax = plt.subplots()
 
               ax.step(x, y, linewidth=2.5)
