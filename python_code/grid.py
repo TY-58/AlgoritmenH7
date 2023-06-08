@@ -169,12 +169,7 @@ if __name__ == '__main__':
 
     #call visualize here since this is where grid information is stored
     grid_1_visual = Gridplot(grid_1)
-    x = grid_1_visual.find_house_cor()
-    y = grid_1_visual.find_battery_cor()
     grid_1_visual.make_plot()
-    #print(z)
-    #print(grid_1_visual.batteries)
-    #print(grid_1_visual.cables_routes)
 
     sum = 0
     for house in grid_1.houses:
