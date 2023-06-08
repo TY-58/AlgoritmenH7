@@ -4,6 +4,7 @@ from battery import Battery
 from cable import Cable
 from house import House
 from visualize import Gridplot
+from json_output import output_json
 
 
 class Grid:
@@ -184,3 +185,5 @@ if __name__ == '__main__':
 
     for battery in grid_1.batteries:
         print(battery.house_connections)
+
+    output_json(grid_1)
