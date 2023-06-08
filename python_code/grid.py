@@ -123,6 +123,7 @@ class Grid:
             for battery in self.batteries:
                 if battery.location == final_location:
                     battery.house_connections.append(current_house)
+                    battery.current_capacity -= current_house.max_output
                     break
 
             for coordinate in route:
@@ -166,6 +167,12 @@ class Grid:
         for house in self.houses:
             self.make_route(house.id)
 
+    def exceeds_battery(self, battery, house):
+        if battery.current_capacity < house.max_capacity:
+            return True
+        else:
+            return False
+
 if __name__ == '__main__':
     grid_1 = Grid(51,1)
     grid_1.process_houses()
@@ -186,4 +193,4 @@ if __name__ == '__main__':
     for battery in grid_1.batteries:
         print(battery.house_connections)
 
-    output_json(grid_1)
+    #output_json(grid_1)
