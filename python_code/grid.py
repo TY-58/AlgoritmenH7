@@ -6,6 +6,7 @@ from house import House
 from visualize import Gridplot
 from json_output import output_json
 from operator import itemgetter
+from greedy_match import Greedy
 
 
 class Grid:
@@ -37,7 +38,8 @@ class Grid:
 
 
     def process_houses(self) -> None:
-        """ Loads
+        """ Loads 
+        Comment: shouldn't unpacking the houses move to house class? 
         """
         houses_data = load_houses(self.district)
 
@@ -239,6 +241,7 @@ if __name__ == '__main__':
     grid_1.process_houses()
     grid_1.process_batteries()
     grid_1.lay_cables()
+    sorted_house_list = Greedy.sort_houses(grid_1)
 
     #for cable in grid_1.cables:
         #print(cable.cable_length(), cable.start_cable(), cable.end_cable())
