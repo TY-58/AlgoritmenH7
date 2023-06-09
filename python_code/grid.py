@@ -89,7 +89,7 @@ class Grid:
 
         if self.grid[y_location][x_location] != 1:
             print("This coordinate does not contain a house")
-
+    
         else:
             route = []
             route.append([x_location, y_location])
@@ -170,6 +170,7 @@ if __name__ == '__main__':
     grid_1.process_houses()
     grid_1.process_batteries()
     grid_1.lay_cables()
+
     #for cable in grid_1.cables:
         #print(cable.cable_length(), cable.start_cable(), cable.end_cable())
 
@@ -182,5 +183,5 @@ if __name__ == '__main__':
         sum += float(house.max_output)
     #grid_1.print_grid()
 
-    for battery in grid_1.batteries:
-        print(battery.house_connections)
+#   for battery in grid_1.batteries:
+#        print(battery.house_connections)
