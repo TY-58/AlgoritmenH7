@@ -5,6 +5,7 @@ from cable import Cable
 from house import House
 from visualize import Gridplot
 from json_output import output_json
+from operator import itemgetter
 
 
 class Grid:
@@ -22,6 +23,7 @@ class Grid:
         self.houses = []
         self.batteries = []
         self.cables = []
+        self.configuration = []
         self.initialize_grid()
 
     def initialize_grid(self) -> None:
@@ -123,7 +125,7 @@ class Grid:
             for battery in self.batteries:
                 if battery.location == final_location:
                     battery.house_connections.append(current_house)
-                    battery.current_capacity -= current_house.max_output
+                    battery.current_capacity -= float(current_house.max_output)
                     break
 
             for coordinate in route:
@@ -168,10 +170,69 @@ class Grid:
             self.make_route(house.id)
 
     def exceeds_battery(self, battery, house):
-        if battery.current_capacity < house.max_capacity:
+        if battery.current_capacity < float(house.max_output):
             return True
         else:
             return False
+
+    def match_house(self, house_id):
+        house = get_house(house_id)
+        distance_list_batteries = self.get_distance_batteries(house_id)
+
+        return 0
+
+
+    def get_distance_batteries(self, house_id):
+        house = self.get_house(house_id)
+        distance_list =[]
+        for battery in self.batteries:
+            distance = abs(battery.location[0] - house.location[0]) + abs(battery.location[1] + house.location[1])
+            distance_list.append([battery, distance])
+
+        sorted_list = sorted(distance_list, key=itemgetter(1))
+        return sorted_list
+
+    def get_house(self, house_id):
+        for house in self.houses:
+            if house.id == house_id:
+                return house
+
+    def try_configuration(self):
+        configuration = []
+        house_list = self.houses
+
+        for house in sorted(house_list,key=lambda _: random.random()):
+            distance_list_batteries = self.get_distance_batteries(house.id)
+            battery_number = random.randint(0,4)
+            try_battery = distance_list_batteries[battery_number][0]
+            error_counter = 0
+
+            while self.exceeds_battery(try_battery, house):
+                battery_number = random.randint(0,4)
+
+                # configuration cannot work anymore, try again
+                #if battery_number == 4:
+                #    return []
+
+                try_battery = distance_list_batteries[battery_number][0]
+                error_counter += 1
+                if error_counter > 50:
+                    return []
+
+            configuration.append([house, try_battery])
+            try_battery.current_capacity -= float(house.max_output)
+
+        return configuration
+
+
+    def make_configuration(self):
+
+        configuration_check = []
+        while configuration_check == []:
+            configuration_check = self.try_configuration()
+
+        return configuration_check
+
 
 if __name__ == '__main__':
     grid_1 = Grid(51,1)
@@ -182,15 +243,15 @@ if __name__ == '__main__':
         #print(cable.cable_length(), cable.start_cable(), cable.end_cable())
 
     #call visualize here since this is where grid information is stored
-    grid_1_visual = Gridplot(grid_1)
-    grid_1_visual.make_plot()
+    #grid_1_visual = Gridplot(grid_1)
+    #grid_1_visual.make_plot()
 
     sum = 0
     for house in grid_1.houses:
         sum += float(house.max_output)
     #grid_1.print_grid()
 
-    for battery in grid_1.batteries:
-        print(battery.house_connections)
+    #for battery in grid_1.batteries:
+    #    print(battery.house_connections)
 
     #output_json(grid_1)
