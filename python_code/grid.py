@@ -241,7 +241,7 @@ if __name__ == '__main__':
     grid_1.process_houses()
     grid_1.process_batteries()
     grid_1.lay_cables()
-    sorted_house_list = Greedy.sort_houses(grid_1)
+    sorted_house_list = Greedy(grid_1)
 
     #for cable in grid_1.cables:
         #print(cable.cable_length(), cable.start_cable(), cable.end_cable())

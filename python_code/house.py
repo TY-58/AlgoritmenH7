@@ -12,3 +12,7 @@ class House:
         self.connected = False
         self.battery_connection = None
         House.house_id_counter += 1
+
+    def process_houses_2(self):
+        """ This should be done in house class, not grid. Name can be changed after removed from grid class. """
+        pass
