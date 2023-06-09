@@ -9,4 +9,6 @@ class Battery:
         self.location = [x_location, y_location]
         self.max_capacity = max_capacity
         self.house_connections = []
+        self.current_capacity = float(max_capacity)
+
         Battery.battery_id_counter += 1
