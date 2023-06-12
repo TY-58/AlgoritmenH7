@@ -7,6 +7,7 @@ from visualize import Gridplot
 from json_output import output_json
 from operator import itemgetter
 from greedy_match import Greedy_configuration
+from cable_route import Cable_route
 
 
 class Grid:
@@ -263,3 +264,4 @@ if __name__ == '__main__':
 
     x = Greedy_configuration(grid_1)
     config = x.make_configuration()
+    cb = Cable_route(grid_1, config)

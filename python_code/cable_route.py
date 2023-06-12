@@ -7,6 +7,7 @@ class Cable_route:
 
         self.grid = grid
         self.configuration = configuration
+        self.lay_cables()
 
     def make_route(self, house, battery):
         """F"""
