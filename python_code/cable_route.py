@@ -55,13 +55,13 @@ class Cable_route:
 
     #prints statement where path crosses with houses
     def check_surroundings(self, x_location, y_location):
-        count = 0
-        for house in self.configuration:
-            print(house[count].location[1], house[count].location[0])
-            if x_location == house[count].location[0] or y_location == house[count].location[1]:
+        for combination in self.configuration:
+            house = combination[0]
+            print(house.location[1], house.location[0])
+            if x_location == house.location[0] or y_location == house.location[1]:
                 print("This path crosses a house at x, y: ", x_location, y_location)
                 return
-        count += 1
+
                 #print(x_location, house[0].location[0])
                 #return False
            # elif y_location == house[0].location[1]:
