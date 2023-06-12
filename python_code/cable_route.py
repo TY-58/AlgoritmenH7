@@ -22,9 +22,17 @@ class Cable_route:
         x_location = start_location[0]
         y_location = start_location[1]
 
+<<<<<<< HEAD
         if x_direction < 0:
             x_direction = abs(x_direction)
 
+=======
+        for x_counter in range(x_direction + 1):
+            cable_route.append([x_location + x_counter, y_location])
+
+        for y_counter in range(y_direction + 1):
+            cable_route.append([x_location, y_location + y_counter])
+>>>>>>> 0c9a5ba90ea509b04dd8315b36e24e18203f7cb0
 
             for x_counter in range(x_direction):
                 cable_route.append([x_location - x_counter, y_location])
