@@ -241,8 +241,8 @@ if __name__ == '__main__':
     grid_1 = Grid(51,1)
     grid_1.process_houses()
     grid_1.process_batteries()
-    print(grid_1.houses)
-    print(grid_1.batteries)
+    #print(grid_1.houses)
+    #print(grid_1.batteries)
     #grid_1.lay_cables()
     #sorted_house_list = Greedy(grid_1)
 
@@ -250,8 +250,6 @@ if __name__ == '__main__':
         #print(cable.cable_length(), cable.start_cable(), cable.end_cable())
 
     #call visualize here since this is where grid information is stored
-    #grid_1_visual = Gridplot(grid_1)
-    #grid_1_visual.make_plot()
 
     sum = 0
     for house in grid_1.houses:
@@ -266,4 +264,7 @@ if __name__ == '__main__':
     x = Greedy_configuration(grid_1)
     config = x.make_configuration()
     cb = Cable_route(grid_1, config)
-    print(len(grid_1.cables))
+    #print(len(grid_1.cables))
+
+    grid_1_visual = Gridplot(grid_1)
+    grid_1_visual.make_plot()

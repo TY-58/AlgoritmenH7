@@ -15,38 +15,41 @@ class Cable_route:
 
         start_location = house.location
         end_location = battery.location
+        print(start_location)
+        print(end_location)
 
         x_direction = abs(int(end_location[0] - start_location[0]))
-        print(x_direction)
         y_direction = abs(int(end_location[1] - start_location[1]))
-        print(y_direction)
 
         x_location = start_location[0]
         y_location = start_location[1]
 
-        if x_direction < 0:
+        if start_location[0] > end_location[0]:
 
-            for x_counter in range(abs(x_direction)):
-                cable_route.append([x_location - x_counter, y_location])
-
-            if y_direction < 0:
-
-                for y_counter in range(abs(y_direction)):
-                    cable_route.append([x_location + x_direction, y_location - y_counter])
-            else:
-                for y_counter in range(y_direction):
-                    cable_route.append([x_location + x_direction, y_location + y_counter])
-
-
-        else:
             for x_counter in range(x_direction):
-                cable_route.append([x_location + x_counter, y_location])
+                cable_route.append([x_location, y_location])
+                x_location -= 1
+        else:
 
-        for y_counter in range(y_direction ):
-            cable_route.append([x_location, y_location + y_counter])
+            for x_counter in range(x_direction):
+                cable_route.append([x_location, y_location])
+                x_location += 1
+            
+        if start_location[1] > end_location[1]:
+
+            for y_counter in range(y_direction + 1):
+                cable_route.append([x_location, y_location])
+                y_location -= 1
+            
+        else:
+
+            for y_counter in range(y_direction + 1):
+                cable_route.append([x_location, y_location])
+                y_location += 1
 
         print(cable_route)
         return cable_route
+
 
     def lay_cables(self, configuration):
         """f"""
