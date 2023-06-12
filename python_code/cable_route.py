@@ -29,37 +29,45 @@ class Cable_route:
             for x_counter in range(x_direction):
                 cable_route.append([x_location, y_location])
                 x_location -= 1
-                self.check_surroundings(x_location, y_location)
+                check = self.check_surroundings(x_location, y_location)
         else:
             for x_counter in range(x_direction):
                 cable_route.append([x_location, y_location])
                 x_location += 1
-                self.check_surroundings(x_location, y_location)
+                check = self.check_surroundings(x_location, y_location)
             
         if start_location[1] > end_location[1]:
             for y_counter in range(y_direction + 1):
                 cable_route.append([x_location, y_location])
                 y_location -= 1
-                self.check_surroundings(x_location, y_location)
+                check = self.check_surroundings(x_location, y_location)
             
         else:
             for y_counter in range(y_direction + 1):
                 cable_route.append([x_location, y_location])
                 y_location += 1
-                self.check_surroundings(x_location, y_location)
+                check = self.check_surroundings(x_location, y_location)
+        
+        if check == True:
+            print("this path does not cross a house")
 
         return cable_route
 
     #prints statement where path crosses with houses
     def check_surroundings(self, x_location, y_location):
-
+        count = 0
         for house in self.configuration:
-            if x_location == house[0].location[0]:
-                print(x_location, house[0].location[0])
-                print("path crosses house at x: ", x_location, "and y: ", house[0].location[1])
-            elif y_location == house[0].location[1]:
-                print(y_location, house[0].location[1])
-                print("path crosses house at x: ", house[0].location[0], "and y: ", y_location)
+            print(house[count].location[1], house[count].location[0])
+            if x_location == house[count].location[0] or y_location == house[count].location[1]:
+                print("This path crosses a house at x, y: ", x_location, y_location)
+                return
+        count += 1
+                #print(x_location, house[0].location[0])
+                #return False
+           # elif y_location == house[0].location[1]:
+                #print(y_location, house[0].location[1])
+                #return False
+        return True
 
     def lay_cables(self, configuration):
         """f"""
