@@ -265,3 +265,6 @@ if __name__ == '__main__':
     x = Greedy_configuration(grid_1)
     config = x.make_configuration()
     cb = Cable_route(grid_1, config)
+
+    grid_1_visual = Gridplot(grid_1)
+    grid_1_visual.make_plot()

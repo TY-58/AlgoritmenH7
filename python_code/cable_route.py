@@ -7,7 +7,7 @@ class Cable_route:
 
         self.grid = grid
         self.configuration = configuration
-        self.lay_cables()
+        self.lay_cables(configuration)
 
     def make_route(self, house, battery):
         """F"""
@@ -22,10 +22,10 @@ class Cable_route:
         x_location = start_location[0]
         y_location = start_location[1]
 
-        for x_counter in range(x_direction + 1):
+        for x_counter in range(x_direction +1):
             cable_route.append([x_location + x_counter, y_location])
 
-        for y_counter in range(y_direction + 1):
+        for y_counter in range(y_direction ):
             cable_route.append([x_location, y_location + y_counter])
 
         return cable_route
@@ -36,4 +36,4 @@ class Cable_route:
         for combination in configuration:
             route = self.make_route(combination[0], combination[1])
             cable = Cable(route)
-            self.grid.append(cable)
+            self.grid.cables.append(cable)
