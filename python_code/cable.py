@@ -10,7 +10,7 @@ class Cable:
         Cable.cable_id_counter += 1
 
     def cable_length(self):
-
+        
         return len(self.route) - 1
 
     def start_cable(self):
