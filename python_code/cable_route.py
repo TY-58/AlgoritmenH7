@@ -11,7 +11,7 @@ class Cable_route:
 
     def make_route(self, house, battery):
         """F"""
-        cable_route =[]
+        cable_route = []
 
         start_location = house.location
         end_location = battery.location
@@ -22,10 +22,10 @@ class Cable_route:
         x_location = start_location[0]
         y_location = start_location[1]
 
-        for x_counter in range(x_direction +1):
+        for x_counter in range(x_direction):
             cable_route.append([x_location + x_counter, y_location])
 
-        for y_counter in range(y_direction ):
+        for y_counter in range(y_direction):
             cable_route.append([x_location, y_location + y_counter])
 
         return cable_route
