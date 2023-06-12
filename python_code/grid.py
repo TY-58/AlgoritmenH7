@@ -148,7 +148,6 @@ class Grid:
         if x_location < 50 and self.grid[y_location][x_location+1] != 1:
             directions.append('r')
 
-        print(directions)
         return directions
 
     def battery_found(self, x_location: int, y_location: int):
@@ -242,6 +241,8 @@ if __name__ == '__main__':
     grid_1 = Grid(51,1)
     grid_1.process_houses()
     grid_1.process_batteries()
+    print(grid_1.houses)
+    print(grid_1.batteries)
     #grid_1.lay_cables()
     #sorted_house_list = Greedy(grid_1)
 
@@ -264,7 +265,9 @@ if __name__ == '__main__':
 
     x = Greedy_configuration(grid_1)
     config = x.make_configuration()
-    cb = Cable_route(grid_1, config)
+    if config == []:
+        print("No Configuration")
 
+    cb = Cable_route(grid_1, config)
     grid_1_visual = Gridplot(grid_1)
     grid_1_visual.make_plot()

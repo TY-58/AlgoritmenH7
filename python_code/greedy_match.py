@@ -67,16 +67,15 @@ class Greedy_configuration:
                     return []
 
             configuration.append([house, battery])
-            #print(configuration)
             battery.current_capacity -= float(house.max_output)
 
-        for i in configuration:
-            print(i[0].id, i[1].id)
+        #for i in configuration:
+        #    print(i[0].id, i[1].id)
         sum = 0
         for battery in self.grid.batteries:
             sum += battery.current_capacity
-            print(battery.current_capacity)
-        print(sum)
+            #print(battery.current_capacity)
+        #print(sum)
         return configuration
 
 
@@ -84,7 +83,8 @@ class Greedy_configuration:
         x = []
         error_counter = 0
 
-        while x == [] and error_counter < 100000:
+        while x == [] and error_counter < 100:
             x = self.try_configuration()
             error_counter += 1
+
         return x
