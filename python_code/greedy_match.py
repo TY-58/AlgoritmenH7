@@ -38,7 +38,7 @@ class Greedy:
 
 
 
-class Greedy_otto:
+class Greedy_configuration:
     """Class for Greedy algorithm to match houses with batteries without exceeding max capacity"""
 
     #neccesary: all houses and batteries and their max output and capacity.
@@ -66,7 +66,7 @@ class Greedy_otto:
                     self.linked_houses = []
                     return []
 
-            configuration.append([battery, house])
+            configuration.append([house, battery])
             #print(configuration)
             battery.current_capacity -= float(house.max_output)
 

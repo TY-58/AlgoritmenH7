@@ -6,7 +6,7 @@ from house import House
 from visualize import Gridplot
 from json_output import output_json
 from operator import itemgetter
-from greedy_match import Greedy_otto
+from greedy_match import Greedy_configuration
 
 
 class Grid:
@@ -147,6 +147,7 @@ class Grid:
         if x_location < 50 and self.grid[y_location][x_location+1] != 1:
             directions.append('r')
 
+        print(directions)
         return directions
 
     def battery_found(self, x_location: int, y_location: int):
@@ -260,5 +261,5 @@ if __name__ == '__main__':
 
     #output_json(grid_1)
 
-    x = Greedy_otto(grid_1)
-    x.make_configuration()
+    x = Greedy_configuration(grid_1)
+    config = x.make_configuration()
