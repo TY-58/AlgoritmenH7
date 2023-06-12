@@ -8,7 +8,7 @@ class House:
 
         self.id = House.house_id_counter
         self.location = [x_location, y_location]
-        self.max_output = max_output
+        self.max_output = float(max_output)
         self.connected = False
         self.battery_connection = None
         House.house_id_counter += 1
