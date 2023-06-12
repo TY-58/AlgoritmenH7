@@ -265,3 +265,4 @@ if __name__ == '__main__':
     x = Greedy_configuration(grid_1)
     config = x.make_configuration()
     cb = Cable_route(grid_1, config)
+    prnit(grid_1.cables)
