@@ -265,9 +265,5 @@ if __name__ == '__main__':
 
     x = Greedy_configuration(grid_1)
     config = x.make_configuration()
-    if config == []:
-        print("No Configuration")
-
     cb = Cable_route(grid_1, config)
-    grid_1_visual = Gridplot(grid_1)
-    grid_1_visual.make_plot()
+    print(len(grid_1.cables))

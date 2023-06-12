@@ -83,7 +83,7 @@ class Greedy_configuration:
         x = []
         error_counter = 0
 
-        while x == [] and error_counter < 100:
+        while x == [] and error_counter < 10000:
             x = self.try_configuration()
             error_counter += 1
 
