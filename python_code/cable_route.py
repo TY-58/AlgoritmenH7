@@ -22,32 +22,32 @@ class Cable_route:
         x_location = start_location[0]
         y_location = start_location[1]
 
-<<<<<<< HEAD
         if x_direction < 0:
-            x_direction = abs(x_direction)
 
-=======
-        for x_counter in range(x_direction + 1):
-            cable_route.append([x_location + x_counter, y_location])
-
-        for y_counter in range(y_direction + 1):
-            cable_route.append([x_location, y_location + y_counter])
->>>>>>> 0c9a5ba90ea509b04dd8315b36e24e18203f7cb0
-
-            for x_counter in range(x_direction):
+            for x_counter in range(abs(x_direction)):
                 cable_route.append([x_location - x_counter, y_location])
+
+            if y_direction < 0:
+
+                for y_counter in range(abs(y_direction)):
+                    cable_route.append([x_location + x_direction, y_location - y_counter])
+            else:
+                for y_counter in range(y_direction):
+                    cable_route.append([x_location + x_direction, y_location + y_counter])
+
+
         else:
             for x_counter in range(x_direction):
                 cable_route.append([x_location + x_counter, y_location])
 
-        if y_direction < 0:
-            y_direction = abs(y_direction)
+            if y_direction < 0:
+                y_direction = abs(y_direction)
 
-            for y_counter in range(y_direction):
-                cable_route.append([x_location, y_location - y_counter])
-        else:
-            for y_counter in range(y_direction):
-                cable_route.append([x_location, y_location + y_counter])
+                for y_counter in range(y_direction):
+                    cable_route.append([x_location + x_direction, y_location - y_counter])
+            else:
+                for y_counter in range(y_direction):
+                    cable_route.append([x_location + x_direction, y_location + y_counter])
 
         print(cable_route)
         return cable_route
