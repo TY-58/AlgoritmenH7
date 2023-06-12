@@ -6,7 +6,7 @@ from house import House
 from visualize import Gridplot
 from json_output import output_json
 from operator import itemgetter
-from greedy_match import Greedy
+from greedy_match import Greedy_otto
 
 
 class Grid:
@@ -38,8 +38,8 @@ class Grid:
 
 
     def process_houses(self) -> None:
-        """ Loads 
-        Comment: shouldn't unpacking the houses move to house class? 
+        """ Loads
+        Comment: shouldn't unpacking the houses move to house class?
         """
         houses_data = load_houses(self.district)
 
@@ -94,7 +94,7 @@ class Grid:
 
         if self.grid[y_location][x_location] != 1:
             print("This coordinate does not contain a house")
-    
+
         else:
             route = []
             route.append([x_location, y_location])
@@ -240,8 +240,8 @@ if __name__ == '__main__':
     grid_1 = Grid(51,1)
     grid_1.process_houses()
     grid_1.process_batteries()
-    grid_1.lay_cables()
-    sorted_house_list = Greedy(grid_1)
+    #grid_1.lay_cables()
+    #sorted_house_list = Greedy(grid_1)
 
     #for cable in grid_1.cables:
         #print(cable.cable_length(), cable.start_cable(), cable.end_cable())
@@ -259,3 +259,6 @@ if __name__ == '__main__':
     #    print(battery.house_connections)
 
     #output_json(grid_1)
+
+    x = Greedy_otto(grid_1)
+    x.make_configuration()
