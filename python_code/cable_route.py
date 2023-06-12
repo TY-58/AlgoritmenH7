@@ -22,10 +22,10 @@ class Cable_route:
         x_location = start_location[0]
         y_location = start_location[1]
 
-        for x_counter in range(x_direction):
+        for x_counter in range(x_direction + 1):
             cable_route.append([x_location + x_counter, y_location])
 
-        for y_counter in range(y_direction):
+        for y_counter in range(y_direction + 1):
             cable_route.append([x_location, y_location + y_counter])
 
         return cable_route
