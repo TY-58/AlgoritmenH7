@@ -3,19 +3,70 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.style.use('_mpl-gallery')
+class Gridplot:
+       """A class for visualizing the grid as a plot"""
 
-# make data
-np.random.seed(3)
-x = 0.5 + np.arange(8)
-y = np.random.uniform(2, 7, len(x))
+       def __init__(self, grid: list[list[int, int]]):
+              self.cables = grid.cables
+              self.houses = grid.houses 
+              self.batteries = grid.batteries
+              self.house_locations = self.find_house_cor()
+              self.battery_locations = self.find_battery_cor()
+              self.cable_routes = self.find_cable_routes()
 
-# plot
-fig, ax = plt.subplots()
+       
+       def find_house_cor(self):
+              house_locations = []
+              for house in self.houses:
+                     house_locations.append(house.location)
+              return house_locations
 
-ax.step(x, y, linewidth=2.5)
+       def find_battery_cor(self):
+              battery_locations = []
+              for battery in self.batteries:
+                     battery_locations.append(battery.location)
+              return battery_locations
 
-ax.set(xlim=(0, 8), xticks=np.arange(1, 8),
-       ylim=(0, 8), yticks=np.arange(1, 8))
+       def find_cable_routes (self):
+              cable_routes = []
+              for cable in self.cables:
+                     cable_routes.append(cable.route)
+              return cable_routes
 
-plt.savefig(".")
+       def make_plot(self):
+
+              plt.style.use('_mpl-gallery')
+              
+              fig, ax = plt.subplots()
+
+              x1 = []
+              y1 = []
+              x2 = []
+              y2 = []
+              x3 = []
+              y3 = []
+
+              # assigns house, battery and route coordinates to x and y
+              for house in self.house_locations:
+                     x1.append(int(house[0]))
+                     y1.append(int(house[1]))
+
+              for battery in self.battery_locations:
+                     x2.append(int(battery[0]))
+                     y2.append(int(battery[1]))
+
+              for cable in self.cable_routes:
+                     for route in cable:
+                            x3.append(int(route[0]))
+                            y3.append(int(route[1]))
+
+              # places the house and battery coordinates and makes route steps
+              ax.step(x3, y3, linewidth=2.5)
+              plt.plot(x2, y2, 'g*')
+              plt.plot(x1, y1, 'r*')
+
+              ax.set(xlim=(0, 50), xticks=np.arange(1, 50),
+                     ylim=(0, 50), yticks=np.arange(1, 50))
+
+              #plt.savefig("pic.")
+              plt.show()
