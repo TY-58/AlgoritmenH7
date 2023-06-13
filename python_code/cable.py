@@ -1,4 +1,4 @@
-
+COST_PER_UNIT: int = 9
 
 class Cable:
     """Class for cables"""
@@ -9,6 +9,7 @@ class Cable:
         """."""
         self.id = Cable.cable_id_counter
         self.route = route
+        self.cost = self.cable_cost()
         Cable.cable_id_counter += 1
 
     def cable_length(self):
@@ -22,8 +23,10 @@ class Cable:
     def end_cable(self):
         """."""
         return self.route[-1]
+
+    def cable_cost(self):
+        """ Calculates the costs of one cable route. Returns X"""
+        return self.cable_length() * COST_PER_UNIT
     
-    def cable_costs(self):
-        """ Calculates the cost of this cable. """
 
     

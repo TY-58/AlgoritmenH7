@@ -16,8 +16,6 @@ from random_cable_route import Random_cable_route
 if __name__ == '__main__':
     grid_1 = Grid(51,1)
 
-
-
     x = Random_configuration(grid_1)
     config = x.make_configuration()
     cb = Random_cable_route(grid_1, config)
