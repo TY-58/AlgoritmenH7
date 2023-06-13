@@ -6,7 +6,7 @@ class Grid:
     """ A class that stores and processes information and data required in the SmartGrid. """
 
     def __init__(self, size: int, district: int):
-        """Creates the grid with all relevant information on coordinates. """
+        """Creates the grid with all relevant information on coordinates."""
 
         self.district = district
         self.size: int = size
@@ -16,6 +16,8 @@ class Grid:
         self.cables = []
         self.configuration = []
         self.initialize_grid()
+        self.process_houses()
+        self.process_batteries()
 
     def initialize_grid(self) -> None:
         """Function that initializes a grid with correct sizing. 
@@ -59,4 +61,11 @@ class Grid:
             self.grid[y_location][x_location] = 2
 
         return None
+
+    def calc_total_cable_cost(self):
+        """ Calculates the cost of all cables on the grid. """
+        total_cost: int = 0
+        for cable in self.cables:
+            total_cost = total_cost + cable.cost
+        return total_cost
 

@@ -69,13 +69,11 @@ class Cable_route:
 
     def lay_cables(self, configuration):
         """."""
-        count = 0
         for combination in configuration:
             route = self.make_route(combination[0], combination[1])
             cable = Cable(route)
+            #append niet aan cables in de grid
             self.grid.cables.append(cable)
-            count += 1
-        print(count)
 
 
     #def check_free_path(self, x_location, y_location, direction):
