@@ -15,7 +15,10 @@ class Grid:
         self.batteries = []
         self.cables = []
         self.configuration = []
+        self.total_cost = 0
         self.initialize_grid()
+        self.process_houses()
+        self.process_batteries()
 
     def initialize_grid(self) -> None:
         """Function that initializes a grid with correct sizing. 
@@ -60,3 +63,9 @@ class Grid:
 
         return None
 
+    def calc_total_cable_cost(self):
+        """ Calculates the cost of all cables on the grid. """
+        total_cost: int = 0
+        for cable in self.cables:
+            total_cost = total_cost + cable.cost
+        self.total_cost = total_cost

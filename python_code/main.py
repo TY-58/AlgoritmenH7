@@ -15,8 +15,7 @@ from random_cable_route import Random_cable_route
 
 if __name__ == '__main__':
     grid_1 = Grid(51,1)
-    grid_1.process_houses()
-    grid_1.process_batteries()
+
 
 
     x = Random_configuration(grid_1)
@@ -26,6 +25,8 @@ if __name__ == '__main__':
     for cable in grid_1.cables:
         print(cable.route)
         print(cable.cable_length())
+
+    grid_1.calc_total_cable_cost()
 
     grid_1_visual = Gridplot(grid_1)
     grid_1_visual.make_plot()
