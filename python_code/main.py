@@ -17,7 +17,7 @@ if __name__ == '__main__':
     grid_1 = Grid(51,1)
     grid_1.process_houses()
     grid_1.process_batteries()
-    
+
 
     x = Random_configuration(grid_1)
     config = x.make_configuration()
@@ -25,6 +25,7 @@ if __name__ == '__main__':
 
     for cable in grid_1.cables:
         print(cable.route)
+        print(cable.cable_length())
 
     grid_1_visual = Gridplot(grid_1)
     grid_1_visual.make_plot()
