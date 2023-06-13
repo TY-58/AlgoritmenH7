@@ -15,6 +15,7 @@ class Grid:
         self.batteries = []
         self.cables = []
         self.configuration = []
+        self.total_cost = 0
         self.initialize_grid()
         self.process_houses()
         self.process_batteries()
@@ -67,5 +68,5 @@ class Grid:
         total_cost: int = 0
         for cable in self.cables:
             total_cost = total_cost + cable.cost
-        return total_cost
+        self.total_cost = total_cost
 

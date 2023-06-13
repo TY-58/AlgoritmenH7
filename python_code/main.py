@@ -16,7 +16,6 @@ from random_cable_route import Random_cable_route
 if __name__ == '__main__':
     grid_1 = Grid(51,1)
     
-
     x = Greedy_configuration(grid_1)
     config = x.make_configuration()
     cb = Cable_route(grid_1, config)
@@ -24,7 +23,9 @@ if __name__ == '__main__':
     #for cable in grid_1.cables:
         #print(cable.route)
 
-    costs = grid_1.calc_total_cable_cost()
+    grid_1.calc_total_cable_cost()
+    
+
     grid_1_visual = Gridplot(grid_1)
     grid_1_visual.make_plot()
     #output_json(grid_1)
