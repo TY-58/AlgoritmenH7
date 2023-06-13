@@ -78,7 +78,7 @@ class Cable_route:
         print(count)
 
 
-    def check_free_path(self, x_location, y_location, direction):
-        if direction == 'u':
-            if grid.
-        elif direction == 'd':
+    #def check_free_path(self, x_location, y_location, direction):
+        #if direction == 'u':
+            #if grid.
+        #elif direction == 'd':
