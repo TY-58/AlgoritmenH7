@@ -17,7 +17,7 @@ if __name__ == '__main__':
     grid_1.process_houses()
     grid_1.process_batteries()
 
-    x = Random_configuration(grid_1)
+    x = Greedy_configuration(grid_1)
     config = x.make_configuration()
     cb = Cable_route(grid_1, config)
 
