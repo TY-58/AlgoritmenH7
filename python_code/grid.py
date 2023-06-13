@@ -8,6 +8,7 @@ from json_output import output_json
 from operator import itemgetter
 from greedy_match import Greedy_configuration
 from cable_route import Cable_route
+from random_match import Random_configuration
 
 
 class Grid:
@@ -261,7 +262,7 @@ if __name__ == '__main__':
 
     #output_json(grid_1)
 
-    x = Greedy_configuration(grid_1)
+    x = Random_configuration(grid_1)
     config = x.make_configuration()
     cb = Cable_route(grid_1, config)
     #print(len(grid_1.cables))
