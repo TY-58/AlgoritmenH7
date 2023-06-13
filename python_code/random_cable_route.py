@@ -1,3 +1,5 @@
+import random
+from cable import Cable
 
 class Random_cable_route:
     """Lay random cable"""
@@ -18,7 +20,7 @@ class Random_cable_route:
         current_location = house.location
         end_location = battery.location
 
-        route.append(current_location)
+        cable_route.append(current_location)
 
         while current_location != end_location:
 
@@ -36,9 +38,9 @@ class Random_cable_route:
             if direction == 'r':
                 current_location[0] += 1
 
-            route.append(current_location)
+            cable_route.append(current_location)
 
-        route.append(current_location)
+        cable_route.append(current_location)
 
         return cable_route
 
@@ -49,13 +51,13 @@ class Random_cable_route:
         y_location = current_location[1]
         directions = []
 
-        if y_location > 0 and self.grid[y_location-1][x_location] != 1:
+        if y_location > 0 and self.grid.grid[y_location-1][x_location] != 1:
             directions.append('d')
-        if y_location < 50 and self.grid[y_location+1][x_location] != 1:
+        if y_location < 50 and self.grid.grid[y_location+1][x_location] != 1:
             directions.append('u')
-        if x_location > 0 and self.grid[y_location][x_location-1] != 1:
+        if x_location > 0 and self.grid.grid[y_location][x_location-1] != 1:
             directions.append('l')
-        if x_location < 50 and self.grid[y_location][x_location+1] != 1:
+        if x_location < 50 and self.grid.grid[y_location][x_location+1] != 1:
             directions.append('r')
 
         return directions
