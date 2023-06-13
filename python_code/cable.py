@@ -1,3 +1,5 @@
+
+
 class Cable:
     """Class for cables"""
 
@@ -20,5 +22,8 @@ class Cable:
     def end_cable(self):
         """."""
         return self.route[-1]
+    
+    def cable_costs(self):
+        """ Calculates the cost of this cable. """
 
     

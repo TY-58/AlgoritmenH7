@@ -39,7 +39,6 @@ class Random_configuration:
 
         return configuration
 
-
     def make_configuration(self):
         """."""
         x = []
