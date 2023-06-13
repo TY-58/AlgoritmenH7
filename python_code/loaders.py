@@ -27,7 +27,6 @@ def load_batteries(district: int) -> list[list[str]]:
 
         data_batteries = []
         for row in csvreader:
-            # Position bestaat hier uit twee coordinaten
             x,y = row[0].split(",")
             data_batteries.append([x,y,row[1]])
 

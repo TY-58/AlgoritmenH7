@@ -41,18 +41,18 @@ class Greedy:
 class Greedy_configuration:
     """Class for Greedy algorithm to match houses with batteries without exceeding max capacity"""
 
-    #neccesary: all houses and batteries and their max output and capacity.
     def __init__(self, input_grid):
+        """."""
         grid_var = copy.copy(input_grid)
         self.grid = grid_var
         self.sorted_houses = self.sort_houses()
 
-
     def sort_houses(self):
+        """."""
         return sorted(self.grid.houses, key=lambda x: x.max_output, reverse=True)
 
-
     def try_configuration(self):
+        """."""
         configuration = []
         for house in self.sorted_houses:
             battery = random.choice(self.grid.batteries)
@@ -69,17 +69,14 @@ class Greedy_configuration:
             configuration.append([house, battery])
             battery.current_capacity -= float(house.max_output)
 
-        #for i in configuration:
-        #    print(i[0].id, i[1].id)
         sum = 0
         for battery in self.grid.batteries:
             sum += battery.current_capacity
-            #print(battery.current_capacity)
-        #print(sum)
         return configuration
 
 
     def make_configuration(self):
+        """."""
         x = []
         error_counter = 0
 

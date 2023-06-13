@@ -13,11 +13,6 @@ class Battery:
 
         Battery.battery_id_counter += 1
 
-    def process_batteries_2(self):
-        """ This should be done in battery class, not grid. Name can be changed after removed from grid class. """
-        pass
-
-
     def calculate_current_capacity(self, output):
         """ Calculates the current capacity of the battery. And returns bool."""
        
