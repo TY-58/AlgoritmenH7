@@ -31,6 +31,7 @@ class Gridplot:
               cable_routes = []
               for cable in self.cables:
                      cable_routes.append(cable.route)
+                     #print("start ", cable.route, "END")
               return cable_routes
 
        def make_plot(self):
@@ -56,12 +57,18 @@ class Gridplot:
                      y2.append(int(battery[1]))
 
               for cable in self.cable_routes:
+                     x3 = []
+                     y3 = []
+                     print("start")
+                     print(cable)
+                     print("end")
                      for route in cable:
                             x3.append(int(route[0]))
                             y3.append(int(route[1]))
+                     ax.step(x3, y3, linewidth=2.5)
 
+              print("end")
               # places the house and battery coordinates and makes route steps
-              ax.step(x3, y3, linewidth=2.5)
               plt.plot(x2, y2, 'g*')
               plt.plot(x1, y1, 'r*')
 
