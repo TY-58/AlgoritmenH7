@@ -16,6 +16,7 @@ from json_output import output_json
 from operator import itemgetter
 from greedy_match import Greedy_configuration
 from cable_route import Cable_route
+#from match_fred import Fred_configuration
 from random_match import Random_configuration
 from grid import Grid
 from random_cable_route import Random_cable_route
@@ -28,7 +29,7 @@ class Sampleplot:
         self.scores = []
         self.count: int = 0
         self.get_scores()
-        self.make_hist()
+        self.make_hist1()
         self.make_csv_hist()
 
     def get_scores(self):
@@ -60,20 +61,25 @@ class Sampleplot:
             return "No viable results"
 
         mu = np.mean(self.scores)
-        print(mu)
         sigma = np.std(self.scores)
-        print(sigma)
         fig, ax = plt.subplots()
         _, bins, _ = ax.hist(self.scores, bins=2, density=True)
         
         y = ((1 / (np.sqrt(2 * np.pi) * sigma)) *np.exp(-0.5 * (1 / sigma * (bins - mu))**2))
-        print(y)
         ax.plot(bins, y, '--')
 
         ax.set_xlabel('Costs')
         ax.set_ylabel('Probability density')
         ax.set_title(r'Grid Cost Probability')
         fig.tight_layout()
+        plt.show()
+
+    def make_hist2(self):
+
+        if self.count == 0:
+            return "No viable results"
+
+        plt.hist(self.scores, bins=2)
         plt.show()
 
     def make_csv_hist(self):
