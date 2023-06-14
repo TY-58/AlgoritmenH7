@@ -75,7 +75,6 @@ class Cable_route:
             cable = Cable(route)
             self.grid.cables.append(cable)
             count += 1
-        print(count)
 
 
     #def check_free_path(self, x_location, y_location, direction):

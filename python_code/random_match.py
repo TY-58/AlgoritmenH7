@@ -26,7 +26,7 @@ class Random_configuration:
                 battery = random.choice(self.grid.batteries)
                 error_counter += 1
 
-                if error_counter > 5000:
+                if error_counter > 50:
                     self.linked_houses = []
                     return []
 
@@ -44,7 +44,7 @@ class Random_configuration:
         x = []
         error_counter = 0
 
-        while x == [] and error_counter < 10000:
+        while x == [] and error_counter < 1000:
             x = self.try_configuration()
             error_counter += 1
 
