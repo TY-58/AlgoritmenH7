@@ -9,7 +9,7 @@ class Gridplot:
        def __init__(self, grid: list[list[int, int]]):
               """."""
               self.cables = grid.cables
-              self.houses = grid.houses 
+              self.houses = grid.houses
               self.batteries = grid.batteries
               self.house_locations = self.find_house_cor()
               self.battery_locations = self.find_battery_cor()
@@ -38,7 +38,7 @@ class Gridplot:
 
        def make_plot(self):
               """."""
-              plt.style.use('_mpl-gallery')   
+              plt.style.use('_mpl-gallery')
               fig, ax = plt.subplots()
 
               x1 = []
@@ -72,5 +72,5 @@ class Gridplot:
               ax.set(xlim=(0, 50), xticks=np.arange(1, 50),
                      ylim=(0, 50), yticks=np.arange(1, 50))
 
-              #plt.savefig("pic.")
-              plt.show()
+              plt.savefig("pic.")
+              #plt.show()

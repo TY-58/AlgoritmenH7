@@ -32,7 +32,6 @@ class Random_cable_route:
 
             directions = self.get_directions(x_location, y_location, end_location)
             direction = random.choice(directions)
-            print(direction)
             if direction == 'd':
                 y_location -= 1
 
@@ -46,8 +45,6 @@ class Random_cable_route:
                 x_location += 1
 
             cable_route.append([x_location, y_location])
-
-        cable_route.append([x_location, y_location])
 
         return cable_route
 
