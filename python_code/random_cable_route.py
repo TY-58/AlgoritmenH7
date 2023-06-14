@@ -17,7 +17,6 @@ class Random_cable_route:
     def make_route(self, house, battery):
         """Start route from a house to battery."""
 
-
         cable_route = []
         current_location = house.location
 
@@ -61,7 +60,6 @@ class Random_cable_route:
             directions.append('l')
         if x_location < 50 and (self.grid.grid[y_location][x_location+1] == 0 or [x_location+1, y_location] == end_location):
             directions.append('r')
-
 
         return directions
 
