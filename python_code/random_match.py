@@ -30,8 +30,11 @@ class Random_configuration:
                 if error_counter > 500:
 =======
                 if error_counter > 50:
+<<<<<<< HEAD
 >>>>>>> 4d5cdfba3b96b831a36921444fb168b0353a4dcc
                     self.linked_houses = []
+=======
+>>>>>>> 827a229bcc3c0499de24dd6e23133cd5241feabd
                     return []
 
             configuration.append([house, battery])
@@ -49,7 +52,7 @@ class Random_configuration:
         x = []
         error_counter = 0
 
-        while x == [] and error_counter < 1000:
+        while x == [] and error_counter < 10000:
             x = self.try_configuration()
             error_counter += 1
 
