@@ -27,7 +27,9 @@ class Random_configuration:
                 error_counter += 1
 
                 if error_counter > 50:
+
                     self.linked_houses = []
+
                     return []
 
             configuration.append([house, battery])

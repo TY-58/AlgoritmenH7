@@ -21,7 +21,7 @@ def output_json(grid):
 
 	output_list.append({
 	"district": grid.district,
-	"costs-shared": 0,
+	"costs-shared": grid.total_cost,
 	})
 
 	for battery in grid.batteries:

@@ -60,11 +60,11 @@ class Otto_cable_route:
             if len(directions_choices) == 1:
                 direction = directions_choices[0][0]
             if len(directions_choices) == 2:
-                direction = random.choices(directions_choices, weights=(95,5), k=1)[0][0]
+                direction = random.choices(directions_choices, weights=(98,2), k=1)[0][0]
             if len(directions_choices) == 3:
-                direction = random.choices(directions_choices, weights=(85,10,5), k=1)[0][0]
+                direction = random.choices(directions_choices, weights=(90,6,4), k=1)[0][0]
             if len(directions_choices) == 4:
-                direction = random.choices(directions_choices, weights=(70,15,10,5), k=1)[0][0]
+                direction = random.choices(directions_choices, weights=(80,10,6,4), k=1)[0][0]
 
 
             if direction == 'd':
@@ -80,10 +80,14 @@ class Otto_cable_route:
                 x_location += 1
 
             cable_route.append([x_location, y_location])
+            self.delete_loops(x_location, y_location, cable_route)
             #print(cable_route)
+            #print()
 
         #self.delete_loops(cable_route)
-        #print(cable_route)
+        print(cable_route)
+        #print()
+        #print()
         return cable_route
 
     #make route
@@ -140,7 +144,7 @@ class Otto_cable_route:
         else:
             return []
 
-    def delete_loops(self, cable_route):
+    def delete_loops(self, x_location, y_location, cable_route):
         """Delete all loops in the route."""
         # duplicate = True
         # i = 0
@@ -157,11 +161,17 @@ class Otto_cable_route:
         #                 break
         #
         #     i += 1
-        duplicate = True
-        while duplicate == True:
-            duplicate = False
-            for tuple in list(combinations(range(len(cable_route)), 2)):
-                if cable_route[tuple[0]] == cable_route[tuple[1]]:
-                    duplicate = True
-                    del cable_route[tuple[0]+1:tuple[1]]
-                    break
+        # duplicate = True
+        # while duplicate == True:
+        #     duplicate = False
+        #     for tuple in list(combinations(range(len(cable_route)), 2)):
+        #         if cable_route[tuple[0]] == cable_route[tuple[1]]:
+        #             duplicate = True
+        #             del cable_route[tuple[0]+1:tuple[1]]
+        #             break
+        counter = 0
+        for location in cable_route:
+            if [x_location, y_location] == location:
+                del cable_route[counter+1:len(cable_route)]
+                break
+            counter += 1

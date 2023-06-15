@@ -21,7 +21,7 @@ class Grid:
         self.process_batteries()
 
     def initialize_grid(self) -> None:
-        """Function that initializes a grid with correct sizing. 
+        """Function that initializes a grid with correct sizing.
         Assigns a '0' to every spot to signify it as empty."""
 
         for height in range(self.size):
@@ -30,7 +30,7 @@ class Grid:
                 self.grid[height].append(0)
 
     def process_houses(self) -> None:
-        """ Processes all house data from loader function. 
+        """ Processes all house data from loader function.
         Assigns a '1' to the spot of the house on the grid. """
 
         houses_data = load_houses(self.district)
@@ -47,7 +47,7 @@ class Grid:
         return None
 
     def process_batteries(self) -> None:
-        """ Processes all battery data from loader function. 
+        """ Processes all battery data from loader function.
         Assigns a '2' to the spot of the battery on the grid. """
 
         batteries_data = load_batteries(self.district)
@@ -68,4 +68,4 @@ class Grid:
         total_cost: int = 0
         for cable in self.cables:
             total_cost = total_cost + cable.cost
-        self.total_cost = total_cost
+        self.total_cost = total_cost + 25000

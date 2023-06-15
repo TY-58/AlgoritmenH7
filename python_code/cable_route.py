@@ -24,35 +24,26 @@ class Cable_route:
         x_location = start_location[0]
         y_location = start_location[1]
 
-        check = True
-
         if start_location[0] > end_location[0]:
             for x_counter in range(x_direction):
-                if x_location != start_location[0]:
-                    check = self.check_surroundings(x_location, y_location)
+
                 cable_route.append([x_location, y_location])
                 x_location -= 1
 
         elif start_location[0] < end_location[0]:
             for x_counter in range(x_direction):
-                if x_location != start_location[0]:
-                    check = self.check_surroundings(x_location, y_location)
                 cable_route.append([x_location, y_location])
                 x_location += 1
 
         if start_location[1] > end_location[1]:
             for y_counter in range(y_direction + 1):
 
-                if y_location != start_location[1]:
-                    check = self.check_surroundings(x_location, y_location)
                 cable_route.append([x_location, y_location])
                 y_location -= 1
 
         elif start_location[1] < end_location[1]:
             for y_counter in range(y_direction + 1):
 
-                if y_location != start_location[1]:
-                    check = self.check_surroundings(x_location, y_location)
                 cable_route.append([x_location, y_location])
                 y_location += 1
 
