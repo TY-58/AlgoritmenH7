@@ -52,13 +52,13 @@ class Random_cable_route:
         """Get all possible directions from current position"""
         directions = []
 
-        if y_location > 0 and (self.grid.grid[y_location-1][x_location] == 0 or [x_location, y_location-1] == end_location):
+        if y_location > 0 and (self.grid.grid[y_location-1][x_location] != 2 or [x_location, y_location-1] == end_location):
             directions.append('d')
-        if y_location < 50 and (self.grid.grid[y_location+1][x_location] == 0 or [x_location, y_location+1] == end_location):
+        if y_location < 50 and (self.grid.grid[y_location+1][x_location] != 2 or [x_location, y_location+1] == end_location):
             directions.append('u')
-        if x_location > 0 and (self.grid.grid[y_location][x_location-1] == 0 or [x_location-1, y_location] == end_location):
+        if x_location > 0 and (self.grid.grid[y_location][x_location-1] != 2 or [x_location-1, y_location] == end_location):
             directions.append('l')
-        if x_location < 50 and (self.grid.grid[y_location][x_location+1] == 0 or [x_location+1, y_location] == end_location):
+        if x_location < 50 and (self.grid.grid[y_location][x_location+1] != 2 or [x_location+1, y_location] == end_location):
             directions.append('r')
 
         return directions

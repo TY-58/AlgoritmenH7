@@ -5,49 +5,58 @@ class Fred_configuration:
     """ A Class for Random algorithm to match houses with batteries without exceeding max capacity. """
 
     def __init__(self, input_grid):
-        """."""
-        self.input_grid = input_grid
-        self.grid = []
-        self.make_grid_copy()
-        self.houses = self.grid.houses
-        #print(self.houses)
+        self.grid = input_grid
+        self.houses = input_grid.houses
+        self.batteries = input_grid.batteries
 
-    def make_grid_copy(self):
-        self.grid = copy.copy(self.input_grid)
-
-    def try_configuration(self):
-        """."""
-        configuration = []
-
-        for house in self.houses:
-            battery = random.choice(self.grid.batteries)
-
-            count = 0
-            while battery.current_capacity < house.max_output:
-                battery = (self.grid.batteries[count])
-                count += 1
-                if count == len(self.grid.batteries):
-                    self.make_grid_copy()
-                    return []
-
-            configuration.append([house, battery])
-            battery.current_capacity -= float(house.max_output)
-
-        sum = 0
-        for battery in self.grid.batteries:
-            sum += battery.current_capacity
-
-        return configuration
+        #a list storing combination of house with battery
+        self.configuration = []
+        self.make_configuration()
+        self.fit_unmatched()
 
     def make_configuration(self):
-        """."""
-        x = []
-        error_counter = 0
 
-        while x == [] and error_counter < 10000:
-            x = self.try_configuration()
-            error_counter += 1
+        for house in self.houses:
 
-        return x
+            battery = self.batteries[0]
+            for b in self.batteries:
+                
+                if b.current_capacity > battery.current_capacity:
+                    battery = b 
 
-#if house is left, switch with houses with lower output where possible
+            #checks if the house still fits on a battery
+            if battery.current_capacity < house.max_output:
+                #print(house, "house does not fit anymore")
+                self.configuration.append([house, 0])
+            
+            else:
+                battery.current_capacity -= float(house.max_output)
+                self.configuration.append([house, battery])
+        
+        #print(self.configuration)
+        return self.configuration
+            #assign to battery
+
+        #match houses with batteries based on capacity until fixed
+    def fit_unmatched(self):
+        for match in self.configuration:
+            if match[1] == 0:
+                print("no match found for", match[0])
+
+        #rematches based on distance
+        
+        """
+        #van Otto
+        def try_configuration(self):
+        configuration = []
+        for house in self.sorted_houses:
+            batteries_sorted = []
+            for bat in self.grid.batteries:
+                batteries_sorted.append([bat, self.distance_to_battery(house, bat)])
+
+            #een lijst met tuples eerste tuple is batterij en tweede distance
+            batteries_sorted.sort(key=lambda a: a[1], reverse=False)
+
+        def distance_to_battery(self, house, battery):
+        return abs(house.location[0]- battery.location[0]) + abs(house.location[1] - battery.location[1])
+        """
