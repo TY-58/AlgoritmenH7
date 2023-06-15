@@ -26,15 +26,10 @@ class Random_configuration:
                 battery = random.choice(self.grid.batteries)
                 error_counter += 1
 
-<<<<<<< HEAD
-                if error_counter > 500:
-=======
                 if error_counter > 50:
-<<<<<<< HEAD
->>>>>>> 4d5cdfba3b96b831a36921444fb168b0353a4dcc
+
                     self.linked_houses = []
-=======
->>>>>>> 827a229bcc3c0499de24dd6e23133cd5241feabd
+
                     return []
 
             configuration.append([house, battery])

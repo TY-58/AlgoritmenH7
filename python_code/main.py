@@ -13,44 +13,63 @@ from match_fred import Fred_configuration
 #from random_match import Random_configuration
 from grid import Grid
 from random_cable_route import Random_cable_route
-<<<<<<< HEAD
+from combined_cable_route import Combined_cable_route
 from otto_random_improve import Otto_cable_route
-=======
 from sampling import Sampleplot
->>>>>>> 4d5cdfba3b96b831a36921444fb168b0353a4dcc
+
 
 
 if __name__ == '__main__':
     #sample = Sampleplot()
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    x = Otto_greedy_configuration(grid_1)
-
-    config = x.try_configuration()
-    cb = Otto_cable_route(grid_1, config)
-
-    grid_1.calc_total_cable_cost()
-    print(grid_1.total_cost)
-
-=======
-    """
-=======
-    
->>>>>>> 827a229bcc3c0499de24dd6e23133cd5241feabd
-    grid_1 = Grid(51,1)
-    x = Fred_configuration(grid_1)
-    config = x.make_configuration()
-    cb = Random_cable_route(grid_1, config)
-
-    #for cable in grid_1.cables:
-     #   print(cable.route)
-      #  print(cable.cable_length())
-
-    grid_1.calc_total_cable_cost()
->>>>>>> 4d5cdfba3b96b831a36921444fb168b0353a4dcc
-    grid_1_visual = Gridplot(grid_1)
-    grid_1_visual.make_plot()
+    # x = Otto_greedy_configuration(grid_1)
+    #
+    # config = x.try_configuration()
+    # cb = Otto_cable_route(grid_1, config)
+    #
+    # grid_1.calc_total_cable_cost()
+    # print(grid_1.total_cost)
+    #
+    # grid_1 = Grid(51,1)
+    # x = Fred_configuration(grid_1)
+    # config = x.make_configuration()
+    # cb = Random_cable_route(grid_1, config)
+    #
+    # #for cable in grid_1.cables:
+    #  #   print(cable.route)
+    #   #  print(cable.cable_length())
+    #
+    # grid_1.calc_total_cable_cost()
+    # grid_1_visual = Gridplot(grid_1)
+    # grid_1_visual.make_plot()
 
     #output_json(grid_1)
-    
+
+    grid_1 = Grid(51,1)
+    x = Otto_greedy_configuration(grid_1)
+    config = x.try_configuration()
+    print(config)
+    x.process_configuration(config)
+    if config != []:
+        print('hey')
+        cb = Combined_cable_route(grid_1, config)
+    for cable in grid_1.cables:
+        print(cable.route)
+    #for cable in grid_1.cables:
+        #print(cable.route)
+    #    print(cable.cable_length())
+    # grid_1.calc_total_cable_cost()
+    # print(grid_1.total_cost)
+    # if grid_1.total_cost != 25000:
+    #     x.process_configuration(config)
+    #     for battery in grid_1.batteries:
+    #         print(cb.find_center_location(battery))
+    #
+    #
+    # cable_length = 0
+    # for cable in grid_1.cables:
+    #     cable_length += cable.cable_length()
+    # print(cable_length)
+    # output_json(grid_1)
+    grid_1_visual = Gridplot(grid_1)
+    grid_1_visual.make_plot()
