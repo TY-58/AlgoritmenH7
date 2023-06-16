@@ -83,6 +83,8 @@ class Otto_greedy_configuration:
 
                 if error_counter > 200:
                     self.linked_houses = []
+                    for battery in self.grid.batteries:
+                        battery.current_capacity = battery.max_capacity
                     return []
 
             configuration.append([house, battery])

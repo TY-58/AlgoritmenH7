@@ -23,7 +23,6 @@ class Combined_cable_route:
             y_location += house.location[1]
 
         center_location = [round(x_location / len(battery.house_connections)), round(y_location / len(battery.house_connections))]
-        print(center_location)
         return center_location
 
     def lay_center_route(self, battery):
@@ -46,28 +45,31 @@ class Combined_cable_route:
         x_location = start_location[0]
         y_location = start_location[1]
 
+        cable_route.append(start_location)
+
         if start_location[0] > end_location[0]:
             for x_counter in range(x_direction):
-
-                cable_route.append([x_location, y_location])
                 x_location -= 1
+                cable_route.append([x_location, y_location])
 
         elif start_location[0] < end_location[0]:
             for x_counter in range(x_direction):
-                cable_route.append([x_location, y_location])
                 x_location += 1
+                cable_route.append([x_location, y_location])
 
         if start_location[1] > end_location[1]:
-            for y_counter in range(y_direction + 1):
+            for y_counter in range(y_direction):
 
-                cable_route.append([x_location, y_location])
                 y_location -= 1
+                cable_route.append([x_location, y_location])
+
 
         elif start_location[1] < end_location[1]:
-            for y_counter in range(y_direction + 1):
+            for y_counter in range(y_direction):
 
-                cable_route.append([x_location, y_location])
                 y_location += 1
+                cable_route.append([x_location, y_location])
+
 
         return cable_route
 
@@ -83,6 +85,12 @@ class Combined_cable_route:
             for house in battery.house_connections:
                 route_location = self.get_closest_location_cable(house.location, center_cable)
                 house_cable = Cable(self.make_route(house.location, route_location))
+                if route_location != house_cable.route[-1]:
+                    print("Gaat mis!")
+                    print(route_location, house_cable.route)
+                if len(house_cable.route) == 1:
+                    print("leeg")
+                #print(house_cable.route[0])
                 self.grid.cables.append(house_cable)
 
 
