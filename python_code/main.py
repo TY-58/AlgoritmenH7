@@ -69,8 +69,15 @@ if __name__ == '__main__':
     if config != []:
         print('hey')
         cb = Combined_cable_route(grid_1, config)
-    #for cable in grid_1.cables:
-    #    print(cable.route)
+
+    for battery in grid_1.batteries:
+        b = battery.location
+        for cable in grid_1.cables:
+            for loc in cable.route:
+                if b == loc:
+                    print("over bat")
+    for cable in grid_1.cables:
+        print(cable.route)
     #for cable in grid_1.cables:
      #   print(cable.route)
       #  print(cable.cable_length())

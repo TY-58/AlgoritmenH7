@@ -74,11 +74,11 @@ class Otto_greedy_configuration:
 
             batteries_sorted.sort(key=lambda a: a[1], reverse=False)
 
-            battery = random.choices(batteries_sorted, weights=(80, 10, 5,3,2), k=1)[0][0]
+            battery = random.choices(batteries_sorted, weights=(90, 4, 3,2,1), k=1)[0][0]
             error_counter = 0
 
             while battery.current_capacity < house.max_output:
-                battery = random.choices(batteries_sorted, weights=(0, 50 ,20,20,10), k=1)[0][0]
+                battery = random.choices(batteries_sorted, weights=(0, 90,5,3,2), k=1)[0][0]
                 error_counter += 1
 
                 if error_counter > 200:
