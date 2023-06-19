@@ -14,60 +14,37 @@ class Turhan_cable_route:
     def make_route(self, house, battery):
         """."""
         cable_route = []
-
         start_location = house.location
         end_location = battery.location
 
-        x_direction = abs(int(end_location[0] - start_location[0]))
-        y_direction = abs(int(end_location[1] - start_location[1]))
+        # 0 --> distance
+        queue = [(start_location, [start_location], 0)]
 
-        x_location = start_location[0]
-        y_location = start_location[1]
+        # Max number of tries
+        max_locations = 100
+        num_locations = 0
 
-        check = True
-        
-        if start_location[0] > end_location[0]:
-            for x_counter in range(x_direction):
-                if x_location != start_location[0]:
-                    check = self.check_surroundings(x_location, y_location)
-                if x_location - 1 != house.location[0]:
-                    cable_route.append([x_location, y_location])
-                    x_location -= 1
+        while queue and num_locations < max_locations:
+            (location, path, _) = queue.pop(0)
+            num_locations += 1
 
-        elif start_location[0] < end_location[0]:
-            for x_counter in range(x_direction):
-                if x_location != start_location[0]:
-                    check = self.check_surroundings(x_location, y_location)
-                if x_location + 1 != house.location[0]:    
-                    cable_route.append([x_location, y_location])
-                    x_location += 1
+            directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+            for direction_x, direction_y in directions:
+                new_location = (location[0] + direction_x, location[1] + direction_y)
 
-        if start_location[1] > end_location[1]:
-            for y_counter in range(y_direction + 1):
-                if y_location != start_location[1]:
-                    check = self.check_surroundings(x_location, y_location)
-                if y_location - 1 != house.location[1]:    
-                    cable_route.append([x_location, y_location])
-                    y_location -= 1
-
-        elif start_location[1] < end_location[1]:
-            for y_counter in range(y_direction + 1):
-                if y_location != start_location[1]:
-                    check = self.check_surroundings(x_location, y_location)
-                if y_location + 1 != house.location[1]:    
-                    cable_route.append([x_location, y_location])
-                    y_location += 1
+                if (0 <= new_location[0] < self.grid.size and
+                    0 <= new_location[1] < self.grid.size and
+                    new_location not in path):
+                        distance = abs(new_location[0] - end_location[0]) + abs(new_location[1] - end_location[1])
+                        #print('-', start_location, path, end_location, distance, '-')
+                        if distance == 0:
+                            #print("succes")
+                            return path + [new_location]
+                        queue.append((new_location, path + [new_location], distance))
+            queue.sort(key=lambda x: x[2])
 
         return cable_route
 
-    def check_surroundings(self, x_location, y_location):
-        """ Prints a statement if route crosses with house. """
-        for combination in self.configuration:
-            house = combination[0]
-            if house.location[0] == x_location and house.location[1] == y_location:
-                print("This path crosses a house at x, y: ", x_location, y_location)
-                return False
-        return True
 
     def lay_cables(self, configuration):
         """."""
@@ -80,7 +57,3 @@ class Turhan_cable_route:
         print(count)
 
 
-    #def check_free_path(self, x_location, y_location, direction):
-        #if direction == 'u':
-            #if grid.
-        #elif direction == 'd':
