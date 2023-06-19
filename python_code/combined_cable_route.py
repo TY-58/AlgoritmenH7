@@ -59,10 +59,11 @@ class Combined_cable_route:
         y_location = start_location[1]
         cable_route.append(start_location)
 
-
+        x_counter = 0
+        y_counter = 0
 
         if start_location[0] > end_location[0]:
-            for x_counter in range(x_direction):
+            while x_counter < x_direction:
                 x_location -= 1
 
                 if [x_location, y_location] in other_battery_locations:
@@ -73,32 +74,36 @@ class Combined_cable_route:
                     y_direction -= 1
 
                 cable_route.append([x_location, y_location])
+                x_counter += 1
 
         elif start_location[0] < end_location[0]:
-            for x_counter in range(x_direction):
+            while x_counter < x_direction:
                 x_location += 1
 
                 if [x_location, y_location] in other_battery_locations:
-                    print([x_location, y_location])
+                    #print([x_location, y_location])
                     x_location -= 1
                     y_location += y_sign
                     x_counter -= 1
                     y_direction -= 1
 
                 cable_route.append([x_location, y_location])
+                x_counter += 1
 
         if start_location[1] > end_location[1]:
-            for y_counter in range(y_direction):
+            while y_counter < y_direction:
 
                 y_location -= 1
                 cable_route.append([x_location, y_location])
+                y_counter += 1
 
 
         elif start_location[1] < end_location[1]:
-            for y_counter in range(y_direction):
+            while y_counter < y_direction:
 
                 y_location += 1
                 cable_route.append([x_location, y_location])
+                y_counter += 1
 
 
         return cable_route
@@ -110,13 +115,24 @@ class Combined_cable_route:
         for battery in self.grid.batteries:
             self.find_center_location(battery)
             center_cable = self.get_center_route(battery)
-            self.grid.cables.append(center_cable)
+            #self.grid.cables.append(center_cable)
 
             for house in battery.house_connections:
                 route_location = self.get_closest_location_cable(house.location, center_cable)
+                print(route_location)
                 house_cable = Cable(self.make_route(house.location, route_location, battery))
                 cable = self.get_connected_cable(center_cable, house_cable)
-                print(cable)
+                if not cable.route[0] in [x.location for x in self.grid.houses]:
+                    print(house_cable.route)
+                    print(center_cable.route)
+                    print(cable.route)
+                    raise ValueError("gaat fout")
+                if not cable.route[-1] in [x.location for x in self.grid.batteries]:
+                    print(house_cable.route)
+                    print(center_cable.route)
+                    print(cable.route)
+                    raise ValueError("gaat fout")
+
                 self.grid.cables.append(cable)
 
 
@@ -126,7 +142,7 @@ class Combined_cable_route:
         minimum_distance = 102
         closest_location = []
         for location in center_cable.route:
-            distance = abs(house_location[0] - location[0]) + abs(house_location[1] - location[1])
+            distance = abs(house_location[0] - location[0]) - 1 + abs(house_location[1] - location[1]) - 1
 
             if distance < minimum_distance:
                 minimum_distance = distance
@@ -148,7 +164,8 @@ class Combined_cable_route:
         counter = 0
         for location in center_cable.route:
             if location == house_cable.route[-1]:
-                if counter + 1 >= center_cable.cable_length():
+                if counter + 1 > center_cable.cable_length():
+                    print('uitzondering!', house_cable.route, center_cable.route)
                     return house_cable
                 else:
                     return Cable(house_cable.route + center_cable.route[counter+1:])

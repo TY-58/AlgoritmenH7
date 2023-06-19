@@ -69,3 +69,23 @@ class Grid:
         for cable in self.cables:
             total_cost = total_cost + cable.cost
         self.total_cost = total_cost + 25000
+
+    def calc_combined_cable_cost(self):
+        """for combined cables"""
+        total_length = 0
+        for battery in self.batteries:
+
+            battery_route = []
+            for cable in self.cables:
+                if cable.route[-1] == battery.location:
+                    cable_route = [tuple(x) for x in cable.route]
+                    battery_route += cable_route
+
+            print(battery_route)
+            battery_route = set(battery_route)
+            print(battery_route)
+
+            total_length += len(battery_route) - 1
+
+        print(total_length)
+        self.total_cost = 9 * total_length + 25000
