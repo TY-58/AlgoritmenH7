@@ -148,7 +148,6 @@ class Combined_cable_route:
                 else:
                     cable_route.append([x_location, y_location])
                     y_counter += 1
-                    cable_route.append([x_location, y_location])
 
         elif start_location[1] < end_location[1]:
             while y_counter < y_direction:
