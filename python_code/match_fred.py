@@ -11,8 +11,14 @@ class Fred_configuration:
         self.batteries = input_grid.batteries
         self.configuration = []
         self.make_configuration()
+    
+    def reset_hb(self):
+        self.houses = self.grid.houses
+        self.batteries = self.grid.batteries
 
     def try_configuration(self):
+        """Matches houses with battery if it does not exceed battery capacity"""
+        self.reset_hb()
         configuration = []
         for house in self.houses:
             battery = random.choice(self.batteries)
@@ -30,20 +36,30 @@ class Fred_configuration:
 
                 else: 
                     configuration.append([house, 0])
-
         return configuration
 
+    def reassign_house(self, configuration, postition):
+        h, b = configuration[position]
+        battery = random.choice(self.batteries)
+        return h, battery
+
+    def check_battery_capacity(self, battery):
+        pass
+
     def make_configuration(self):
+        """ Performs try_configuration until a max error value is exceeded or all houses are succesfully matched"""
         error_counter = 0
+        self.reset_hb()
         configuration = []
         while self.check_unmatched(configuration) == False and error_counter < 1000:
             error_counter += 1
             configuration = self.try_configuration()
-            
+
         self.configuration = configuration
         print(self.configuration)
 
     def check_unmatched(self, configuration):
+        """Returns True if all houses are matched with a battery without exceeding capacity. """
         if configuration == []:
             return False
 
