@@ -66,7 +66,6 @@ class Otto_cable_route:
             if len(directions_choices) == 4:
                 direction = random.choices(directions_choices, weights=(80,10,6,4), k=1)[0][0]
 
-
             if direction == 'd':
                 y_location -= 1
 
@@ -89,6 +88,7 @@ class Otto_cable_route:
         #print()
         #print()
         return cable_route
+
 
     #make route
     def get_directions(self, x_location, y_location, end_location):
