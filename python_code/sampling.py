@@ -14,12 +14,15 @@ from house import House
 from visualize import Gridplot
 from json_output import output_json
 from operator import itemgetter
-from greedy_match import Greedy_configuration
+##from greedy_match import Greedy_configuration
 from cable_route import Cable_route
 #from match_fred import Fred_configuration
-from random_match import Random_configuration
+#from random_match import Random_configuration
 from grid import Grid
-from random_cable_route import Random_cable_route
+#from random_cable_route import Random_cable_route
+from otto_greedy_match_improve import Otto_greedy_configuration
+from combined_cable_route import Combined_cable_route
+from otto_random_improve import Otto_cable_route
 
 
 class Sampleplot:
@@ -40,11 +43,36 @@ class Sampleplot:
             count += 1
             print("enters range #", count)
             #sample of random algorithm
+            """
             grid_1 = Grid(51,1)
             x = Random_configuration(grid_1)
             config = x.make_configuration()
             cb = Random_cable_route(grid_1, config)
             grid_1.calc_total_cable_cost()
+            """
+
+            #sample of greedy config and combined route
+            
+            grid_1 = Grid(51,3)
+            x = Otto_greedy_configuration(grid_1)
+            config = []
+            while config == []:
+                config = x.try_configuration()
+            x.process_configuration(config)
+            cb = Combined_cable_route(grid_1, config)
+            grid_1.calc_combined_cable_cost()
+            
+
+            #sample of greedy and A+
+            # grid_1 = Grid(51,1)
+            # x = Otto_greedy_configuration(grid_1)
+            # config = []
+            # while config == []:
+            #     config = x.try_configuration()
+            # x.process_configuration(config)
+            # cb = Otto_cable_route(grid_1, config)
+            # grid_1.calc_total_cable_cost()
+
             if grid_1.total_cost != 0:
                 print(grid_1.total_cost)
                 self.scores.append(grid_1.total_cost)
