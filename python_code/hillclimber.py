@@ -16,8 +16,19 @@ class Hillclimber:
 
     def find_match(self, configuration):
         """ Find a match to mutate."""
-        match = random.choice(configuration)
-        print(match)
+        match1 = random.choice(configuration)
+        #print(match1)
+        capacity = self.find_battery_capacity(match1[1])
+        #print(capacity)
+
+
+    def find_battery_capacity(self, battery):
+        """ finds the capacity of a given battery. """
+        return battery.current_capacity
+
+    def find_house_output(self, house):
+        """Finds the output of a house. """
+        pass
 
     def score(self):
         """ Assigns a score to the mutated configuration. """
