@@ -24,18 +24,54 @@ from sampling import Sampleplot
 if __name__ == '__main__':
     #sample = Sampleplot()
 
-    #3grid_1 = Grid(51,1)
+    #een-na
+    # grid_1 = Grid(51,1)
+    # x = Otto_greedy_configuration(grid_1)
+    # config = []
+    # while config == []:
+    #     config = x.try_configuration()
+    # x.process_configuration(config)
+    # cb = Otto_cable_route(grid_1, config)
+    # grid_1_visual = Gridplot(grid_1)
+    # grid_1_visual.make_plot()
+
+
+    #beste
+    # grid_1 = Grid(51,1)
+    # x = Otto_greedy_configuration(grid_1)
+    # config = []
+    # while config == []:
+    #     config = x.try_configuration()
+    # x.process_configuration(config)
+    # cb = Combined_cable_route(grid_1, config)
+    # grid_1.calc_combined_cable_cost()
+    # grid_1_visual = Gridplot(grid_1)
+    # grid_1_visual.make_plot()
+
+    # #random route and config 
+    # grid_1 = Grid(51,1)
+    # config = Random_configuration(grid_1)
+    # x = config.make_configuration()
+    # cb = Random_cable_route(grid_1, x)
+    # grid_1_visual = Gridplot(grid_1)
+    # grid_1_visual.make_plot()
+
     #make = Fred_configuration(grid_1)
 
-    """
+    
     grid_1 = Grid(51,1)
-    config = Random_configuration(grid_1)
+    config = Fred_configuration(grid_1)
+    config.try_configuration()
+    # x = []
+    # while x == []:
+    #     x = config.try_configuration()
+    # cb = Otto_cable_route(grid_1, x)
+    #grid_1_visual = Gridplot(grid_1)
+    #grid_1_visual.make_plot()
 
-    cb = Cable_route(grid_1, config)
-
-    grid_1.calc_total_cable_cost()
-    print(grid_1.total_cost)
-    """
+    #grid_1.calc_total_cable_cost()
+    #print(grid_1.total_cost)
+    
 
 
     # x = Otto_greedy_configuration(grid_1)
@@ -61,18 +97,18 @@ if __name__ == '__main__':
 
     #output_json(grid_1)
 
-    grid_1 = Grid(51,1)
-    x = Otto_greedy_configuration(grid_1)
-    config = []
-    while config == []:
-        config = x.try_configuration()
+   # grid_1 = Grid(51,1)
+    #x = Otto_greedy_configuration(grid_1)
+    #config = []
+    #while config == []:
+     #   config = x.try_configuration()
         #print(config)
 
     #print(config)
-    x.process_configuration(config)
-    if config != []:
-        print('hey')
-        cb = Combined_cable_route(grid_1, config)
+  #  x.process_configuration(config)
+  #  if config != []:
+  #      print('hey')
+  #      cb = Combined_cable_route(grid_1, config)
 
     # for battery in grid_1.batteries:
     #     b = battery.location
@@ -86,11 +122,11 @@ if __name__ == '__main__':
       #  print(cable.cable_length())
 
     #grid_1.calc_total_cable_cost()
-    grid_1.calc_combined_cable_cost()
-    grid_1_visual = Gridplot(grid_1)
-    grid_1_visual.make_plot()
+ #   grid_1.calc_combined_cable_cost()
+  #  grid_1_visual = Gridplot(grid_1)
+   # grid_1_visual.make_plot()
 
-    output_json(grid_1)
+    #output_json(grid_1)
 
 
         #print(cable.route)
@@ -108,5 +144,5 @@ if __name__ == '__main__':
     #     cable_length += cable.cable_length()
     # print(cable_length)
     # output_json(grid_1)
-    grid_1_visual = Gridplot(grid_1)
-    grid_1_visual.make_plot()
+   # grid_1_visual = Gridplot(grid_1)
+    #grid_1_visual.make_plot()
