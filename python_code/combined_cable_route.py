@@ -67,7 +67,7 @@ class Combined_cable_route:
                 x_location -= 1
 
                 if [x_location, y_location] in other_battery_locations:
-                    print([x_location, y_location])
+                #    print([x_location, y_location])
                     x_location += 1
                     y_location += y_sign
                     x_counter -= 1
@@ -119,7 +119,7 @@ class Combined_cable_route:
 
             for house in battery.house_connections:
                 route_location = self.get_closest_location_cable(house.location, center_cable)
-                print(route_location)
+                #print(route_location)
                 house_cable = Cable(self.make_route(house.location, route_location, battery))
                 cable = self.get_connected_cable(center_cable, house_cable)
                 if not cable.route[0] in [x.location for x in self.grid.houses]:
@@ -165,7 +165,7 @@ class Combined_cable_route:
         for location in center_cable.route:
             if location == house_cable.route[-1]:
                 if counter + 1 > center_cable.cable_length():
-                    print('uitzondering!', house_cable.route, center_cable.route)
+                    #print('uitzondering!', house_cable.route, center_cable.route)
                     return house_cable
                 else:
                     return Cable(house_cable.route + center_cable.route[counter+1:])

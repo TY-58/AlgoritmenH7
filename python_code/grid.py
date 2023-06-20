@@ -81,11 +81,11 @@ class Grid:
                     cable_route = [tuple(x) for x in cable.route]
                     battery_route += cable_route
 
-            print(battery_route)
+            #print(battery_route)
             battery_route = set(battery_route)
-            print(battery_route)
+            #print(battery_route)
 
             total_length += len(battery_route) - 1
 
-        print(total_length)
+        #print(total_length)
         self.total_cost = 9 * total_length + 25000

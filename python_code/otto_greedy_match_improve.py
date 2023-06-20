@@ -77,14 +77,14 @@ class Otto_greedy_configuration:
             battery = random.choices(batteries_sorted, weights=(90, 4, 3,2,1), k=1)[0][0]
             error_counter = 0
 
-            while battery.current_capacity < house.max_output:
+            while float(battery.current_capacity) < house.max_output:
                 battery = random.choices(batteries_sorted, weights=(0, 90,5,3,2), k=1)[0][0]
                 error_counter += 1
 
                 if error_counter > 200:
                     self.linked_houses = []
                     for battery in self.grid.batteries:
-                        battery.current_capacity = battery.max_capacity
+                        battery.current_capacity = float(battery.max_capacity)
                     return []
 
             configuration.append([house, battery])

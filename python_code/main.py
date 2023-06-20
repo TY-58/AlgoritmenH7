@@ -63,7 +63,11 @@ if __name__ == '__main__':
 
     grid_1 = Grid(51,1)
     x = Otto_greedy_configuration(grid_1)
-    config = x.try_configuration()
+    config = []
+    while config == []:
+        config = x.try_configuration()
+        #print(config)
+
     #print(config)
     x.process_configuration(config)
     if config != []:
