@@ -101,8 +101,9 @@ if __name__ == '__main__':
     # grid_1_visual.make_plot()
 
 #     #output_json(grid_1)
-#     for _ in range(0,1):
-#         grid_1 = Grid(51,3)
+ #   minimum = 40000
+#     for _ in range(0,5000):
+#         grid_1 = Grid(51,1)
 #         x = Otto_greedy_configuration(grid_1)
 #         config = []
 #         while config == []:
@@ -114,6 +115,13 @@ if __name__ == '__main__':
 #         if config != []:
 #             print('hey')
 #             cb = Combined_cable_route(grid_1, config)
+        # grid_1.calc_combined_cable_cost()
+        # print(grid_1.total_cost)
+        # if grid_1.total_cost < minimum:
+        #     minimum = grid_1.total_cost
+        # if minimum < 25000:
+        #     print(minmum)
+        #     raise ValueError ("te laag")
 
 #     # for battery in grid_1.batteries:
 #     #     b = battery.location
@@ -152,3 +160,20 @@ if __name__ == '__main__':
 #     # output_json(grid_1)
 #    # grid_1_visual = Gridplot(grid_1)
 #     #grid_1_visual.make_plot()
+    #     print(cable.route)
+    #    print(cable.cable_length())
+    # grid_1.calc_total_cable_cost()
+    # print(grid_1.total_cost)
+    # if grid_1.total_cost != 25000:
+    #     x.process_configuration(config)
+    #     for battery in grid_1.batteries:
+    #         print(cb.find_center_location(battery))
+    #
+    #
+
+
+
+    #print(cable_length)
+    # output_json(grid_1)
+   # grid_1_visual = Gridplot(grid_1)
+    #grid_1_visual.make_plot()
