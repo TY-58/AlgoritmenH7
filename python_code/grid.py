@@ -86,6 +86,7 @@ class Grid:
             #print(battery_route)
 
             total_length += len(battery_route) - 1
+        print(total_length)
 
         #print(total_length)
         self.total_cost = 9 * total_length + 25000

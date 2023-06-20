@@ -60,19 +60,19 @@ if __name__ == '__main__':
     # grid_1_visual.make_plot()
 
     #output_json(grid_1)
+    for _ in range(0,1):
+        grid_1 = Grid(51,3)
+        x = Otto_greedy_configuration(grid_1)
+        config = []
+        while config == []:
+            config = x.try_configuration()
+            #print(config)
 
-    grid_1 = Grid(51,1)
-    x = Otto_greedy_configuration(grid_1)
-    config = []
-    while config == []:
-        config = x.try_configuration()
         #print(config)
-
-    #print(config)
-    x.process_configuration(config)
-    if config != []:
-        print('hey')
-        cb = Combined_cable_route(grid_1, config)
+        x.process_configuration(config)
+        if config != []:
+            print('hey')
+            cb = Combined_cable_route(grid_1, config)
 
     # for battery in grid_1.batteries:
     #     b = battery.location
@@ -87,13 +87,14 @@ if __name__ == '__main__':
 
     #grid_1.calc_total_cable_cost()
     grid_1.calc_combined_cable_cost()
+    print(grid_1.total_cost)
     grid_1_visual = Gridplot(grid_1)
     grid_1_visual.make_plot()
 
     output_json(grid_1)
 
 
-        #print(cable.route)
+    #     print(cable.route)
     #    print(cable.cable_length())
     # grid_1.calc_total_cable_cost()
     # print(grid_1.total_cost)
@@ -103,10 +104,10 @@ if __name__ == '__main__':
     #         print(cb.find_center_location(battery))
     #
     #
-    # cable_length = 0
-    # for cable in grid_1.cables:
-    #     cable_length += cable.cable_length()
-    # print(cable_length)
+    cable_length = 0
+    for cable in grid_1.cables:
+        cable_length += cable.cable_length()
+    #print(cable_length)
     # output_json(grid_1)
     grid_1_visual = Gridplot(grid_1)
     grid_1_visual.make_plot()
