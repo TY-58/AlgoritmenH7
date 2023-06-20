@@ -69,12 +69,29 @@ class Combined_cable_route:
                 if [x_location, y_location] in other_battery_locations:
                 #    print([x_location, y_location])
                     x_location += 1
-                    y_location += y_sign
-                    x_counter -= 1
-                    y_direction -= 1
 
-                cable_route.append([x_location, y_location])
-                x_counter += 1
+                    if y_location == end_location[1]:
+                        y_location += 1
+                        cable_route.append([x_location, y_location])
+
+                        x_location -= 1
+                        cable_route.append([x_location, y_location])
+
+                        x_location -= 1
+                        cable_route.append([x_location, y_location])
+
+                        y_location -= 1
+                        cable_route.append([x_location, y_location])
+
+                        x_counter += 2
+                    else:
+
+                        y_location += y_sign
+                        y_direction -= 1
+
+                else:
+                    cable_route.append([x_location, y_location])
+                    x_counter += 1
 
         elif start_location[0] < end_location[0]:
             while x_counter < x_direction:
@@ -83,28 +100,79 @@ class Combined_cable_route:
                 if [x_location, y_location] in other_battery_locations:
                     #print([x_location, y_location])
                     x_location -= 1
-                    y_location += y_sign
-                    x_counter -= 1
-                    y_direction -= 1
 
-                cable_route.append([x_location, y_location])
-                x_counter += 1
+                    if y_location == end_location[1]:
+                        y_location += 1
+                        cable_route.append([x_location, y_location])
+
+                        x_location += 1
+                        cable_route.append([x_location, y_location])
+
+                        x_location += 1
+                        cable_route.append([x_location, y_location])
+
+                        y_location -= 1
+                        cable_route.append([x_location, y_location])
+
+                        x_counter += 2
+                    else:
+
+                        y_location += y_sign
+                        y_direction -= 1
+                        cable_route.append([x_location, y_location])
+                else:
+                    cable_route.append([x_location, y_location])
+                    x_counter += 1
 
         if start_location[1] > end_location[1]:
             while y_counter < y_direction:
 
                 y_location -= 1
-                cable_route.append([x_location, y_location])
-                y_counter += 1
+                if [x_location, y_location] in other_battery_locations:
+                    y_location += 1
 
+                    x_location += 1
+                    cable_route.append([x_location, y_location])
+
+                    y_location -= 1
+                    cable_route.append([x_location, y_location])
+
+                    y_location -= 1
+                    cable_route.append([x_location, y_location])
+
+                    x_location -= 1
+                    cable_route.append([x_location, y_location])
+
+                    y_counter += 2
+
+                else:
+                    cable_route.append([x_location, y_location])
+                    y_counter += 1
+                    cable_route.append([x_location, y_location])
 
         elif start_location[1] < end_location[1]:
             while y_counter < y_direction:
-
                 y_location += 1
-                cable_route.append([x_location, y_location])
-                y_counter += 1
+                if [x_location, y_location] in other_battery_locations:
+                    y_location -= 1
 
+                    x_location += 1
+                    cable_route.append([x_location, y_location])
+
+                    y_location += 1
+                    cable_route.append([x_location, y_location])
+
+                    y_location += 1
+                    cable_route.append([x_location, y_location])
+
+                    x_location -= 1
+                    cable_route.append([x_location, y_location])
+
+                    y_counter += 2
+
+                else:
+                    cable_route.append([x_location, y_location])
+                    y_counter += 1
 
         return cable_route
 
@@ -122,6 +190,11 @@ class Combined_cable_route:
                 #print(route_location)
                 house_cable = Cable(self.make_route(house.location, route_location, battery))
                 cable = self.get_connected_cable(center_cable, house_cable)
+                print('begin')
+                print(house_cable.route)
+                print(center_cable.route)
+                print(cable.route)
+                print('eind')
                 if not cable.route[0] in [x.location for x in self.grid.houses]:
                     print(house_cable.route)
                     print(center_cable.route)
