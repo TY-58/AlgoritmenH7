@@ -18,7 +18,7 @@ from sampling import Sampleplot
 from combined_cable_route import Combined_cable_route
 from otto_random_improve import Otto_cable_route
 from sampling import Sampleplot
-
+from hillclimber import Hillclimber
 
 
 if __name__ == '__main__':
@@ -61,7 +61,12 @@ if __name__ == '__main__':
     
     grid_1 = Grid(51,1)
     config = Fred_configuration(grid_1)
-    config.try_configuration()
+    x = []
+    while x == []:
+        x = config.try_configuration()
+
+    hclimb = Hillclimber(x)
+    hclimb.find_match(x)
     # x = []
     # while x == []:
     #     x = config.try_configuration()
