@@ -2,7 +2,7 @@ import random
 import copy
 from match_fred import Fred_configuration
 
-class HillClimber:
+class Hillclimber:
     """."""
 
     def __init__(self, input_config):
