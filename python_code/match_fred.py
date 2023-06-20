@@ -36,7 +36,7 @@ class Fred_configuration:
 
                 else: 
                     configuration.append([house, 0])
-        return configuration
+        return configuration 
 
     def reassign_house(self, configuration, postition):
         h, b = configuration[position]

@@ -64,7 +64,7 @@ class Sampleplot:
         sigma = np.std(self.scores)
         fig, ax = plt.subplots()
         _, bins, _ = ax.hist(self.scores, bins=50, density=True)
-
+        
         y = ((1 / (np.sqrt(2 * np.pi) * sigma)) *np.exp(-0.5 * (1 / sigma * (bins - mu))**2))
         ax.plot(bins, y, '--')
 
@@ -94,3 +94,6 @@ class Sampleplot:
             for i in self.scores:
                 writer.writerow([count, i])
                 count += 1
+
+
+
