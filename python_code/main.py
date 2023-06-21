@@ -18,7 +18,7 @@ from sampling import Sampleplot
 from combined_cable_route import Combined_cable_route
 from otto_random_improve import Otto_cable_route
 from sampling import Sampleplot
-from hillclimber import Hillclimber
+#from hillclimber import Hillclimber
 
 
 if __name__ == '__main__':
@@ -59,14 +59,14 @@ if __name__ == '__main__':
     #make = Fred_configuration(grid_1)
 
 
-    grid_1 = Grid(51,1)
-    config = Fred_configuration(grid_1)
-    x = []
-    while x == []:
-        x = config.try_configuration()
-
-    hclimb = Hillclimber(grid_1, x)
-    hclimb.mutate_match(x)
+    # grid_1 = Grid(51,1)
+    # config = Fred_configuration(grid_1)
+    # x = []
+    # while x == []:
+    #     x = config.try_configuration()
+    #
+    # hclimb = Hillclimber(grid_1, x)
+    # hclimb.mutate_match(x)
     # x = []
     # while x == []:
     #     x = config.try_configuration()
@@ -100,11 +100,11 @@ if __name__ == '__main__':
     # grid_1_visual = Gridplot(grid_1)
     # grid_1_visual.make_plot()
 
-<<<<<<< HEAD
+
     #output_json(grid_1)
     minimum = 40000
-    for _ in range(0,100):
-        grid_1 = Grid(51,2)
+    for _ in range(0,1):
+        grid_1 = Grid(51,1)
         x = Otto_greedy_configuration(grid_1)
         config = []
         while config == []:
@@ -123,6 +123,14 @@ if __name__ == '__main__':
         if minimum < 25000:
             print(minmum)
             raise ValueError ("te laag")
+        grid_1_visual = Gridplot(grid_1)
+        grid_1_visual.make_plot()
+
+        # for cable in grid_1.cables:
+            # for loc in range(len(cable.route) - 1) :
+            #     if abs(cable.route[loc][0] - cable.route[loc + 1][0]) + abs(cable.route[loc][1] - cable.route[loc + 1][1]) != 1:
+            #         print(cable.route)
+            #         raise ValueError ("misss")
 
     # for battery in grid_1.batteries:
     #     b = battery.location
@@ -144,7 +152,6 @@ if __name__ == '__main__':
     output_json(grid_1)
 
 
-=======
 #     #output_json(grid_1)
  #   minimum = 40000
 #     for _ in range(0,5000):
@@ -205,7 +212,6 @@ if __name__ == '__main__':
 #     # output_json(grid_1)
 #    # grid_1_visual = Gridplot(grid_1)
 #     #grid_1_visual.make_plot()
->>>>>>> eb911d34fcad781057db12387c2873469068842e
     #     print(cable.route)
     #    print(cable.cable_length())
     # grid_1.calc_total_cable_cost()

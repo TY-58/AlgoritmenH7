@@ -79,9 +79,7 @@ class Grid:
             for cable in self.cables:
                 if cable.route[-1] == battery.location:
                     cable_route = [tuple(x) for x in cable.route]
-                    print(cable_route)
                     battery_route += cable_route
-            print()
 
             #print(battery_route)
             battery_route = set(battery_route)

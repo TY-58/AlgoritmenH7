@@ -26,35 +26,56 @@ class Otto_greedy_configuration:
         """
         Sort houses by max_output (descending).
         """
-        
+
         return sorted(self.grid.houses, key=lambda x: x.max_output, reverse=True)
 
-        #random.shuffle(self.grid.houses)
-        #return self.grid.houses
+    def sort_batteries(self, house):
+        """
+        Sorts batteries by distance, closest to input house first.
+        """
+
+        batteries_sorted = []
+
+        for bat in self.grid.batteries:
+            batteries_sorted.append([bat, self.distance_to_battery(house, bat)])
+
+        batteries_sorted.sort(key=lambda a: a[1], reverse=False)
+
+        return batteries_sorted
+
 
     def try_configuration(self):
-        """."""
+        """
+        Start matching houses (in order) to closest batteries.
+        If configuration fails (no legit option possible), return empty list.
+        Else, return configuration as list with items [house, battery].
+        """
+
         configuration = []
+
         for house in self.sorted_houses:
-            batteries_sorted = []
-            for bat in self.grid.batteries:
-                batteries_sorted.append([bat, self.distance_to_battery(house, bat)])
 
-            batteries_sorted.sort(key=lambda a: a[1], reverse=False)
+            batteries_sorted = self.sort_batteries(house)
 
+            # Give a margin to make a suboptimal choice
             battery = random.choices(batteries_sorted, weights=(90, 4, 3,2,1), k=1)[0][0]
-            error_counter = 0
 
+            # Keep choosing until a battery with enough capacity is found
+            error_counter = 0
             while float(battery.current_capacity) < house.max_output:
                 battery = random.choices(batteries_sorted, weights=(0, 90,5,3,2), k=1)[0][0]
                 error_counter += 1
 
-                if error_counter > 200:
+                # If battery is not found after a 100 times, no battery has capacity left
+                if error_counter > 100:
+
+                    # Reset configuration and return empty list
                     self.linked_houses = []
                     for battery in self.grid.batteries:
                         battery.current_capacity = float(battery.max_capacity)
                     return []
 
+            # If a battery is found, add tuple to the configuration and adjust capacity
             configuration.append([house, battery])
             battery.current_capacity -= float(house.max_output)
 
@@ -62,22 +83,29 @@ class Otto_greedy_configuration:
 
 
     def make_configuration(self):
-        """."""
-        x = []
-        error_counter = 0
+        """
+        Run try_configuration until a configuration is found.
+        Return it if this is the case
+        """
+        configuration = []
 
-        while x == [] and error_counter < 100000000:
-            x = self.try_configuration()
-            error_counter += 1
+        while configuration == []:
+            configuration = self.try_configuration()
 
-        return x
+        return configuration
+
 
     def distance_to_battery(self, house, battery):
+        """
+        Return (Manhattan) distance between house and battery.
+        """
         return abs(house.location[0]- battery.location[0]) + abs(house.location[1] - battery.location[1])
 
 
     def process_configuration(self, configuration):
-        """f"""
+        """
+        Add all houses to the house_connections of the batteries that they've matched with.
+        """
         for battery in self.grid.batteries:
             for house in self.grid.houses:
                 if [house, battery] in configuration:
