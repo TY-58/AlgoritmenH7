@@ -69,6 +69,18 @@ if __name__ == '__main__':
     # grid_1_visual.make_plot()
     # print(x)
     # print(grid_1.configuration)
+
+     #beste
+    # grid_1 = Grid(51,1)
+    # x = Otto_greedy_configuration(grid_1)
+    # config = []
+    # while config == []:
+    #     config = x.try_configuration()
+    # x.process_configuration(config)
+    # cb = Combined_cable_route(grid_1, config)
+    # grid_1.calc_combined_cable_cost()
+    # grid_1_visual = Gridplot(grid_1)
+    # grid_1_visual.make_plot()
     
 
     grid_1 = Grid(51,1)
@@ -78,13 +90,11 @@ if __name__ == '__main__':
         config = x.try_configuration()
     x.process_configuration(config)
     grid_1.configuration = x.configuration
-    print(x)
-    print(grid_1)
-    print(grid_1.configuration)
-    for combo in grid_1.configuration:
-        print(combo)
-    # hclimb = Hillclimber(grid_1)
-    # hclimb.do_mutate()
+    cb = Combined_cable_route(grid_1, config)
+    grid_1.calc_combined_cable_cost()
+    #print(grid_1.total_cost)
+    hclimb = Hillclimber(grid_1)
+    hclimb.do_mutate()
 
 
     # x = []
@@ -121,27 +131,27 @@ if __name__ == '__main__':
     # grid_1_visual.make_plot()
 
     #output_json(grid_1)
-    minimum = 40000
-    for _ in range(0,100):
-        grid_1 = Grid(51,2)
-        x = Otto_greedy_configuration(grid_1)
-        config = []
-        while config == []:
-            config = x.try_configuration()
-            #print(config)
+    # minimum = 40000
+    # for _ in range(0,100):
+    #     grid_1 = Grid(51,2)
+    #     x = Otto_greedy_configuration(grid_1)
+    #     config = []
+    #     while config == []:
+    #         config = x.try_configuration()
+    #         #print(config)
 
-        #print(config)
-        x.process_configuration(config)
-        if config != []:
-            print('hey')
-            cb = Combined_cable_route(grid_1, config)
-        grid_1.calc_combined_cable_cost()
-        print(grid_1.total_cost)
-        if grid_1.total_cost < minimum:
-            minimum = grid_1.total_cost
-        if minimum < 25000:
-            print(minmum)
-            raise ValueError ("te laag")
+    #     #print(config)
+    #     x.process_configuration(config)
+    #     if config != []:
+    #         print('hey')
+    #         cb = Combined_cable_route(grid_1, config)
+    #     grid_1.calc_combined_cable_cost()
+    #     print(grid_1.total_cost)
+    #     if grid_1.total_cost < minimum:
+    #         minimum = grid_1.total_cost
+    #     if minimum < 25000:
+    #         print(minmum)
+    #         raise ValueError ("te laag")
 
     # for battery in grid_1.batteries:
     #     b = battery.location
@@ -156,11 +166,11 @@ if __name__ == '__main__':
 
     #grid_1.calc_total_cable_cost()
     #grid_1.calc_combined_cable_cost()
-    print(minimum)
-    grid_1_visual = Gridplot(grid_1)
-    grid_1_visual.make_plot()
+    # print(minimum)
+    # grid_1_visual = Gridplot(grid_1)
+    # grid_1_visual.make_plot()
 
-    output_json(grid_1)
+    # output_json(grid_1)
 
 
 #     #output_json(grid_1)

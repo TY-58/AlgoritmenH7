@@ -4,7 +4,7 @@ from match_fred import Fred_configuration
 from combined_cable_route import Combined_cable_route
 from grid import Grid
 
-MAX_STUCK: int = 10
+MAX_STUCK: int = 1000
 
 #grid.houses daarin in grid.cables begin en eindpunt
 #ook nog op manhatten
@@ -37,38 +37,29 @@ class Hillclimber:
         """ 
         Performs mutations under certain conditions. 
         """
-        new_config = self.mutate_match(self.current_config)
-        #print(new_config)
-        print(new_config[0])
-        print(self.current_grid.batteries)
-        #print(self.current_grid.houses)
+        print("score_old: ", self.current_score)
+        while self.stop_mutation() == False:
+            #make a new configuration
+            new_config = self.mutate_match(self.current_config)
 
-        #process the configuration
-        self.current_grid.process_configuration_grid(new_config)
-        #print(self.current_grid)
-        # while self.stop_mutation() == False:
-        #     #makes a new configuration
-        #     new_config = self.mutate_match(self.current_config)
+            #replace the configuration in the grid with the new one
+            self.current_grid.process_configuration_grid(new_config)
 
-        #     #process the configuration
-        #     self.current_grid.process_configuration_grid(new_config)
-        #     print(self.current_grid)
+            score_new = self.score(new_config)
 
-        #     #calculates the score of the new configuration
-        #     score_new = self.score(self.current_grid, new_config)
+            improvement = self.implement_score(score_new)
 
-        #     #decides if the new score is an improvement
-        #     improvement = self.implement_score(score_new)
+            #if improved, saves the improvement
+            if improvement == True:
+                self.last_config = self.current_config
+                self.last_grid = self.current_grid
 
-        #     #if improved, saves the improvement
-        #     if improvement == True:
-        #         self.last_config = self.current_config
-        #         self.last_grid = self.current_grid
-
-        #     #if not improved, resets grid and configuration to best
-        #     elif improvement == False:
-        #         self.current_config = self.last_config
-        #         self.current_grid = self.last_grid
+            #if not improved, resets grid and configuration to best
+            elif improvement == False:
+                self.current_config = self.last_config
+                self.current_grid = self.last_grid
+        
+        print("score_new: ", self.current_score)
 
     def mutate_match(self, configuration):
         """ 
@@ -98,7 +89,7 @@ class Hillclimber:
     def valid_mutation(self, match1, match2):
         """Checks if the mutation is valid and returns Bool. """
         if match1[1] == match2[1]:
-            print("match is invalid")
+            #print("match is invalid")
             return False
 
         #return false if battery capacity+house < house output
@@ -110,11 +101,13 @@ class Hillclimber:
         cap2 = float(b_cap2 + h_out2)
 
         if cap1 < h_out2:
-            print("mutation is invalid. cap:", cap1," out: ", h_out2)
+            #print("mutation is invalid. cap:", cap1," out: ", h_out2)
             return False
         if cap2 < h_out1:
-            print("mutation is invalid")
+            #print("mutation is invalid")
             return False
+
+        #print("mutation is valid")
         return True
 
     def find_match(self, configuration):
@@ -131,14 +124,26 @@ class Hillclimber:
         """Finds the output of a house. """
         return house.max_output
 
-    def score(self, grid, configuration):
+    def score(self, configuration):
         """ Gets a configuration and measures cost. Assigns a score to the mutated configuration. """
-        route = Combined_cable_route(grid, configuration)
-        print(route)
-        score = grid.calc_combined_cable_cost()
+
+         #resets the house_connections neccesary to lay new cables
+        for battery in self.current_grid.batteries:
+            battery.house_connections = []
+
+        #reconnect houses to batteries according to new configuration
+        self.current_grid.process_configuration_grid(configuration)
+
+        #lays new cable routes
+        Combined_cable_route(self.current_grid, configuration)
+
+        #calculates new cost
+        self.current_grid.calc_combined_cable_cost()
+
+        score = self.current_grid.total_cost
         return score
 
-    def implement_score(score_new):
+    def implement_score(self, score_new):
         """ Decides if configuration should become mutated configuration. """
         score_old = self.current_score
         #if score 2 is better than 1, current config is updated
@@ -150,10 +155,12 @@ class Hillclimber:
         #or return certain something 
         elif score_new > score_old:
             self.stuck += 1
+            #print("stuck:", self.stuck)
             return False
 
         elif score_old == score_new:
             self.stuck += 1
+            #print("stuck:", self.stuck)
             return False
 
     def save_scores(self):
