@@ -2,6 +2,7 @@ import random
 import copy
 from match_fred import Fred_configuration
 from combined_cable_route import Combined_cable_route
+from grid import Grid
 
 class Hillclimber:
     """ Loads an input configuration
@@ -79,13 +80,21 @@ class Hillclimber:
         """Finds the output of a house. """
         return house.max_output
 
-    def score(self, configuration):
+    def score(self, grid, configuration):
         """ Gets a configuration and measures cost. Assigns a score to the mutated configuration. """
-        pass
+        route = Combined_cable_route(grid, configuration)
+        score = grid.calc_combined_cable_cost()
+        return score
 
-    def implement_score(self):
+    def implement_score(self, grid1, grid2, config1, config2):
         """ Decides if configuration should become mutated configuration. """
-        pass
+        score1 = self.score(grid1, config1)
+        score2 = self.score(grid2, config2)
+
+        #if score 2 is better than 1, current config is updated
+        if score2 < score1:
+            self.current_config = config2
+            self.current_grid = grid2
 
     def save_scores(self):
         """ Saves the scores of the mutation and"""
