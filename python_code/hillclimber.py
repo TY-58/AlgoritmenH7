@@ -4,6 +4,8 @@ from match_fred import Fred_configuration
 from combined_cable_route import Combined_cable_route
 from grid import Grid
 
+MAX_STUCK: int = 100
+
 class Hillclimber:
     """ Loads an input configuration
     returns an output configuration
@@ -21,6 +23,7 @@ class Hillclimber:
         self.input_config = copy.copy(input_config)
         self.last_config = []
         self.current_config = self.input_config 
+        self.stuck = 0
 
     def mutate_match(self, configuration):
         """ mutate a single match."""
@@ -95,6 +98,15 @@ class Hillclimber:
         if score2 < score1:
             self.current_config = config2
             self.current_grid = grid2
+            self.stuck = 0
+
+        #tell to keep score 1 and redo 2 
+        #or return certain something 
+        elif score2 > score1:
+            self.stuck += 1
+
+        else score1 == score2:
+            pass
 
     def save_scores(self):
         """ Saves the scores of the mutation and"""
@@ -102,11 +114,8 @@ class Hillclimber:
 
     def stop_mutation(self):
         """ Quits program if mutations do not improve configuration after X tries."""
-        pass
-        
-
-
-        #get a random match
-        #match with new battery
-        #check if match is valid
+        #maybe change into different return?
+        if self.stuck > MAX_STUCK:
+            return True
+        return False
 
