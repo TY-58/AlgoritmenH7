@@ -8,9 +8,9 @@ class Random_configuration:
         """."""
         grid_var = copy.copy(input_grid)
         self.grid = grid_var
-        self.shuffled_houses = self.randomize_houses()
+        self.shuffled_houses = self.shuffle_houses()
 
-    def randomize_houses(self):
+    def shuffle_houses(self):
         """."""
         random.shuffle(self.grid.houses)
         return self.grid.houses
