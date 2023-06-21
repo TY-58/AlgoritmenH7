@@ -48,7 +48,7 @@ if __name__ == '__main__':
     # grid_1_visual = Gridplot(grid_1)
     # grid_1_visual.make_plot()
 
-    # #random route and config 
+    # #random route and config
     # grid_1 = Grid(51,1)
     # config = Random_configuration(grid_1)
     # x = config.make_configuration()
@@ -58,7 +58,7 @@ if __name__ == '__main__':
 
     #make = Fred_configuration(grid_1)
 
-    
+
     grid_1 = Grid(51,1)
     config = Fred_configuration(grid_1)
     x = []
@@ -76,7 +76,7 @@ if __name__ == '__main__':
 
     #grid_1.calc_total_cable_cost()
     #print(grid_1.total_cost)
-    
+
 
 
     # x = Otto_greedy_configuration(grid_1)
@@ -102,8 +102,8 @@ if __name__ == '__main__':
 
     #output_json(grid_1)
     minimum = 40000
-    for _ in range(0,5000):
-        grid_1 = Grid(51,1)
+    for _ in range(0,100):
+        grid_1 = Grid(51,2)
         x = Otto_greedy_configuration(grid_1)
         config = []
         while config == []:
@@ -135,12 +135,12 @@ if __name__ == '__main__':
       #  print(cable.cable_length())
 
     #grid_1.calc_total_cable_cost()
-    grid_1.calc_combined_cable_cost()
-    print(grid_1.total_cost)
+    #grid_1.calc_combined_cable_cost()
+    print(minimum)
     grid_1_visual = Gridplot(grid_1)
     grid_1_visual.make_plot()
 
-    #output_json(grid_1)
+    output_json(grid_1)
 
 
     #     print(cable.route)

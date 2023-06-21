@@ -52,7 +52,7 @@ class Sampleplot:
             """
 
             #sample of greedy config and combined route
-            
+
             grid_1 = Grid(51,3)
             x = Otto_greedy_configuration(grid_1)
             config = []
@@ -61,7 +61,7 @@ class Sampleplot:
             x.process_configuration(config)
             cb = Combined_cable_route(grid_1, config)
             grid_1.calc_combined_cable_cost()
-            
+
 
             #sample of greedy and A+
             # grid_1 = Grid(51,1)
@@ -92,7 +92,7 @@ class Sampleplot:
         sigma = np.std(self.scores)
         fig, ax = plt.subplots()
         _, bins, _ = ax.hist(self.scores, bins=50, density=True)
-        
+
         y = ((1 / (np.sqrt(2 * np.pi) * sigma)) *np.exp(-0.5 * (1 / sigma * (bins - mu))**2))
         ax.plot(bins, y, '--')
 
@@ -122,6 +122,3 @@ class Sampleplot:
             for i in self.scores:
                 writer.writerow([count, i])
                 count += 1
-
-
-
