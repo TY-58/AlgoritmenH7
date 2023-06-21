@@ -1,29 +1,47 @@
 import random
 import copy
 from match_fred import Fred_configuration
+from combined_cable_route import Combined_cable_route
 
 class Hillclimber:
-    """."""
+    """ Loads an input configuration
+    returns an output configuration
+    finds matches in configuration and swaps batteries if possible.
+    """
 
-    def __init__(self, input_config):
-        """ Loads an input configuration. """
-        self.input_config = input_config
-        self.current_config = input_config
+    def __init__(self, input_grid, input_config):
+        """ Loads an input configuration.
+        Input grid and configuration always need to stay the same.
+        current and last can be updated.
+        """
+        self.input_grid = copy.copy(input_grid)
+        self.last_grid = []
+        self.current_grid = self.input_grid
+        self.input_config = copy.copy(input_config)
+        self.last_config = []
+        self.current_config = self.input_config 
 
     def mutate_match(self, configuration):
         """ mutate a single match."""
-        match1 = self.find_match(configuration)
-        match2 = self.find_match(configuration)
+        configuration_
+        place1, match1 = self.find_match(configuration)
+        place2, match2 = self.find_match(configuration)
         while self.valid_mutation(match1, match2) == False:
-            print(match1, match2)
-            match1 = self.find_match(configuration)
-            match2 = self.find_match(configuration)
+            place1, match1 = self.find_match(configuration)
+            place2, match2 = self.find_match(configuration)
 
-        print(match1, match2)
+        #switches batteries
+        bat_switch = match1[1]
+        match1[1] = match2[1]
+        match2[1] = bat_switch
+
+        #puts mutated matches in configuration
+        configuration[place1] = match1
+        configuration[place2] = match2
 
     def copy_configuration(self):
         """ Make a copy of the current configuration to manipulate. """
-        pass
+        self.last_config = copy.copy(self.current_config)
 
     def valid_mutation(self, match1, match2):
         """Checks if the mutation is valid and returns Bool. """
@@ -48,9 +66,10 @@ class Hillclimber:
         return True
 
     def find_match(self, configuration):
-        """ Find a match to mutate."""
-        match = random.choice(configuration)
-        return match
+        """ Find a match to mutate. Returns place of match in configuration and the match. """
+        x = random.choice(range(len(configuration)))
+        match = configuration[x]
+        return x, match
 
     def find_battery_capacity(self, battery):
         """ finds the capacity of a given battery. """
@@ -60,8 +79,8 @@ class Hillclimber:
         """Finds the output of a house. """
         return house.max_output
 
-    def score(self):
-        """ Assigns a score to the mutated configuration. """
+    def score(self, configuration):
+        """ Gets a configuration and measures cost. Assigns a score to the mutated configuration. """
         pass
 
     def implement_score(self):

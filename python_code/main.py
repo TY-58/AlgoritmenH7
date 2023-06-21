@@ -65,7 +65,7 @@ if __name__ == '__main__':
     while x == []:
         x = config.try_configuration()
 
-    hclimb = Hillclimber(x)
+    hclimb = Hillclimber(grid_1, x)
     hclimb.mutate_match(x)
     # x = []
     # while x == []:
