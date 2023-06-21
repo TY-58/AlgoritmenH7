@@ -91,3 +91,11 @@ class Grid:
 
         #print(total_length)
         self.total_cost = 9 * total_length + 25000
+
+    def process_configuration_grid(self, configuration):
+        """f"""
+        for battery in self.batteries:
+            for house in self.houses:
+                if [house, battery] in configuration:
+                    battery.house_connections.append(house)
+            #print(battery.house_connections)
