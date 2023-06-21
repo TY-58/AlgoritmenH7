@@ -4,30 +4,76 @@ from match_fred import Fred_configuration
 from combined_cable_route import Combined_cable_route
 from grid import Grid
 
-MAX_STUCK: int = 100
+MAX_STUCK: int = 10
+
+#grid.houses daarin in grid.cables begin en eindpunt
+#ook nog op manhatten
+
 
 class Hillclimber:
-    """ Loads an input configuration
+    """ 
+    Loads an input configuration
     returns an output configuration
     finds matches in configuration and swaps batteries if possible.
     """
 
-    def __init__(self, input_grid, input_config):
-        """ Loads an input configuration.
+    def __init__(self, input_grid):
+        """ 
+        Loads an input configuration.
         Input grid and configuration always need to stay the same.
         current and last can be updated.
         """
-        self.input_grid = copy.copy(input_grid)
-        self.last_grid = []
-        self.current_grid = self.input_grid
-        self.input_config = copy.copy(input_config)
-        self.last_config = []
-        self.current_config = self.input_config 
+        #haal config uit grid
+        self.input_grid = input_grid
+        self.input_config = input_grid.configuration
+        self.last_grid = copy.deepcopy(self.input_grid)
+        self.last_config = self.last_grid.configuration 
+        self.current_grid = copy.deepcopy(self.input_grid)
+        self.current_config = self.current_grid.configuration
+        self.current_score = input_grid.total_cost
         self.stuck = 0
 
+    def do_mutate(self):
+        """ 
+        Performs mutations under certain conditions. 
+        """
+        new_config = self.mutate_match(self.current_config)
+        #print(new_config)
+        print(new_config[0])
+        print(self.current_grid.batteries)
+        #print(self.current_grid.houses)
+
+        #process the configuration
+        self.current_grid.process_configuration_grid(new_config)
+        #print(self.current_grid)
+        # while self.stop_mutation() == False:
+        #     #makes a new configuration
+        #     new_config = self.mutate_match(self.current_config)
+
+        #     #process the configuration
+        #     self.current_grid.process_configuration_grid(new_config)
+        #     print(self.current_grid)
+
+        #     #calculates the score of the new configuration
+        #     score_new = self.score(self.current_grid, new_config)
+
+        #     #decides if the new score is an improvement
+        #     improvement = self.implement_score(score_new)
+
+        #     #if improved, saves the improvement
+        #     if improvement == True:
+        #         self.last_config = self.current_config
+        #         self.last_grid = self.current_grid
+
+        #     #if not improved, resets grid and configuration to best
+        #     elif improvement == False:
+        #         self.current_config = self.last_config
+        #         self.current_grid = self.last_grid
+
     def mutate_match(self, configuration):
-        """ mutate a single match."""
-        configuration_
+        """ 
+        Mutate a single match.
+        """
         place1, match1 = self.find_match(configuration)
         place2, match2 = self.find_match(configuration)
         while self.valid_mutation(match1, match2) == False:
@@ -42,6 +88,8 @@ class Hillclimber:
         #puts mutated matches in configuration
         configuration[place1] = match1
         configuration[place2] = match2
+        
+        return configuration
 
     def copy_configuration(self):
         """ Make a copy of the current configuration to manipulate. """
@@ -86,27 +134,27 @@ class Hillclimber:
     def score(self, grid, configuration):
         """ Gets a configuration and measures cost. Assigns a score to the mutated configuration. """
         route = Combined_cable_route(grid, configuration)
+        print(route)
         score = grid.calc_combined_cable_cost()
         return score
 
-    def implement_score(self, grid1, grid2, config1, config2):
+    def implement_score(score_new):
         """ Decides if configuration should become mutated configuration. """
-        score1 = self.score(grid1, config1)
-        score2 = self.score(grid2, config2)
-
+        score_old = self.current_score
         #if score 2 is better than 1, current config is updated
-        if score2 < score1:
-            self.current_config = config2
-            self.current_grid = grid2
+        if score_new < score_old:
             self.stuck = 0
+            return True
 
         #tell to keep score 1 and redo 2 
         #or return certain something 
-        elif score2 > score1:
+        elif score_new > score_old:
             self.stuck += 1
+            return False
 
-        else score1 == score2:
-            pass
+        elif score_old == score_new:
+            self.stuck += 1
+            return False
 
     def save_scores(self):
         """ Saves the scores of the mutation and"""

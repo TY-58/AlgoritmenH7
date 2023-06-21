@@ -1,5 +1,8 @@
+from operator import itemgetter
+from helper import function_sort_output
 import random
 import copy
+
 class Fred_configuration:
     """ Class for Greedy algorithm to match houses with batteries without exceeding max capacity. """
 
@@ -47,14 +50,14 @@ class Fred_configuration:
 
     def make_configuration(self):
         """."""
-        x = []
+        self.configuration = []
         error_counter = 0
 
-        while x == [] and error_counter < 100000000:
-            x = self.try_configuration()
+        while self.configuration == [] and error_counter < 100000000:
+            self.try_configuration()
             error_counter += 1
 
-        return x
+        return self.configuration
 
     def distance_to_battery(self, house, battery):
         return abs(house.location[0]- battery.location[0]) + abs(house.location[1] - battery.location[1])

@@ -58,7 +58,20 @@ if __name__ == '__main__':
 
     #make = Fred_configuration(grid_1)
 
+    # grid_1 = Grid(51,1)
+    # x = Otto_greedy_configuration(grid_1)
+    # config = []
+    # while config == []:
+    #     config = x.try_configuration()
+    # x.process_configuration(config)
+    # cb = Otto_cable_route(grid_1, config)
+    # grid_1_visual = Gridplot(grid_1)
+    # grid_1_visual.make_plot()
+    # print(x)
+    # print(grid_1.configuration)
+    
 
+<<<<<<< HEAD
     # grid_1 = Grid(51,1)
     # config = Fred_configuration(grid_1)
     # x = []
@@ -67,6 +80,24 @@ if __name__ == '__main__':
     #
     # hclimb = Hillclimber(grid_1, x)
     # hclimb.mutate_match(x)
+=======
+    grid_1 = Grid(51,1)
+    x = Fred_configuration(grid_1)
+    config = []
+    while config == []:
+        config = x.try_configuration()
+    x.process_configuration(config)
+    grid_1.configuration = x.configuration
+    print(x)
+    print(grid_1)
+    print(grid_1.configuration)
+    for combo in grid_1.configuration:
+        print(combo)
+    # hclimb = Hillclimber(grid_1)
+    # hclimb.do_mutate()
+
+
+>>>>>>> d7df5febc54eec1e4342098042eb587cecc4dd5b
     # x = []
     # while x == []:
     #     x = config.try_configuration()
@@ -100,7 +131,10 @@ if __name__ == '__main__':
     # grid_1_visual = Gridplot(grid_1)
     # grid_1_visual.make_plot()
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d7df5febc54eec1e4342098042eb587cecc4dd5b
     #output_json(grid_1)
     minimum = 40000
     for _ in range(0,1):
