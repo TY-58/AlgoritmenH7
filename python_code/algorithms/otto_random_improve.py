@@ -1,6 +1,6 @@
 import random
-from cable import Cable
-from house import House
+from classes.cable import Cable
+from classes.house import House
 import copy
 from itertools import combinations
 
@@ -104,10 +104,10 @@ class Otto_cable_route:
 
 
     def get_directions(self, x_location, y_location, end_location):
-            """
-            Get all possible directions from current position.
-            Batteries other than the destination battery are not allowed to move over.
-            """
+        """
+        Get all possible directions from current position.
+        Batteries other than the destination battery are not allowed to move over.
+        """
 
         directions = []
 

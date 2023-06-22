@@ -1,4 +1,4 @@
-from cable import Cable
+from classes.cable import Cable
 
 class Combined_cable_route:
     """
