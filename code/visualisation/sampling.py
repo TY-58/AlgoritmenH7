@@ -20,8 +20,8 @@ from operator import itemgetter
 #from random_configuration import Random_configuration
 from code.classes.grid import Grid
 #from random_cable_route import Random_cable_route
-from code.algorithms.greedy_configuration import Greedy_configuration
-from code.algorithms.shared_cable_route import Shared_cable_route
+from code.algorithms.configurations.greedy_configuration import Greedy_configuration
+from code.algorithms.cable_routes.shared_cable_route import Shared_cable_route
 # from algorithms.greedy_cable_route import Greedy_cable_route
 
 

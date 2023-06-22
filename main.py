@@ -6,14 +6,13 @@ from code.classes.house import House
 from code.visualisation.visualize import Gridplot
 from code.helpers.json_output import output_json
 from operator import itemgetter
-from code.algorithms.greedy_configuration import Greedy_configuration
+from code.algorithms.configurations.greedy_configuration import Greedy_configuration
 #from code.algorithms.match_fred import Fred_configuration
-from code.algorithms.random_configuration import Random_configuration
+from code.algorithms.configurations.random_configuration import Random_configuration
 from code.classes.grid import Grid
-from code.algorithms.random_cable_route import Random_cable_route
-from code.algorithms.greedy_cable_route import Greedy_cable_route
-from code.algorithms.shared_cable_route import Shared_cable_route
-from code.algorithms.greedy_cable_route import Greedy_cable_route
+from code.algorithms.cable_routes.random_cable_route import Random_cable_route
+from code.algorithms.cable_routes.greedy_cable_route import Greedy_cable_route
+from code.algorithms.cable_routes.shared_cable_route import Shared_cable_route
 from code.visualisation.sampling import Sampleplot
 from code.algorithms.hillclimber import Hillclimber
 

@@ -1,8 +1,8 @@
 import random
 import copy
 #from .match_fred import Fred_configuration
-from .shared_cable_route import Shared_cable_route
-from .greedy_configuration import Greedy_configuration
+from .cable_routes.shared_cable_route import Shared_cable_route
+from .configurations.greedy_configuration import Greedy_configuration
 from code.classes.grid import Grid
 
 MAX_STUCK: int = 1000
@@ -17,7 +17,7 @@ class Hillclimber:
 
     def __init__(self, input_grid):
         """
-        Takes a grid as input and stores the grid. 
+        Takes a grid as input and stores the grid.
         Makes deepcopies of the input grid to make mutations without loss of input grid.
         """
 
@@ -40,7 +40,7 @@ class Hillclimber:
 
         # Performs mutations while at least 1 in every X iterations is an improvement
         while self.stop_mutation() == False:
-            
+
             new_config = self.mutate_match(self.current_config)
 
             # Replaces configuration in the grid with new_config
@@ -70,7 +70,7 @@ class Hillclimber:
         """
         Mutates a single match in the given configuration and retursn the mutated configuration.
         """
-    
+
         # Finds valid mutations
         place1, match1 = self.find_match(configuration)
         place2, match2 = self.find_match(configuration)
@@ -91,7 +91,7 @@ class Hillclimber:
 
     def valid_mutation(self, match1, match2):
         """
-        Checks if the mutation is valid and returns Bool. 
+        Checks if the mutation is valid and returns Bool.
         """
 
         if match1[1] == match2[1]:
@@ -113,8 +113,8 @@ class Hillclimber:
         return True
 
     def find_match(self, configuration):
-        """ 
-        Finds a match to mutate. Returns place of match in configuration and match. 
+        """
+        Finds a match to mutate. Returns place of match in configuration and match.
         """
 
         x = random.choice(range(len(configuration)))
@@ -123,23 +123,23 @@ class Hillclimber:
         return x, match
 
     def find_battery_capacity(self, battery):
-        """ 
-        Finds the capacity of a given battery. 
+        """
+        Finds the capacity of a given battery.
         """
 
         return battery.current_capacity
 
     def find_house_output(self, house):
         """
-        Finds the output of a given house. 
+        Finds the output of a given house.
         """
 
         return house.max_output
 
     def score(self, configuration):
-        """ 
-        Gets a configuration and measures cost. 
-        Calls to calculate new score. 
+        """
+        Gets a configuration and measures cost.
+        Calls to calculate new score.
         Returns the new calculated score.
         """
 
@@ -151,20 +151,20 @@ class Hillclimber:
         self.current_grid.process_configuration_grid(configuration)
 
         # Lays new cable routes for new configuration
-        Combined_cable_route(self.current_grid, configuration)
+        Shared_cable_route(self.current_grid, configuration)
 
         # Calculates new cost
-        self.current_grid.calc_combined_cable_cost()
+        self.current_grid.calc_shared_cable_cost()
         score = self.current_grid.total_cost
 
         return score
 
     def implement_score(self, score_new):
-        """ 
+        """
         Checks if the newly calculated score is better than the last score.
         Updates self.stuck if the new score is not an improvement.
         Resets self.stuck if the new score is an improvement
-        Returns False if not, else True. 
+        Returns False if not, else True.
         """
 
         score_old = self.current_score
@@ -177,7 +177,7 @@ class Hillclimber:
             return False
 
     def stop_mutation(self):
-        """ 
+        """
         Returns Bool if self.stuck exceeds global variable MAX_STUCK.
         """
 
