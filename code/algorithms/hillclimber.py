@@ -1,8 +1,8 @@
 import random
 import copy
-from match_fred import Fred_configuration
-from combined_cable_route import Combined_cable_route
-from grid import Grid
+from .match_fred import Fred_configuration
+from .combined_cable_route import Combined_cable_route
+from code.classes.grid import Grid
 
 MAX_STUCK: int = 1000
 

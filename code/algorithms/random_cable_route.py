@@ -1,6 +1,6 @@
 import random
-from classes.cable import Cable
-from classes.house import House
+from code.classes.cable import Cable
+from code.classes.house import House
 import copy
 
 class Random_cable_route:

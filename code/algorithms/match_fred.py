@@ -1,5 +1,4 @@
 from operator import itemgetter
-from helper import function_sort_output
 import random
 import copy
 
@@ -187,7 +186,7 @@ class Fred_configuration:
 # #         self.batteries = input_grid.batteries
 # #         self.configuration = []
 # #         self.make_configuration()
-    
+
 # #     def reset_hb(self):
 # #         self.houses = self.grid.houses
 # #         self.batteries = self.grid.batteries
@@ -205,14 +204,14 @@ class Fred_configuration:
 # #             else:
 # #                 for b in self.batteries:
 # #                     if b.current_capacity > battery.current_capacity:
-# #                         battery = b 
+# #                         battery = b
 # #                 if battery.current_capacity >= house.max_output:
 # #                     battery.current_capacity -= float(house.max_output)
 # #                     configuration.append([house, battery])
 
-# #                 else: 
+# #                 else:
 # #                     configuration.append([house, 0])
-# #         return configuration 
+# #         return configuration
 
 # #     def reassign_house(self, configuration, postition):
 # #         h, b = configuration[position]
@@ -247,9 +246,9 @@ class Fred_configuration:
 
 # #  #       return x
 # #  #   def simulated_ann():
-        
+
 # #     """
-# # 1. 
+# # 1.
 
 # #     """
 
@@ -288,7 +287,7 @@ class Fred_configuration:
 # #             if battery.current_capacity < house.max_output:
 # #                 for b in self.batteries:
 # #                     if b.current_capacity > battery.current_capacity:
-# #                         battery = b 
+# #                         battery = b
 # #             if battery.current_capacity < house.max_output:
 # #                     self.linked_houses = []
 
@@ -311,7 +310,7 @@ class Fred_configuration:
 # #             if battery.current_capacity < house.max_output:
 # #                 for b in self.batteries:
 # #                     if b.current_capacity > battery.current_capacity:
-# #                         battery = b 
+# #                         battery = b
 # #             if battery.current_capacity < house.max_output:
 # #                 self.configuration = []
 # #                 return
