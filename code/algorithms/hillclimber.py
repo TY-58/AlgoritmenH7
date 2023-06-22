@@ -1,7 +1,8 @@
 import random
 import copy
-from .match_fred import Fred_configuration
-from .combined_cable_route import Combined_cable_route
+#from .match_fred import Fred_configuration
+from .shared_cable_route import Shared_cable_route
+from .greedy_configuration import Greedy_configuration
 from code.classes.grid import Grid
 
 MAX_STUCK: int = 1000
@@ -61,19 +62,19 @@ class Hillclimber:
 
             #if improved, saves the improvement
             if improvement == True:
-                #print("last batteries: ", self.last_grid.batteries) 
+                #print("last batteries: ", self.last_grid.batteries)
                 self.last_grid = self.current_grid
                 #print("new batteries: ", self.last_grid.batteries)
                 self.last_config = self.current_config
                 self.current_score = score_new
                 self.current_grid = copy.deepcopy(self.last_grid)
-                self.current_config = self.current_grid.configuration 
+                self.current_config = self.current_grid.configuration
 
             #if not improved, resets grid and configuration to best
             elif improvement == False:
                 self.current_config = self.last_config
                 self.current_grid = self.last_grid
-        
+
         print("score_new: ", self.current_score)
 
     def mutate_match(self, configuration):
@@ -146,7 +147,7 @@ class Hillclimber:
          #maakt lijst leeg ook als niet nodig denk ik
         for battery in self.current_grid.batteries:
             battery.house_connections = []
-    
+
         #reconnect houses to batteries according to new configuration
         #gaat hier fout config wijst naar andere objecten. welke is juist?
         #je wilt dat nieuwe config naar objecten in current grid wijst.
@@ -156,10 +157,10 @@ class Hillclimber:
         self.current_grid.process_configuration_grid(configuration)
 
         #lays new cable routes
-        Combined_cable_route(self.current_grid, configuration)
+        Shared_cable_route(self.current_grid, configuration)
 
         #calculates new cost
-        self.current_grid.calc_combined_cable_cost()
+        self.current_grid.calc_shared_cable_cost()
 
         score = self.current_grid.total_cost
         return score

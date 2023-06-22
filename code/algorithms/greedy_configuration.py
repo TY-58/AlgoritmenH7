@@ -2,7 +2,7 @@ from operator import itemgetter
 import random
 import copy
 
-class Otto_greedy_configuration:
+class Greedy_configuration:
     """
     Class for Greedy algorithm to match houses with batteries without exceeding max capacity.
     Matches every house to closest battery, starting with houses with the biggest capacity.
@@ -19,6 +19,7 @@ class Otto_greedy_configuration:
         grid_var = copy.copy(input_grid)
         self.grid = grid_var
         self.sorted_houses = self.sort_houses()
+        self.configuration = []
 
 
     def sort_houses(self):
@@ -50,7 +51,8 @@ class Otto_greedy_configuration:
         Else, return configuration as list with items [house, battery].
         """
 
-        configuration = []
+        # Create temporary configuration
+        temp_configuration = []
 
         for house in self.sorted_houses:
 
@@ -70,15 +72,18 @@ class Otto_greedy_configuration:
 
                     # Reset configuration and return empty list
                     self.linked_houses = []
+                    self.configuration = []
                     for battery in self.grid.batteries:
                         battery.current_capacity = float(battery.max_capacity)
                     return []
 
             # If a battery is found, add tuple to the configuration and adjust capacity
-            configuration.append([house, battery])
+            temp_configuration.append([house, battery])
             battery.current_capacity -= float(house.max_output)
 
-        return configuration
+        self.configuration = temp_configuration
+
+        return temp_configuration
 
 
     def make_configuration(self):
@@ -86,12 +91,12 @@ class Otto_greedy_configuration:
         Run try_configuration until a configuration is found.
         Return it if this is the case
         """
-        configuration = []
+        self.configuration = []
 
-        while configuration == []:
-            configuration = self.try_configuration()
+        while self.configuration == []:
+            self.try_configuration()
 
-        return configuration
+        return self.configuration
 
 
     def distance_to_battery(self, house, battery):

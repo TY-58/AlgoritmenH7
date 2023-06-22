@@ -93,7 +93,7 @@ class Grid:
         self.total_cost = total_cost + 25000
 
 
-    def calc_combined_cable_cost(self):
+    def calc_shared_cable_cost(self):
         """
         Calculates and updates the cost of all cables on the grid.
         Does allow shared cables, so if two houses share a piece of a route and
