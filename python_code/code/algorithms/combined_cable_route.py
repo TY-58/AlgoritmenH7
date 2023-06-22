@@ -286,7 +286,7 @@ class Combined_cable_route:
         Lay all cables: for every battery, find center route, and lay route for
         every house matched to the battery. Finally, add cables to the grid.
         """
-
+        self.grid.cables = []
         for battery in self.grid.batteries:
 
             # Find center location of all houses matched to battery
