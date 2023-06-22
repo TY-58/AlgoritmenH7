@@ -91,6 +91,7 @@ class Greedy_configuration:
         Run try_configuration until a configuration is found.
         Return it if this is the case
         """
+
         self.configuration = []
 
         while self.configuration == []:
@@ -103,6 +104,7 @@ class Greedy_configuration:
         """
         Return (Manhattan) distance between house and battery.
         """
+
         return abs(house.location[0]- battery.location[0]) + abs(house.location[1] - battery.location[1])
 
 
@@ -110,6 +112,7 @@ class Greedy_configuration:
         """
         Add all houses to the house_connections of the batteries that they've matched with.
         """
+        
         for battery in self.grid.batteries:
             for house in self.grid.houses:
                 if [house, battery] in configuration:

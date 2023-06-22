@@ -113,10 +113,16 @@ class Hillclimber:
         return True
 
     def find_match(self, configuration):
+<<<<<<< HEAD
         """
         Finds a match to mutate. Returns place of match in configuration and match.
+=======
+        """ 
+        Finds a match to mutate. Returns place of match in configuration and the match. 
+>>>>>>> 4f5c78971e3f13bce0a2928f454fdae97f45da65
         """
 
+        # Picks a random location in the configuration list
         x = random.choice(range(len(configuration)))
         match = configuration[x]
 
