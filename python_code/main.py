@@ -1,21 +1,20 @@
 import random
-from loaders import load_houses, load_batteries
-from classes.battery import Battery
-from classes.cable import Cable
-from classes.house import House
-from visualize import Gridplot
-from json_output import output_json
+from code.helpers.loaders import load_houses, load_batteries
+from code.classes.battery import Battery
+from code.classes.cable import Cable
+from code.classes.house import House
+from code.visualisation.visualize import Gridplot
+from code.helpers.json_output import output_json
 from operator import itemgetter
-from algorithms.otto_greedy_match_improve import Otto_greedy_configuration
-from algorithms.match_fred import Fred_configuration
-from algorithms.random_match import Random_configuration
-from classes.grid import Grid
-from algorithms.random_cable_route import Random_cable_route
-from algorithms.otto_random_improve import Otto_cable_route
-from sampling import Sampleplot
-from algorithms.combined_cable_route import Combined_cable_route
-from algorithms.otto_random_improve import Otto_cable_route
-from sampling import Sampleplot
+from code.algorithms.otto_greedy_match_improve import Otto_greedy_configuration
+from code.algorithms.match_fred import Fred_configuration
+from code.algorithms.random_match import Random_configuration
+from code.classes.grid import Grid
+from code.algorithms.random_cable_route import Random_cable_route
+from code.algorithms.otto_random_improve import Otto_cable_route
+from code.algorithms.combined_cable_route import Combined_cable_route
+from code.algorithms.otto_random_improve import Otto_cable_route
+from code.visualisation.sampling import Sampleplot
 #from hillclimber import Hillclimber
 
 

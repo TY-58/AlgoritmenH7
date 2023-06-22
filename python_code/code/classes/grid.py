@@ -1,6 +1,6 @@
-from loaders import load_houses, load_batteries
-from classes.battery import Battery
-from classes.house import House
+from code.helpers.loaders import load_houses, load_batteries
+from .battery import Battery
+from .house import House
 
 class Grid:
     """
