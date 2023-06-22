@@ -33,7 +33,7 @@ conda install --file requirements.txt
 
 3. Run the main script with the desired algorithm: 
 ```bash
-python main.py
+python3 main.py
 ```
 
 You can replace ` the algorithm` with the name of the algorithm you want to use (`Random Algorithm`, `Greedy Configuration with Pathfinder`, or `Greedy Confuguration with Shared Cables`) by changing the name of the algorithm in main.
