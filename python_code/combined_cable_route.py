@@ -99,10 +99,6 @@ class Combined_cable_route:
         x_counter = 0
         y_counter = 0
 
-        # If start and end are the same, only append that one location
-        if start_location == end_location:
-            cable_route.append([x_location, y_location])
-
         # First move horizontally, check if route should move to the left
         if start_location[0] > end_location[0]:
 
@@ -319,6 +315,13 @@ class Combined_cable_route:
                     print(center_cable.route)
                     print(cable.route)
                     raise ValueError("gaat fout")
+
+                for loc in range(len(cable.route) - 1) :
+                    if abs(cable.route[loc][0] - cable.route[loc + 1][0]) + abs(cable.route[loc][1] - cable.route[loc + 1][1]) != 1:
+                        print(house_cable.route)
+                        print(center_cable.route)
+                        print(cable.route)
+                        raise ValueError ("misss")
 
                 # Process cable in the grid
                 self.grid.cables.append(cable)

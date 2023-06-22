@@ -1,7 +1,7 @@
 #Partially taken from: https://matplotlib.org/stable/gallery/statistics/hist.html#sphx-glr-gallery-statistics-hist-py
 #Partially taken from: https://www.tutorialspoint.com/drawing-average-line-in-histogram-in-matplotlib
 
-NUMBER_OF_SAMPLES: int = 10000
+NUMBER_OF_SAMPLES: int = 1000
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -79,9 +79,9 @@ class Sampleplot:
                 self.count += 1
 
             #NTS: may print if not viable solution, make check.
-        print(self.count)
-        for score in self.scores:
-            print(score)
+            print(self.count)
+            for score in self.scores:
+                print(score)
 
     def make_hist(self):
 
