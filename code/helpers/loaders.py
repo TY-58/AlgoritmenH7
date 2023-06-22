@@ -12,7 +12,7 @@ def load_houses(district: int) -> list[list[str]]:
         csvreader = csv.reader(file)
         next(csvreader)
 
-        data_houses = []
+        data_houses: list[list[str]] = []
         for row in csvreader:
             data_houses.append(row)
 
@@ -30,7 +30,7 @@ def load_batteries(district: int) -> list[list[str]]:
         csvreader = csv.reader(file)
         next(csvreader)
 
-        data_batteries = []
+        data_batteries: list[list[str]] = []
         for row in csvreader:
             x,y = row[0].split(",")
             data_batteries.append([x,y,row[1]])

@@ -16,6 +16,7 @@ class Hillclimber:
     Performs mutations for the duration of a global variable MAX_STUCK.
     """
 
+
     def __init__(self, input_grid: Grid):
         """
         Takes a grid as input and stores the grid.
@@ -30,6 +31,7 @@ class Hillclimber:
         self.current_config: list[list[House, Battery]] = self.current_grid.configuration
         self.current_score: int = input_grid.total_cost
         self.stuck: int = 0
+
 
     def do_mutate(self):
         """
@@ -67,6 +69,7 @@ class Hillclimber:
 
         print("score_new: ", self.current_score)
 
+
     def mutate_match(self, configuration: list[list[House, Battery]]) -> list[list[House, Battery]]:
         """
         Mutates a single match in the given configuration and retursn the mutated configuration.
@@ -89,6 +92,7 @@ class Hillclimber:
         configuration[place2] = match2
 
         return configuration
+
 
     def valid_mutation(self, match1: [House, Battery], match2: [House, Battery]) -> bool:
         """
@@ -113,6 +117,7 @@ class Hillclimber:
 
         return True
 
+
     def find_match(self, configuration: list[list[House, Battery]]) -> Tuple[int, [House, Battery]]:
         """
         Finds a match to mutate. Returns place of match in configuration and match.
@@ -124,6 +129,7 @@ class Hillclimber:
 
         return x, match_
 
+
     def find_battery_capacity(self, battery: Battery) -> float:
         """
         Finds the capacity of a given battery.
@@ -131,12 +137,14 @@ class Hillclimber:
 
         return battery.current_capacity
 
+
     def find_house_output(self, house: House) -> int:
         """
         Finds the output of a given house.
         """
 
         return house.max_output
+
 
     def score(self, configuration: [House, Battery]) -> int:
         """
@@ -161,6 +169,7 @@ class Hillclimber:
 
         return score
 
+
     def implement_score(self, score_new: int) -> bool:
         """
         Checks if the newly calculated score is better than the last score.
@@ -177,6 +186,7 @@ class Hillclimber:
         else:
             self.stuck += 1
             return False
+
 
     def stop_mutation(self) -> bool:
         """

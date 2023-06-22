@@ -1,3 +1,4 @@
+from __future__ import annotations
 from code.helpers.loaders import load_houses, load_batteries
 from .battery import Battery
 from .house import House
@@ -14,14 +15,14 @@ class Grid:
         the houses and batteries.
         """
 
-        self.district = district
+        self.district: int = district
         self.size: int = size
         self.grid: list[list[int]] = []
-        self.houses = []
-        self.batteries = []
-        self.cables = []
-        self.configuration = []
-        self.total_cost = 0
+        self.houses: list[House] = []
+        self.batteries: list[Battery] = []
+        self.cables: list[Cable] = []
+        self.configuration: list[list[House, Battery]] = []
+        self.total_cost: int = 0
         self.initialize_grid()
         self.process_houses()
         self.process_batteries()
@@ -45,12 +46,12 @@ class Grid:
         Assigns a '1' to the spot of the house on the grid.
         """
 
-        houses_data = load_houses(self.district)
+        houses_data: list[House] = load_houses(self.district)
 
         for house_row in houses_data:
-            x_location = int(house_row[0])
-            y_location = int(house_row[1])
-            max_output = house_row[2]
+            x_location: int = int(house_row[0])
+            y_location: int = int(house_row[1])
+            max_output: int = house_row[2]
 
             house = House(x_location, y_location, max_output)
             self.houses.append(house)
@@ -100,17 +101,17 @@ class Grid:
         are matched to the same battery, it will only be counted once.
         """
 
-        total_length = 0
+        total_length: int = 0
 
         for battery in self.batteries:
 
             # Create a big route with all routes from cables connected to battery
-            battery_route = []
+            battery_route: list = []
             for cable in self.cables:
                 if cable.route[-1] == battery.location:
 
                     # Need tuples instead of lists in order to use set()
-                    cable_route = [tuple(x) for x in cable.route]
+                    cable_route: list[Tuple(int,int)] = [tuple(x) for x in cable.route]
                     battery_route += cable_route
 
             # Get rid of all duplicates, because shared cables are allowed
@@ -122,7 +123,7 @@ class Grid:
         self.total_cost = 9 * total_length + 25000
 
 
-    def process_configuration_grid(self, configuration):
+    def process_configuration_grid(self, configuration: list[list[House, Battery]]) -> None:
         """
         Add all houses to house_connections of the battery they are matched to.
         """
