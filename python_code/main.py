@@ -22,22 +22,23 @@ from sampling import Sampleplot
 
 
 if __name__ == '__main__':
-    #sample = Sampleplot()
+    sample = Sampleplot()
 
     #een-na
-    # grid_1 = Grid(51,1)
-    # x = Otto_greedy_configuration(grid_1)
-    # config = []
-    # while config == []:
-    #     config = x.try_configuration()
-    # x.process_configuration(config)
-    # cb = Otto_cable_route(grid_1, config)
-    # grid_1_visual = Gridplot(grid_1)
-    # grid_1_visual.make_plot()
+    grid_1 = Grid(51,1)
+    x = Otto_greedy_configuration(grid_1)
+    config = []
+    while config == []:
+        config = x.try_configuration()
+    x.process_configuration(config)
+    cb = Otto_cable_route(grid_1, config)
+    grid_1.calc_total_cable_cost()
+    grid_1_visual = Gridplot(grid_1)
+    grid_1_visual.make_plot()
 
 
     #beste
-    # grid_1 = Grid(51,1)
+    # grid_1 = Grid(51,3)
     # x = Otto_greedy_configuration(grid_1)
     # config = []
     # while config == []:
@@ -71,16 +72,6 @@ if __name__ == '__main__':
     # print(grid_1.configuration)
     
 
-<<<<<<< HEAD
-    # grid_1 = Grid(51,1)
-    # config = Fred_configuration(grid_1)
-    # x = []
-    # while x == []:
-    #     x = config.try_configuration()
-    #
-    # hclimb = Hillclimber(grid_1, x)
-    # hclimb.mutate_match(x)
-=======
     grid_1 = Grid(51,1)
     x = Fred_configuration(grid_1)
     config = []
@@ -97,7 +88,6 @@ if __name__ == '__main__':
     # hclimb.do_mutate()
 
 
->>>>>>> d7df5febc54eec1e4342098042eb587cecc4dd5b
     # x = []
     # while x == []:
     #     x = config.try_configuration()
@@ -131,10 +121,6 @@ if __name__ == '__main__':
     # grid_1_visual = Gridplot(grid_1)
     # grid_1_visual.make_plot()
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d7df5febc54eec1e4342098042eb587cecc4dd5b
     #output_json(grid_1)
     minimum = 40000
     for _ in range(0,1):
