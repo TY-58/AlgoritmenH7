@@ -1,8 +1,8 @@
 import random
 import copy
-from match_fred import Fred_configuration
-from combined_cable_route import Combined_cable_route
-from grid import Grid
+from algorithms.match_fred import Fred_configuration
+from algorithms.combined_cable_route import Combined_cable_route
+from classes.grid import Grid
 
 MAX_STUCK: int = 1000
 
@@ -39,20 +39,35 @@ class Hillclimber:
         """
         print("score_old: ", self.current_score)
         while self.stop_mutation() == False:
+
+            """House connections are not updated when configurations are copied."""
             #make a new configuration
             new_config = self.mutate_match(self.current_config)
 
             #replace the configuration in the grid with the new one
             self.current_grid.process_configuration_grid(new_config)
+           # print("bat in last config:", self.current_config[0])
+           # print("bat in last grid: ", self.current_grid.batteries)
 
+           # print("bat in current config:", self.current_config[0])
+           # print("bat in current grid: ", self.current_grid.batteries)
+            #calculate the new score
+            #gaat hier fout
+            #objecten staan op een andere locatie
             score_new = self.score(new_config)
 
+            #checks if the score is improved
             improvement = self.implement_score(score_new)
 
             #if improved, saves the improvement
             if improvement == True:
-                self.last_config = self.current_config
+                #print("last batteries: ", self.last_grid.batteries) 
                 self.last_grid = self.current_grid
+                #print("new batteries: ", self.last_grid.batteries)
+                self.last_config = self.current_config
+                self.current_score = score_new
+                self.current_grid = copy.deepcopy(self.last_grid)
+                self.current_config = self.current_grid.configuration 
 
             #if not improved, resets grid and configuration to best
             elif improvement == False:
@@ -128,10 +143,16 @@ class Hillclimber:
         """ Gets a configuration and measures cost. Assigns a score to the mutated configuration. """
 
          #resets the house_connections neccesary to lay new cables
+         #maakt lijst leeg ook als niet nodig denk ik
         for battery in self.current_grid.batteries:
             battery.house_connections = []
-
+    
         #reconnect houses to batteries according to new configuration
+        #gaat hier fout config wijst naar andere objecten. welke is juist?
+        #je wilt dat nieuwe config naar objecten in current grid wijst.
+        #print("batterijen:", self.current_grid.batteries)
+        #print(configuration[1])
+
         self.current_grid.process_configuration_grid(configuration)
 
         #lays new cable routes
