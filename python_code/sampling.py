@@ -1,7 +1,7 @@
 #Partially taken from: https://matplotlib.org/stable/gallery/statistics/hist.html#sphx-glr-gallery-statistics-hist-py
 #Partially taken from: https://www.tutorialspoint.com/drawing-average-line-in-histogram-in-matplotlib
 
-NUMBER_OF_SAMPLES: int = 10000
+NUMBER_OF_SAMPLES: int = 1000
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -53,15 +53,25 @@ class Sampleplot:
 
             #sample of greedy config and combined route
             
-            grid_1 = Grid(51,3)
+            # grid_1 = Grid(51,1)
+            # x = Otto_greedy_configuration(grid_1)
+            # config = []
+            # while config == []:
+            #     config = x.try_configuration()
+            # x.process_configuration(config)
+            # cb = Combined_cable_route(grid_1, config)
+            # grid_1.calc_combined_cable_cost()
+            
+            grid_1 = Grid(51,1)
             x = Otto_greedy_configuration(grid_1)
             config = []
             while config == []:
                 config = x.try_configuration()
             x.process_configuration(config)
-            cb = Combined_cable_route(grid_1, config)
-            grid_1.calc_combined_cable_cost()
-            
+            cb = Otto_cable_route(grid_1, config)
+            grid_1.calc_total_cable_cost()
+            #grid_1_visual = Gridplot(grid_1)
+            #grid_1_visual.make_plot()
 
             #sample of greedy and A+
             # grid_1 = Grid(51,1)
@@ -79,9 +89,9 @@ class Sampleplot:
                 self.count += 1
 
             #NTS: may print if not viable solution, make check.
-        print(self.count)
-        for score in self.scores:
-            print(score)
+            print(self.count)
+            for score in self.scores:
+                print(score)
 
     def make_hist(self):
 
