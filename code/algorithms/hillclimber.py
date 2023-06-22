@@ -1,6 +1,5 @@
 import random
 import copy
-#from .match_fred import Fred_configuration
 from .shared_cable_route import Shared_cable_route
 from .greedy_configuration import Greedy_configuration
 from code.classes.grid import Grid
@@ -114,9 +113,10 @@ class Hillclimber:
 
     def find_match(self, configuration):
         """ 
-        Finds a match to mutate. Returns place of match in configuration and match. 
+        Finds a match to mutate. Returns place of match in configuration and the match. 
         """
 
+        # Picks a random location in the configuration list
         x = random.choice(range(len(configuration)))
         match = configuration[x]
 
