@@ -1,28 +1,28 @@
 #Partially taken from: https://matplotlib.org/stable/gallery/statistics/hist.html#sphx-glr-gallery-statistics-hist-py
 #Partially taken from: https://www.tutorialspoint.com/drawing-average-line-in-histogram-in-matplotlib
 
-NUMBER_OF_SAMPLES: int = 1000
+NUMBER_OF_SAMPLES: int = 100
 
 import matplotlib.pyplot as plt
 import numpy as np
 import random
 import csv
-from loaders import load_houses, load_batteries
-from classes.battery import Battery
-from classes.cable import Cable
-from classes.house import House
-from visualize import Gridplot
-from json_output import output_json
+from code.helpers.loaders import load_houses, load_batteries
+# from classes.battery import Battery
+# from classes.cable import Cable
+# from classes.house import House
+from .visualize import Gridplot
+from code.helpers.json_output import output_json
 from operator import itemgetter
 ##from greedy_match import Greedy_configuration
 #from algorithms.cable_route import Cable_route
 #from match_fred import Fred_configuration
 #from random_match import Random_configuration
-from classes.grid import Grid
+from code.classes.grid import Grid
 #from random_cable_route import Random_cable_route
-from algorithms.otto_greedy_match_improve import Otto_greedy_configuration
-from algorithms.combined_cable_route import Combined_cable_route
-from algorithms.otto_random_improve import Otto_cable_route
+from code.algorithms.otto_greedy_match_improve import Otto_greedy_configuration
+from code.algorithms.combined_cable_route import Combined_cable_route
+# from algorithms.otto_random_improve import Otto_cable_route
 
 
 class Sampleplot:
@@ -101,7 +101,7 @@ class Sampleplot:
         ax.set_title(r'Grid Cost Probability')
         fig.tight_layout()
         plt.show()
-        plt.savefig("sample.")
+        plt.savefig("saved_output/sample.")
 
     def make_hist2(self):
 
@@ -113,7 +113,7 @@ class Sampleplot:
 
     def make_csv_hist(self):
 
-        with open('hist_plot1.csv', 'w', newline='') as file:
+        with open('saved_output/hist_plot1.csv', 'w', newline='') as file:
             writer = csv.writer(file)
             field = ["iteration", "cost"]
             count = 1

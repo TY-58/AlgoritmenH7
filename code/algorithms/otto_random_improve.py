@@ -1,6 +1,6 @@
 import random
-from classes.cable import Cable
-from classes.house import House
+from code.classes.cable import Cable
+from code.classes.house import House
 import copy
 from itertools import combinations
 
@@ -162,6 +162,8 @@ class Otto_cable_route:
         Delete all loops in the route thusfar.
         """
 
+        counter = 0
+        
         # Check every location in list
         for location in cable_route:
 
