@@ -15,11 +15,11 @@ from code.algorithms.otto_random_improve import Otto_cable_route
 from code.algorithms.combined_cable_route import Combined_cable_route
 from code.algorithms.otto_random_improve import Otto_cable_route
 from code.visualisation.sampling import Sampleplot
-#from hillclimber import Hillclimber
+from code.algorithms.hillclimber import Hillclimber
 
 
 if __name__ == '__main__':
-    sample = Sampleplot()
+    #sample = Sampleplot()
 
     #een-na
     # grid_1 = Grid(51,1)
