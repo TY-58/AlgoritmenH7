@@ -1,26 +1,127 @@
 import random
 import copy
 from match_fred import Fred_configuration
+from combined_cable_route import Combined_cable_route
+from grid import Grid
+
+MAX_STUCK: int = 10
+
+#grid.houses daarin in grid.cables begin en eindpunt
+#ook nog op manhatten
+
 
 class Hillclimber:
-    """."""
+    """ 
+    Loads an input configuration
+    returns an output configuration
+    finds matches in configuration and swaps batteries if possible.
+    """
 
-    def __init__(self, input_config):
-        """ Loads an input configuration. """
-        self.input_config = input_config
-        self.current_config = input_config
+    def __init__(self, input_grid):
+        """ 
+        Loads an input configuration.
+        Input grid and configuration always need to stay the same.
+        current and last can be updated.
+        """
+        #haal config uit grid
+        self.input_grid = input_grid
+        self.input_config = input_grid.configuration
+        self.last_grid = copy.deepcopy(self.input_grid)
+        self.last_config = self.last_grid.configuration 
+        self.current_grid = copy.deepcopy(self.input_grid)
+        self.current_config = self.current_grid.configuration
+        self.current_score = input_grid.total_cost
+        self.stuck = 0
+
+    def do_mutate(self):
+        """ 
+        Performs mutations under certain conditions. 
+        """
+        new_config = self.mutate_match(self.current_config)
+        #print(new_config)
+        print(new_config[0])
+        print(self.current_grid.batteries)
+        #print(self.current_grid.houses)
+
+        #process the configuration
+        self.current_grid.process_configuration_grid(new_config)
+        #print(self.current_grid)
+        # while self.stop_mutation() == False:
+        #     #makes a new configuration
+        #     new_config = self.mutate_match(self.current_config)
+
+        #     #process the configuration
+        #     self.current_grid.process_configuration_grid(new_config)
+        #     print(self.current_grid)
+
+        #     #calculates the score of the new configuration
+        #     score_new = self.score(self.current_grid, new_config)
+
+        #     #decides if the new score is an improvement
+        #     improvement = self.implement_score(score_new)
+
+        #     #if improved, saves the improvement
+        #     if improvement == True:
+        #         self.last_config = self.current_config
+        #         self.last_grid = self.current_grid
+
+        #     #if not improved, resets grid and configuration to best
+        #     elif improvement == False:
+        #         self.current_config = self.last_config
+        #         self.current_grid = self.last_grid
+
+    def mutate_match(self, configuration):
+        """ 
+        Mutate a single match.
+        """
+        place1, match1 = self.find_match(configuration)
+        place2, match2 = self.find_match(configuration)
+        while self.valid_mutation(match1, match2) == False:
+            place1, match1 = self.find_match(configuration)
+            place2, match2 = self.find_match(configuration)
+
+        #switches batteries
+        bat_switch = match1[1]
+        match1[1] = match2[1]
+        match2[1] = bat_switch
+
+        #puts mutated matches in configuration
+        configuration[place1] = match1
+        configuration[place2] = match2
+        
+        return configuration
 
     def copy_configuration(self):
         """ Make a copy of the current configuration to manipulate. """
-        pass
+        self.last_config = copy.copy(self.current_config)
+
+    def valid_mutation(self, match1, match2):
+        """Checks if the mutation is valid and returns Bool. """
+        if match1[1] == match2[1]:
+            print("match is invalid")
+            return False
+
+        #return false if battery capacity+house < house output
+        b_cap1 = self.find_battery_capacity(match1[1])
+        h_out1 = self.find_house_output(match1[0])
+        cap1 = float(b_cap1 + h_out1)
+        b_cap2 = self.find_battery_capacity(match2[1])
+        h_out2 = self.find_house_output(match2[0])
+        cap2 = float(b_cap2 + h_out2)
+
+        if cap1 < h_out2:
+            print("mutation is invalid. cap:", cap1," out: ", h_out2)
+            return False
+        if cap2 < h_out1:
+            print("mutation is invalid")
+            return False
+        return True
 
     def find_match(self, configuration):
-        """ Find a match to mutate."""
-        match1 = random.choice(configuration)
-        #print(match1)
-        capacity = self.find_battery_capacity(match1[1])
-        #print(capacity)
-
+        """ Find a match to mutate. Returns place of match in configuration and the match. """
+        x = random.choice(range(len(configuration)))
+        match = configuration[x]
+        return x, match
 
     def find_battery_capacity(self, battery):
         """ finds the capacity of a given battery. """
@@ -28,15 +129,32 @@ class Hillclimber:
 
     def find_house_output(self, house):
         """Finds the output of a house. """
-        pass
+        return house.max_output
 
-    def score(self):
-        """ Assigns a score to the mutated configuration. """
-        pass
+    def score(self, grid, configuration):
+        """ Gets a configuration and measures cost. Assigns a score to the mutated configuration. """
+        route = Combined_cable_route(grid, configuration)
+        print(route)
+        score = grid.calc_combined_cable_cost()
+        return score
 
-    def implement_score(self):
+    def implement_score(score_new):
         """ Decides if configuration should become mutated configuration. """
-        pass
+        score_old = self.current_score
+        #if score 2 is better than 1, current config is updated
+        if score_new < score_old:
+            self.stuck = 0
+            return True
+
+        #tell to keep score 1 and redo 2 
+        #or return certain something 
+        elif score_new > score_old:
+            self.stuck += 1
+            return False
+
+        elif score_old == score_new:
+            self.stuck += 1
+            return False
 
     def save_scores(self):
         """ Saves the scores of the mutation and"""
@@ -44,15 +162,8 @@ class Hillclimber:
 
     def stop_mutation(self):
         """ Quits program if mutations do not improve configuration after X tries."""
-        pass
-        
-    def mutate_match(self):
-        """ mutate a single match."""
-        pass
-
-
-
-        #get a random match
-        #match with new battery
-        #check if match is valid
+        #maybe change into different return?
+        if self.stuck > MAX_STUCK:
+            return True
+        return False
 
