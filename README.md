@@ -46,6 +46,7 @@ You can replace ` the algorithm` with the name of the algorithm you want to use 
 
 ## Acknowledgments
 Code from third parties:
+
 Loaders:
 -   https://earthly.dev/blog/csv-python/
 -   https://linuxhint.com/skip-header-row-csv-python/
