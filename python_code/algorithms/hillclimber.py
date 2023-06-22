@@ -11,14 +11,14 @@ MAX_STUCK: int = 1000
 
 
 class Hillclimber:
-    """ 
+    """
     Loads an input configuration
     returns an output configuration
     finds matches in configuration and swaps batteries if possible.
     """
 
     def __init__(self, input_grid):
-        """ 
+        """
         Loads an input configuration.
         Input grid and configuration always need to stay the same.
         current and last can be updated.
@@ -27,15 +27,15 @@ class Hillclimber:
         self.input_grid = input_grid
         self.input_config = input_grid.configuration
         self.last_grid = copy.deepcopy(self.input_grid)
-        self.last_config = self.last_grid.configuration 
+        self.last_config = self.last_grid.configuration
         self.current_grid = copy.deepcopy(self.input_grid)
         self.current_config = self.current_grid.configuration
         self.current_score = input_grid.total_cost
         self.stuck = 0
 
     def do_mutate(self):
-        """ 
-        Performs mutations under certain conditions. 
+        """
+        Performs mutations under certain conditions.
         """
         print("score_old: ", self.current_score)
         while self.stop_mutation() == False:
@@ -62,7 +62,7 @@ class Hillclimber:
         print("score_new: ", self.current_score)
 
     def mutate_match(self, configuration):
-        """ 
+        """
         Mutate a single match.
         """
         place1, match1 = self.find_match(configuration)
@@ -79,7 +79,7 @@ class Hillclimber:
         #puts mutated matches in configuration
         configuration[place1] = match1
         configuration[place2] = match2
-        
+
         return configuration
 
     def copy_configuration(self):
@@ -151,8 +151,8 @@ class Hillclimber:
             self.stuck = 0
             return True
 
-        #tell to keep score 1 and redo 2 
-        #or return certain something 
+        #tell to keep score 1 and redo 2
+        #or return certain something
         elif score_new > score_old:
             self.stuck += 1
             #print("stuck:", self.stuck)
@@ -173,4 +173,3 @@ class Hillclimber:
         if self.stuck > MAX_STUCK:
             return True
         return False
-

@@ -57,7 +57,7 @@ class Otto_greedy_configuration:
 
             batteries_sorted = self.sort_batteries(house)
 
-            # Give a margin to make a suboptimal choice
+            # Give a margin to make a suboptimal choice when choosing a battery to connect to
             battery = random.choices(batteries_sorted, weights=(90, 4, 3,2,1), k=1)[0][0]
 
             # Keep choosing until a battery with enough capacity is found
