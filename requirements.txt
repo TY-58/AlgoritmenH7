@@ -1,2 +1,8 @@
 matplotlib==3.7.1
-Numpy==1.23.5
+numpy==1.23.5
+random
+operator
+csv
+copy
+itertools
+json

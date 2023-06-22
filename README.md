@@ -16,13 +16,12 @@ We have implemented the following algorithms to solve this problem:
 3. **Greedy Confuguration with Shared Cables**: This algorithm uses the same configuration as the previous algorithm, but the cable routes from houses to batteries is different. In this algoritm we try to not only find the shortest route, but also a way to share cables in order to reduce cost, since cables that go the same route share the costs.
 
 ## Reproducing Results
-You will need to Download at least Python version == 3.10.9
+You will need to Download at least Python3 version == 3.10.9
 
 To reproduce our results, follow these steps:
 
 1. Clone this repository to your local machine.
-2. Install the necessary Python packages listed in `requirements.txt` using pip: `pip install -r requirements.txt`
-
+2. Install the necessary Python packages listed in `requirements.txt` using pip:
 ```bash
 pip3 install -r requirements.txt
 ```
@@ -32,7 +31,10 @@ Or with Conda:
 conda install --file requirements.txt
 ```
 
-3. Run the main script with the desired algorithm: `python main.py` 
+3. Run the main script with the desired algorithm: 
+```bash
+python main.py
+```
 
 You can replace ` the algorithm` with the name of the algorithm you want to use (`Random Algorithm`, `Greedy Configuration with Pathfinder`, or `Greedy Confuguration with Shared Cables`) by changing the name of the algorithm in main.
 
@@ -43,5 +45,14 @@ You can replace ` the algorithm` with the name of the algorithm you want to use 
 - Turhan Yildiz
 
 ## Acknowledgments
+Code from third parties:
+-   Loaders:
+-   https://earthly.dev/blog/csv-python/
+-   https://linuxhint.com/skip-header-row-csv-python/
 
-- Alle bronnen hier denk ik ?
+-   Visualization:
+-   Partially taken from: https://matplotlib.org/stable/gallery/statistics/hist.html#sphx-glr-gallery-statistics-hist-py
+-   Partially taken from: https://www.tutorialspoint.com/drawing-average-line-in-histogram-in-matplotlib
+  
+-   Json:
+-   https://www.geeksforgeeks.org/reading-and-writing-json-to-a-file-in-python/ 
