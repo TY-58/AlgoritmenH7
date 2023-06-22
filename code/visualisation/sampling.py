@@ -1,7 +1,7 @@
 #Partially taken from: https://matplotlib.org/stable/gallery/statistics/hist.html#sphx-glr-gallery-statistics-hist-py
 #Partially taken from: https://www.tutorialspoint.com/drawing-average-line-in-histogram-in-matplotlib
 
-NUMBER_OF_SAMPLES: int = 1000
+NUMBER_OF_SAMPLES: int = 100
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -101,7 +101,7 @@ class Sampleplot:
         ax.set_title(r'Grid Cost Probability')
         fig.tight_layout()
         plt.show()
-        plt.savefig("sample.")
+        plt.savefig("saved_output/sample.")
 
     def make_hist2(self):
 
@@ -113,7 +113,7 @@ class Sampleplot:
 
     def make_csv_hist(self):
 
-        with open('hist_plot1.csv', 'w', newline='') as file:
+        with open('saved_output/hist_plot1.csv', 'w', newline='') as file:
             writer = csv.writer(file)
             field = ["iteration", "cost"]
             count = 1

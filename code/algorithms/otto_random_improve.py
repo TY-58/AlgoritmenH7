@@ -162,6 +162,8 @@ class Otto_cable_route:
         Delete all loops in the route thusfar.
         """
 
+        counter = 0
+        
         # Check every location in list
         for location in cable_route:
 

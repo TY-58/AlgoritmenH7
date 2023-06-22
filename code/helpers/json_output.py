@@ -3,6 +3,9 @@ import json
 
 
 def output_json(grid):
+	"""
+	Formats and saves json in the right format.
+	"""
 	output_list = []
 
 	output_list.append({
@@ -18,7 +21,7 @@ def output_json(grid):
 		})
 
 	json_object = json.dumps(output_list, indent=4)
-	with open("output.json", "w") as outfile:
+	with open("saved_output/output.json", "w") as outfile:
 		outfile.write(json_object)
 
 
