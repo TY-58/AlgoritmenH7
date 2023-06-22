@@ -4,7 +4,7 @@ from code.classes.house import House
 import copy
 from itertools import combinations
 
-class Otto_cable_route:
+class Greedy_cable_route:
     """
     A class for deciding the routes from houses to the matched batteries.
     Routes are decided by an algorithm that sorts possible directions, best option
@@ -163,7 +163,7 @@ class Otto_cable_route:
         """
 
         counter = 0
-        
+
         # Check every location in list
         for location in cable_route:
 

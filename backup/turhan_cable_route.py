@@ -1,5 +1,5 @@
-from cable import Cable
-from house import House
+from classes.cable import Cable
+from classes.house import House
 
 class Turhan_cable_route:
     """A class for deciding the route for the cables from a house to a battery. """
@@ -40,6 +40,10 @@ class Turhan_cable_route:
                         if distance == 0:
                             #print("succes")
                             return path + [new_location]
+                        for cable in self.grid.cables:
+                            if new_location in cable.route:
+                            # If a cable exists, follow it to the battery
+                                return path + cable.route[cable.route.index(new_location):]
                         queue.append((new_location, path + [new_location], distance))
             queue.sort(key=lambda x: x[2])
 

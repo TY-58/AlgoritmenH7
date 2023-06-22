@@ -1,7 +1,8 @@
 import random
 import copy
-from .match_fred import Fred_configuration
-from .combined_cable_route import Combined_cable_route
+#from .match_fred import Fred_configuration
+from .shared_cable_route import Shared_cable_route
+from .greedy_configuration import Greedy_configuration
 from code.classes.grid import Grid
 
 MAX_STUCK: int = 1000
@@ -56,13 +57,13 @@ class Hillclimber:
                 self.last_config = self.current_config
                 self.current_score = score_new
                 self.current_grid = copy.deepcopy(self.last_grid)
-                self.current_config = self.current_grid.configuration 
+                self.current_config = self.current_grid.configuration
 
             # Resets grid and configuration to last
             elif improvement == False:
                 self.current_config = self.last_config
                 self.current_grid = self.last_grid
-        
+
         print("score_new: ", self.current_score)
 
     def mutate_match(self, configuration):

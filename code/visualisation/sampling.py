@@ -14,15 +14,15 @@ from code.helpers.loaders import load_houses, load_batteries
 from .visualize import Gridplot
 from code.helpers.json_output import output_json
 from operator import itemgetter
-##from greedy_match import Greedy_configuration
+##from greedy_configuration import Greedy_configuration
 #from algorithms.cable_route import Cable_route
 #from match_fred import Fred_configuration
-#from random_match import Random_configuration
+#from random_configuration import Random_configuration
 from code.classes.grid import Grid
 #from random_cable_route import Random_cable_route
-from code.algorithms.otto_greedy_match_improve import Otto_greedy_configuration
-from code.algorithms.combined_cable_route import Combined_cable_route
-# from algorithms.otto_random_improve import Otto_cable_route
+from code.algorithms.greedy_configuration import Greedy_configuration
+from code.algorithms.shared_cable_route import Shared_cable_route
+# from algorithms.greedy_cable_route import Greedy_cable_route
 
 
 class Sampleplot:
@@ -51,26 +51,26 @@ class Sampleplot:
             grid_1.calc_total_cable_cost()
             """
 
-            #sample of greedy config and combined route
+            #sample of greedy config and shared route
 
             grid_1 = Grid(51,3)
-            x = Otto_greedy_configuration(grid_1)
+            x = Greedy_configuration(grid_1)
             config = []
             while config == []:
                 config = x.try_configuration()
             x.process_configuration(config)
-            cb = Combined_cable_route(grid_1, config)
-            grid_1.calc_combined_cable_cost()
+            cb = Shared_cable_route(grid_1, config)
+            grid_1.calc_shared_cable_cost()
 
 
             #sample of greedy and A+
             # grid_1 = Grid(51,1)
-            # x = Otto_greedy_configuration(grid_1)
+            # x = Greedy_configuration(grid_1)
             # config = []
             # while config == []:
             #     config = x.try_configuration()
             # x.process_configuration(config)
-            # cb = Otto_cable_route(grid_1, config)
+            # cb = Greedy_cable_route(grid_1, config)
             # grid_1.calc_total_cable_cost()
 
             if grid_1.total_cost != 0:

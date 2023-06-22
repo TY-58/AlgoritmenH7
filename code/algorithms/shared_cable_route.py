@@ -1,6 +1,6 @@
 from code.classes.cable import Cable
 
-class Combined_cable_route:
+class Shared_cable_route:
     """
     A class for deciding the routes for the cables from houses to batteries.
     Takes a grid and a configuration as input and adds cables to the grid.
