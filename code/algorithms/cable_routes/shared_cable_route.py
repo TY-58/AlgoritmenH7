@@ -234,6 +234,7 @@ class Shared_cable_route:
         Returns location on the center route that is closest to input house.
         """
 
+        # Take upper bound for the minimum distance
         minimum_distance = 102
         closest_location = []
 
