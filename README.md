@@ -16,11 +16,22 @@ We have implemented the following algorithms to solve this problem:
 3. **Greedy Confuguration with Shared Cables**: This algorithm uses the same configuration as the previous algorithm, but the cable routes from houses to batteries is different. In this algoritm we try to not only find the shortest route, but also a way to share cables in order to reduce cost, since cables that go the same route share the costs.
 
 ## Reproducing Results
+You will need to Download at least Python version == 3.10.9
 
 To reproduce our results, follow these steps:
 
 1. Clone this repository to your local machine.
 2. Install the necessary Python packages listed in `requirements.txt` using pip: `pip install -r requirements.txt`
+
+```bash
+pip3 install -r requirements.txt
+```
+
+Or with Conda:
+```bash
+conda install --file requirements.txt
+```
+
 3. Run the main script with the desired algorithm: `python main.py` 
 
 You can replace ` the algorithm` with the name of the algorithm you want to use (`Random Algorithm`, `Greedy Configuration with Pathfinder`, or `Greedy Confuguration with Shared Cables`) by changing the name of the algorithm in main.
