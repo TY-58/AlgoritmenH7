@@ -1,7 +1,8 @@
 from code.classes.cable import Cable
 from code.classes.house import House
+from code.classes.grid import Grid
 
-class Turhan_cable_route:
+class Breadth_manhattan_cables:
     """A class for deciding the route for the cables from a house to a battery.
     It looks at all options it could go at every step (breadth first like) but
     only looks at a breadth further if that stap has to shortest distance from
