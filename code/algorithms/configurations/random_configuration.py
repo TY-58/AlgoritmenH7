@@ -1,3 +1,4 @@
+from __future__ import annotations
 import random
 import copy
 
@@ -13,12 +14,12 @@ class Random_configuration:
         Shuffles house list.
         """
 
-        grid_var = copy.copy(input_grid)
-        self.grid = grid_var
-        self.shuffled_houses = self.shuffle_houses()
+        grid_var: Grid = copy.copy(input_grid)
+        self.grid: Grid = grid_var
+        self.shuffled_houses: list[House] = self.shuffle_houses()
 
 
-    def shuffle_houses(self):
+    def shuffle_houses(self) -> list[House]:
         """
         Function that shuffles the list of houses in a random order.
         """
@@ -27,31 +28,31 @@ class Random_configuration:
         return self.grid.houses
 
 
-    def try_configuration(self):
+    def try_configuration(self) -> list[list[House, Battery]]:
         """
         Function that tries to make a random configuration, assigning
         a randomly chosen house to a randomly chosen battery.
         """
 
-        configuration = []
+        configuration: list[list[House, Battery]] = []
         for house in self.shuffled_houses:
-            battery = random.choice(self.grid.batteries)
+            battery: Battery = random.choice(self.grid.batteries)
 
             # Try to find a battery with enough capacity
-            error_counter = 0
+            error_counter: int = 0
 
             # Keep choosing battery and see if house fits
             while battery.current_capacity < house.max_output:
-                battery = random.choice(self.grid.batteries)
+                battery: Battery = random.choice(self.grid.batteries)
                 error_counter += 1
 
                 # If more than 50 tries are needed, there is probably no battery left
                 if error_counter > 50:
 
                     # Reset configuration and return empty list.
-                    self.linked_houses = []
+                    self.linked_houses: list[House] = []
                     for battery in self.grid.batteries:
-                        battery.current_capacity = float(battery.max_capacity)
+                        battery.current_capacity: float = float(battery.max_capacity)
 
                     return []
 
@@ -62,13 +63,13 @@ class Random_configuration:
         return configuration
 
 
-    def make_configuration(self):
+    def make_configuration(self) -> list[list[House, Battery]]:
         """
         Run try_configuration until a configuration is found.
         Return it if this is the case
         """
-        x = []
-        error_counter = 0
+
+        configuration: list[list[House, Battery]] = []
 
         while configuration == []:
             configuration = self.try_configuration()

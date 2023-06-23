@@ -1,6 +1,10 @@
+from __future__ import annotations
+
 from code.classes.cable import Cable
 
-class Combined_cable_route:
+MINIMUM_DISTANCE: int = 102
+
+class Shared_cable_route:
     """
     A class for deciding the routes for the cables from houses to batteries.
     Takes a grid and a configuration as input and adds cables to the grid.
@@ -9,7 +13,7 @@ class Combined_cable_route:
     """
 
 
-    def __init__(self, grid, configuration):
+    def __init__(self, grid: Grid, configuration: list[list[House, Battery]]):
         """
         Takes grid and configuration as input.
         Center routes are central cables to which house cables try to connect
@@ -17,46 +21,45 @@ class Combined_cable_route:
         Every battery has one specific center route.
         """
 
-        self.grid = grid
-        self.configuration = configuration
-        self.center_routes = []
+        self.grid: Grid = grid
+        self.configuration: list[list[House, Battery]] = configuration
         self.lay_cables()
 
 
-    def find_center_location(self, battery):
+    def find_center_location(self, battery: Battery) -> list[int, int]:
         """
         Function that takes a battery as input and returns the center location
         of all houses that are matched with the battery.
         """
 
-        x_location = 0
-        y_location = 0
+        x_location: int = 0
+        y_location: int = 0
 
         for house in battery.house_connections:
             x_location += house.location[0]
             y_location += house.location[1]
 
         # Take mean of both x location and y location, rounded to an integer.
-        center_location = [round(x_location / len(battery.house_connections)), round(y_location / len(battery.house_connections))]
+        center_location: list[int, int] = [round(x_location / len(battery.house_connections)), round(y_location / len(battery.house_connections))]
 
         return center_location
 
 
-    def get_center_cable(self, battery):
+    def get_center_cable(self, battery: Battery) -> Cable:
         """
         Function that takes a battery as input, retrieves the center location and
         returns a cable from the center location to the battery.
         """
 
-        start_location = self.find_center_location(battery)
-        end_location = battery.location
+        start_location: list[int, int] = self.find_center_location(battery)
+        end_location: list[int, int] = battery.location
 
-        cable = Cable(self.make_route(start_location, end_location, battery))
+        cable: Cable = Cable(self.make_route(start_location, end_location, battery))
 
         return cable
 
 
-    def make_route(self, start_location, end_location, battery):
+    def make_route(self, start_location: list[int, int], end_location: list[int, int], battery: Battery) -> list[list[int, int]]:
         """
         Creates route from start_location to end_location. This is either from a
         house to the center route or from the center location to a battery.
@@ -68,10 +71,10 @@ class Combined_cable_route:
         """
 
         # Create list that will be filled with coordinates that are passed on route
-        cable_route = []
+        cable_route: list[list[int, int]] = []
 
         # Get horizontal distance and save direction (left or right) as sign
-        x_direction = int(end_location[0] - start_location[0])
+        x_direction: int = int(end_location[0] - start_location[0])
         if x_direction > 0:
             x_sign = 1
         else:
@@ -81,7 +84,7 @@ class Combined_cable_route:
         x_direction = abs(x_direction)
 
         # Same for vertical direction
-        y_direction = int(end_location[1] - start_location[1])
+        y_direction: int = int(end_location[1] - start_location[1])
         if y_direction > 0:
             y_sign = 1
         else:
@@ -90,14 +93,14 @@ class Combined_cable_route:
         y_direction = abs(y_direction)
 
         # Get a list of all batteries other than relevant battery
-        other_battery_locations = self.get_locations_other_batteries(battery)
+        other_battery_locations: list[Battery] = self.get_locations_other_batteries(battery)
 
-        x_location = start_location[0]
-        y_location = start_location[1]
+        x_location: int = start_location[0]
+        y_location: int = start_location[1]
         cable_route.append(start_location)
 
-        x_counter = 0
-        y_counter = 0
+        x_counter: int = 0
+        y_counter: int = 0
 
         # First move horizontally, check if route should move to the left
         if start_location[0] > end_location[0]:
@@ -228,17 +231,18 @@ class Combined_cable_route:
         return cable_route
 
 
-    def get_closest_location_cable(self, house_location, center_cable):
+    def get_closest_location_cable(self, house_location: list[int, int], center_cable: Cable) -> list[int, int]:
         """
         Function that finds closest location on the center route for a given house.
         Returns location on the center route that is closest to input house.
         """
 
-        minimum_distance = 102
-        closest_location = []
+        # Take upper bound for the minimum distance
+        minimum_distance: int = MINIMUM_DISTANCE
+        closest_location: list[int, int] = []
 
         for location in center_cable.route:
-            distance = abs(house_location[0] - location[0]) - 1 + abs(house_location[1] - location[1]) - 1
+            distance: int = abs(house_location[0] - location[0]) - 1 + abs(house_location[1] - location[1]) - 1
 
             if distance < minimum_distance:
                 minimum_distance = distance
@@ -247,12 +251,12 @@ class Combined_cable_route:
         return closest_location
 
 
-    def get_locations_other_batteries(self, battery_input):
+    def get_locations_other_batteries(self, battery_input: Battery) -> list[list[int, int]]:
         """
         Find and return locations of all batteries but the inputted battery.
         """
 
-        battery_locations = []
+        battery_locations: list[list[int, int]] = []
         for battery in self.grid.batteries:
             if battery != battery_input:
                 battery_locations.append(battery.location)
@@ -260,13 +264,13 @@ class Combined_cable_route:
         return battery_locations
 
 
-    def get_connected_cable(self, center_cable, house_cable):
+    def get_connected_cable(self, center_cable: Cable, house_cable: Cable) -> Cable:
         """
         Connects the cable from a house to the center route with the center
         and creates a new cable from the house to the battery.
         """
 
-        counter = 0
+        counter: int = 0
         for location in center_cable.route:
             if location == house_cable.route[-1]:
 
@@ -286,42 +290,33 @@ class Combined_cable_route:
         Lay all cables: for every battery, find center route, and lay route for
         every house matched to the battery. Finally, add cables to the grid.
         """
-        self.grid.cables = []
+        self.grid.cables: list[Cable] = []
         for battery in self.grid.batteries:
 
             # Find center location of all houses matched to battery
             self.find_center_location(battery)
 
             # Find route between center location and battery
-            center_cable = self.get_center_cable(battery)
+            center_cable: Cable = self.get_center_cable(battery)
 
             for house in battery.house_connections:
 
                 # Find closest location on center route and lay cable between house and center route
-                route_location = self.get_closest_location_cable(house.location, center_cable)
-                house_cable = Cable(self.make_route(house.location, route_location, battery))
+                route_location: list[int, int] = self.get_closest_location_cable(house.location, center_cable)
+                house_cable: Cable = Cable(self.make_route(house.location, route_location, battery))
 
                 # Connect both parts of the cable into one cable from house to battery
-                cable = self.get_connected_cable(center_cable, house_cable)
+                cable: Cable = self.get_connected_cable(center_cable, house_cable)
 
                 # Raise errors if start is not house location or end is not battery location
                 if not cable.route[0] in [x.location for x in self.grid.houses]:
-                    print(house_cable.route)
-                    print(center_cable.route)
-                    print(cable.route)
                     raise ValueError("gaat fout")
                 if not cable.route[-1] in [x.location for x in self.grid.batteries]:
-                    print(house_cable.route)
-                    print(center_cable.route)
-                    print(cable.route)
                     raise ValueError("gaat fout")
 
                 for loc in range(len(cable.route) - 1) :
                     if abs(cable.route[loc][0] - cable.route[loc + 1][0]) + abs(cable.route[loc][1] - cable.route[loc + 1][1]) != 1:
-                        print(house_cable.route)
-                        print(center_cable.route)
-                        print(cable.route)
-                        raise ValueError ("misss")
+                        raise ValueError ("gaat fout")
 
                 # Process cable in the grid
                 self.grid.cables.append(cable)

@@ -1,10 +1,10 @@
-# From: https://www.geeksforgeeks.org/reading-and-writing-json-to-a-file-in-python/
 import json
 
 
 def output_json(grid):
 	"""
 	Formats and saves json in the right format.
+	Taken from: https://www.geeksforgeeks.org/reading-and-writing-json-to-a-file-in-python/.
 	"""
 	output_list = []
 
@@ -26,6 +26,10 @@ def output_json(grid):
 
 
 def connected_houses_dict(battery, grid):
+	"""
+	Formats all houses matched to specific battery.
+	"""
+
 	houses_list = []
 	for house in battery.house_connections:
 		houses_list.append({
@@ -38,6 +42,10 @@ def connected_houses_dict(battery, grid):
 
 
 def cable_route(house, grid):
+	"""
+	Formats cable from a house.
+	"""
+
 	route_list = []
 	route_formatted = []
 	for cable in grid.cables:

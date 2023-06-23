@@ -1,7 +1,9 @@
+from __future__ import annotations
 import random
+import copy
+
 from code.classes.cable import Cable
 from code.classes.house import House
-import copy
 
 class Random_cable_route:
     """
@@ -9,30 +11,30 @@ class Random_cable_route:
     The path every route takes is random.
     """
 
-    def __init__(self, grid, configuration):
+    def __init__(self, grid: Grid, configuration: list[list[House, Battery]]):
         """
         Takes grid and configuration as input.
         Lays cables from houses to matched batteries.
         """
 
-        self.grid = grid
-        self.configuration = configuration
+        self.grid: Grid = grid
+        self.configuration: list[list[House, Battery]] = configuration
         self.lay_cables(configuration)
 
 
-    def make_route(self, house, battery):
+    def make_route(self, house: House, battery: Battery) -> list[list[int, int]]:
         """
         Creates a random route from a house to a battery and returns it
         as a list.
         """
 
-        cable_route = []
-        current_location = house.location
+        cable_route: list[list[int, int]] = []
+        current_location: list[int, int] = house.location
 
-        x_location = current_location[0]
-        y_location = current_location[1]
+        x_location: int = current_location[0]
+        y_location: int  = current_location[1]
 
-        end_location = battery.location
+        end_location: list[int, int] = battery.location
 
         cable_route.append([x_location, y_location])
 
@@ -40,10 +42,10 @@ class Random_cable_route:
         while x_location != end_location[0] or y_location != end_location[1]:
 
             # Get all possible directions (other batteries than destination not allowed)
-            directions = self.get_directions(x_location, y_location, end_location)
+            directions: list[str] = self.get_directions(x_location, y_location, end_location)
 
             # Make a random choice and process choice
-            direction = random.choice(directions)
+            direction: str = random.choice(directions)
             if direction == 'd':
                 y_location -= 1
 
@@ -61,12 +63,12 @@ class Random_cable_route:
         return cable_route
 
 
-    def get_directions(self, x_location, y_location, end_location):
+    def get_directions(self, x_location: int, y_location: int, end_location: list[int, int]) -> list[str]:
         """
         Get all possible directions from current position.
         Batteries other than the destination battery are not allowed to move over.
         """
-        directions = []
+        directions: list[str] = []
 
         # Make sure route stays within the grid
         if y_location > 0 and (self.grid.grid[y_location-1][x_location] != 2 or [x_location, y_location-1] == end_location):
@@ -81,11 +83,11 @@ class Random_cable_route:
         return directions
 
 
-    def lay_cables(self, configuration):
+    def lay_cables(self, configuration: list[list[House, Battery]]):
         """
         A function that lays all the cables from houses to the matched batteries.
         """
         for combination in configuration:
-            route = self.make_route(combination[0], combination[1])
-            cable = Cable(route)
+            route: list[list[int, int]] = self.make_route(combination[0], combination[1])
+            cable: Cable = Cable(route)
             self.grid.cables.append(cable)
