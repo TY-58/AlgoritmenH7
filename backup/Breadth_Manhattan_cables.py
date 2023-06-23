@@ -28,7 +28,7 @@ class Turhan_cable_route:
         queue = [(start_location, [start_location], 0)]
 
         # Max number of tries
-        max_locations = 100
+        max_locations = 150
         num_locations = 0
 
         # Start of the queue, with every new location the pop function will update the newest path and distance
@@ -41,7 +41,7 @@ class Turhan_cable_route:
             for direction_x, direction_y in directions:
                 new_location = (location[0] + direction_x, location[1] + direction_y)
 
-                # Cehcks whehter the next step is within the grid and is not a battery and append new location if not
+                # Checks whehter the next step is within the grid and is not a battery and append new location if not
                 if (0 <= new_location[0] < self.grid.size and
                     0 <= new_location[1] < self.grid.size and
                     new_location not in path and self.grid.grid[new_location[1]][new_location[0]] != '2'):
