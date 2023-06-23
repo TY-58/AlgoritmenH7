@@ -44,13 +44,16 @@ You can replace ` the algorithm` with the name of the algorithm you want to use 
 ## Acknowledgments
 Code from third parties:
 
-Loaders:
+Loaders.py:
 -   https://earthly.dev/blog/csv-python/
 -   https://linuxhint.com/skip-header-row-csv-python/
 
-Visualization:
+Sampling.py:
 -   Partially taken from: https://matplotlib.org/stable/gallery/statistics/hist.html#sphx-glr-gallery-statistics-hist-py
 -   Partially taken from: https://www.tutorialspoint.com/drawing-average-line-in-histogram-in-matplotlib
 
-Json:
+Json_output.py:
 -   https://www.geeksforgeeks.org/reading-and-writing-json-to-a-file-in-python/ 
+
+Visualize.py
+-   https://matplotlib.org/stable/plot_types/basic/step.html#sphx-glr-plot-types-basic-step-py
