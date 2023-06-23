@@ -27,6 +27,8 @@ class Sampleplot:
         self.get_scores()
         self.make_hist()
         self.make_csv_hist()
+        self.best_grid = []
+        self.best_configuration = []
 
     def get_scores(self):
 
@@ -66,7 +68,13 @@ class Sampleplot:
             # grid_1.calc_total_cable_cost()
 
             if grid_1.total_cost != 0:
-                print(grid_1.total_cost)
+                if self.count == 0:
+                    self.best_grid = grid_1
+                    self.best_configuration = config
+                    self.best_score = grid_1.total_cost
+                else:
+                    self.save_best(grid_1.total_cost, grid_1, config)
+                    
                 self.scores.append(grid_1.total_cost)
                 self.count += 1
 
@@ -74,6 +82,16 @@ class Sampleplot:
             print(self.count)
             for score in self.scores:
                 print(score)
+
+    def save_best(self, score_new, grid_new, config_new):
+        """ 
+        Saves the best current grid judged on score. 
+        """
+        if score_new < self.best_score:
+            self.best_grid = grid_new
+            self.best_configuration = config_new
+            self.best_score = score_new
+
 
     def make_hist(self):
 
