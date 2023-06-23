@@ -54,25 +54,37 @@ if __name__ == '__main__':
     # grid_1_visual = Gridplot(grid_1)
     # grid_1_visual.make_plot()
 
-    #make = Fred_configuration(grid_1)
-
+    minimum = 40000
+    for _ in range(2000):
+        grid_1 = Grid(51,3)
+        x = Greedy_configuration(grid_1)
+        config = x.make_configuration()
+        x.process_configuration(config)
+        cb = Shared_cable_route(grid_1, config)
+        grid_1.calc_shared_cable_cost()
+        if grid_1.total_cost < minimum:
+            minimum = grid_1.total_cost
+            print(minimum)
+            grid_1_visual = Gridplot(grid_1)
+            grid_1_visual.make_plot()
+            output_json(grid_1)
 
 
     #HILLCLIMBER
-    grid_1 = Grid(51,1)
-    x = Greedy_configuration(grid_1)
-    config = []
-    while config == []:
-        config = x.try_configuration()
-    x.process_configuration(config)
-    grid_1.configuration = x.configuration
-    cb = Shared_cable_route(grid_1, config)
-    grid_1.calc_shared_cable_cost()
-    #print(grid_1.total_cost)
-    hclimb = Hillclimber(grid_1)
-    hclimb.do_mutate()
-    grid_1_visual = Gridplot(grid_1)
-    grid_1_visual.make_plot()
+    # grid_1 = Grid(51,1)
+    # x = Greedy_configuration(grid_1)
+    # config = []
+    # while config == []:
+    #     config = x.try_configuration()
+    # x.process_configuration(config)
+    # grid_1.configuration = x.configuration
+    # cb = Shared_cable_route(grid_1, config)
+    # grid_1.calc_shared_cable_cost()
+    # #print(grid_1.total_cost)
+    # hclimb = Hillclimber(grid_1)
+    # hclimb.do_mutate()
+    # grid_1_visual = Gridplot(grid_1)
+    # grid_1_visual.make_plot()
 
     # x = []
     # while x == []:
