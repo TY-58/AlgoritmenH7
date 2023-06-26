@@ -1,7 +1,7 @@
 #Partially taken from: https://matplotlib.org/stable/gallery/statistics/hist.html#sphx-glr-gallery-statistics-hist-py
 #Partially taken from: https://www.tutorialspoint.com/drawing-average-line-in-histogram-in-matplotlib
 
-NUMBER_OF_SAMPLES: int = 10000
+NUMBER_OF_SAMPLES: int = 1000
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -48,8 +48,8 @@ class Sampleplot:
 
             #sample of greedy config and shared route
 
-            grid_1 = Grid(51,1)
-            x = Random_configuration(grid_1)
+            grid_1 = Grid(51,3)
+            x = Greedy_configuration(grid_1)
             config = []
             while config == []:
                 config = x.try_configuration()

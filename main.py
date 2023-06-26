@@ -18,7 +18,7 @@ from code.algorithms.hillclimber import Hillclimber
 
 
 if __name__ == '__main__':
-    sample = Sampleplot()
+    #sample = Sampleplot()
 
     #een-na
     # grid_1 = Grid(51,1)
@@ -34,17 +34,19 @@ if __name__ == '__main__':
 
 
     #beste
-    # grid_1 = Grid(51,3)
-    # x = Greedy_configuration(grid_1)
-    # config = []
-    # while config == []:
-    #     config = x.try_configuration()
-    # x.process_configuration(config)
-    # cb = Shared_cable_route(grid_1, config)
-    # grid_1.calc_shared_cable_cost()
-    # grid_1_visual = Gridplot(grid_1)
-    # grid_1_visual.make_plot()
-    # print(grid_1.total_cost)
+    grid_1 = Grid(51,3)
+    x = Greedy_configuration(grid_1)
+    config = []
+    while config == []:
+        config = x.try_configuration()
+    x.process_configuration(config)
+    cb = Shared_cable_route(grid_1, config)
+    grid_1.calc_shared_cable_cost()
+    grid_1_visual = Gridplot(grid_1)
+    grid_1_visual.make_plot()
+    print(grid_1.total_cost)
+
+    output_json(grid_1)
 
     # #random route and config
     # grid_1 = Grid(51,1)
@@ -164,10 +166,7 @@ if __name__ == '__main__':
     #grid_1.calc_total_cable_cost()
     #grid_1.calc_shared_cable_cost()
     # print(minimum)
-    # grid_1_visual = Gridplot(grid_1)
-    # grid_1_visual.make_plot()
 
-    #output_json(grid_1)
 
 
 #     #output_json(grid_1)

@@ -292,6 +292,7 @@ class Shared_cable_route:
         """
         self.grid.cables: list[Cable] = []
         for battery in self.grid.batteries:
+            battery_cables: list[Cable] = []
 
             # Find center location of all houses matched to battery
             self.find_center_location(battery)
@@ -302,11 +303,28 @@ class Shared_cable_route:
             for house in battery.house_connections:
 
                 # Find closest location on center route and lay cable between house and center route
-                route_location: list[int, int] = self.get_closest_location_cable(house.location, center_cable)
-                house_cable: Cable = Cable(self.make_route(house.location, route_location, battery))
+                route_center_cable_location: list[int, int] = self.get_closest_location_cable(house.location, center_cable)
 
-                # Connect both parts of the cable into one cable from house to battery
-                cable: Cable = self.get_connected_cable(center_cable, house_cable)
+                minimum_distance: int = MINIMUM_DISTANCE
+                for cable in battery_cables:
+                    route_house_cable_location: list[int, int] = self.get_closest_location_cable(house.location, cable)
+
+                    cable_distance: int = abs(house.location[0] - route_house_cable_location[0]) + abs(house.location[1] - route_house_cable_location[1])
+                    if cable_distance < minimum_distance:
+                        closest_cable: Cable = cable
+                        closest_cable_location: list[int, int] = route_house_cable_location
+                        minimum_distance: int = cable_distance
+
+                if minimum_distance < abs(route_center_cable_location[0] - house.location[0]) + abs(route_center_cable_location[1] - house.location[1]):
+
+                    house_cable: Cable = Cable(self.make_route(house.location, closest_cable_location, battery))
+
+                    cable: Cable = self.get_connected_cable(closest_cable, house_cable)
+                else:
+                    house_cable: Cable = Cable(self.make_route(house.location, route_center_cable_location, battery))
+
+                    # Connect both parts of the cable into one cable from house to battery
+                    cable: Cable = self.get_connected_cable(center_cable, house_cable)
 
                 # Raise errors if start is not house location or end is not battery location
                 if not cable.route[0] in [x.location for x in self.grid.houses]:
@@ -320,3 +338,4 @@ class Shared_cable_route:
 
                 # Process cable in the grid
                 self.grid.cables.append(cable)
+                battery_cables.append(cable)
