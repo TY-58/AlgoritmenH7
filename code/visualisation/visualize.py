@@ -39,7 +39,8 @@ class Gridplot:
        def make_plot(self):
               """."""
               plt.style.use('_mpl-gallery')
-              fig, ax = plt.subplots()
+              fig, ax = plt.subplots(figsize=(15, 10))
+
 
               x1 = []
               y1 = []
