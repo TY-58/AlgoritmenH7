@@ -122,7 +122,6 @@ class Greedy_cable_route:
         if x_location < 50 and (self.grid.grid[y_location][x_location+1] != 2 or [x_location+1, y_location] == end_location):
             directions.append('r')
 
-
         return directions
 
 

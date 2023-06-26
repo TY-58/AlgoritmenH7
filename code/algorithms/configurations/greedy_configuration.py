@@ -3,6 +3,8 @@ from operator import itemgetter
 import random
 import copy
 
+#from .configuration_helpers import make_configuration
+
 class Greedy_configuration:
     """
     Class for Greedy algorithm to match houses with batteries without exceeding max capacity.
@@ -27,6 +29,10 @@ class Greedy_configuration:
         """
         Sort houses by max_output (descending).
         """
+        # random.shuffle(self.grid.houses)
+        # return self.grid.houses
+
+        # Hierboven uit random_configuration hieronder originele
 
         return sorted(self.grid.houses, key=lambda x: x.max_output, reverse=True)
 
@@ -68,8 +74,8 @@ class Greedy_configuration:
                 battery: Battery = random.choices(batteries_sorted, weights=(0, 90,5,3,2), k=1)[0][0]
                 error_counter += 1
 
-                # If battery is not found after a 100 times, no battery has capacity left
-                if error_counter > 100:
+                # If battery is not found after 50 times, no battery has capacity left
+                if error_counter > 50:
 
                     # Reset configuration and return empty list
                     self.linked_houses: list[House] = []
@@ -91,7 +97,7 @@ class Greedy_configuration:
     def make_configuration(self) -> list[list[House, Battery]]:
         """
         Run try_configuration until a configuration is found.
-        Return it if this is the case
+        Return it if this is the case.
         """
 
         self.configuration: list[list[House, Battery]] = []
