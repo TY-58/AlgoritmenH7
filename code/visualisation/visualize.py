@@ -6,7 +6,7 @@ import numpy as np
 class Gridplot:
        """A class for visualizing the grid as a plot"""
 
-       def __init__(self, grid: list[list[int, int]]):
+       def __init__(self, grid):
               """."""
               self.cables = grid.cables
               self.houses = grid.houses
@@ -73,4 +73,4 @@ class Gridplot:
                      ylim=(0, 50), yticks=np.arange(1, 50))
 
               plt.savefig("saved_output/pic.")
-              #plt.show()
+              plt.show()

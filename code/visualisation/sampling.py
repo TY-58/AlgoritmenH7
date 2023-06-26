@@ -1,7 +1,7 @@
 #Partially taken from: https://matplotlib.org/stable/gallery/statistics/hist.html#sphx-glr-gallery-statistics-hist-py
 #Partially taken from: https://www.tutorialspoint.com/drawing-average-line-in-histogram-in-matplotlib
 
-NUMBER_OF_SAMPLES: int = 100
+NUMBER_OF_SAMPLES: int = 1000
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -27,8 +27,6 @@ class Sampleplot:
         self.get_scores()
         self.make_hist()
         self.make_csv_hist()
-        self.best_grid = []
-        self.best_configuration = []
 
     def get_scores(self):
 
@@ -47,15 +45,25 @@ class Sampleplot:
 
             #sample of greedy config and shared route
 
+            # grid_1 = Grid(51,3)
+            # x = Greedy_configuration(grid_1)
+            # config = []
+            # while config == []:
+            #     config = x.try_configuration()
+            # x.process_configuration(config)
+            # cb = Shared_cable_route(grid_1, config)
+            # grid_1.calc_shared_cable_cost()
+
+            #best
             grid_1 = Grid(51,3)
             x = Greedy_configuration(grid_1)
             config = []
             while config == []:
                 config = x.try_configuration()
             x.process_configuration(config)
+            grid_1.configuration = x.configuration
             cb = Shared_cable_route(grid_1, config)
             grid_1.calc_shared_cable_cost()
-
 
             #sample of greedy and A+
             # grid_1 = Grid(51,1)
@@ -91,6 +99,9 @@ class Sampleplot:
             self.best_grid = grid_new
             self.best_configuration = config_new
             self.best_score = score_new
+
+    def return_best(self):
+        return self.best_grid
 
 
     def make_hist(self):

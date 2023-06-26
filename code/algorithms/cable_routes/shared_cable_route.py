@@ -56,6 +56,10 @@ class Shared_cable_route:
 
         cable: Cable = Cable(self.make_route(start_location, end_location, battery))
 
+        for battery in self.grid.batteries:
+            if start_location != end_location and start_location == battery.location:
+                cable.route.pop(0)
+
         return cable
 
 
@@ -282,8 +286,9 @@ class Shared_cable_route:
                 else:
 
                     return Cable(house_cable.route + center_cable.route[counter+1:])
-
+            
             counter += 1
+
 
     def lay_cables(self):
         """
