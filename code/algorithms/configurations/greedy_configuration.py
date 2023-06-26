@@ -3,7 +3,7 @@ from operator import itemgetter
 import random
 import copy
 
-from configuration_helpers import make_configuration
+#from .configuration_helpers import make_configuration
 
 class Greedy_configuration:
     """
@@ -74,8 +74,8 @@ class Greedy_configuration:
                 battery: Battery = random.choices(batteries_sorted, weights=(0, 90,5,3,2), k=1)[0][0]
                 error_counter += 1
 
-                # If battery is not found after a 100 times, no battery has capacity left
-                if error_counter > 100:
+                # If battery is not found after 50 times, no battery has capacity left
+                if error_counter > 50:
 
                     # Reset configuration and return empty list
                     self.linked_houses: list[House] = []

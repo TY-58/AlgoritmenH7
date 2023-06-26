@@ -18,7 +18,7 @@ from code.algorithms.hillclimber import Hillclimber
 
 
 if __name__ == '__main__':
-    #sample = Sampleplot()
+    sample = Sampleplot()
 
     #een-na
     # grid_1 = Grid(51,1)
@@ -54,20 +54,20 @@ if __name__ == '__main__':
     # grid_1_visual = Gridplot(grid_1)
     # grid_1_visual.make_plot()
 
-    minimum = 40000
-    for _ in range(2000):
-        grid_1 = Grid(51,3)
-        x = Greedy_configuration(grid_1)
-        config = x.make_configuration()
-        x.process_configuration(config)
-        cb = Shared_cable_route(grid_1, config)
-        grid_1.calc_shared_cable_cost()
-        if grid_1.total_cost < minimum:
-            minimum = grid_1.total_cost
-            print(minimum)
-            grid_1_visual = Gridplot(grid_1)
-            grid_1_visual.make_plot()
-            output_json(grid_1)
+    # minimum = 40000
+    # for _ in range(2000):
+    #     grid_1 = Grid(51,3)
+    #     x = Greedy_configuration(grid_1)
+    #     config = x.make_configuration()
+    #     x.process_configuration(config)
+    #     cb = Shared_cable_route(grid_1, config)
+    #     grid_1.calc_shared_cable_cost()
+    #     if grid_1.total_cost < minimum:
+    #         minimum = grid_1.total_cost
+    #         print(minimum)
+    #         grid_1_visual = Gridplot(grid_1)
+    #         grid_1_visual.make_plot()
+    #         output_json(grid_1)
 
 
     #HILLCLIMBER

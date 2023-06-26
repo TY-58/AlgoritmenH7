@@ -1,7 +1,7 @@
 #Partially taken from: https://matplotlib.org/stable/gallery/statistics/hist.html#sphx-glr-gallery-statistics-hist-py
 #Partially taken from: https://www.tutorialspoint.com/drawing-average-line-in-histogram-in-matplotlib
 
-NUMBER_OF_SAMPLES: int = 100
+NUMBER_OF_SAMPLES: int = 10000
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -13,12 +13,13 @@ from code.helpers.json_output import output_json
 from operator import itemgetter
 from code.classes.grid import Grid
 from code.algorithms.configurations.greedy_configuration import Greedy_configuration
+from code.algorithms.configurations.random_configuration import Random_configuration
 from code.algorithms.cable_routes.shared_cable_route import Shared_cable_route
 
 
 class Sampleplot:
-    """ 
-    Takes random sample solutions and visualizes them in a histogram plot. 
+    """
+    Takes random sample solutions and visualizes them in a histogram plot.
     """
 
     def __init__(self):
@@ -47,8 +48,8 @@ class Sampleplot:
 
             #sample of greedy config and shared route
 
-            grid_1 = Grid(51,3)
-            x = Greedy_configuration(grid_1)
+            grid_1 = Grid(51,1)
+            x = Random_configuration(grid_1)
             config = []
             while config == []:
                 config = x.try_configuration()
@@ -74,7 +75,7 @@ class Sampleplot:
                     self.best_score = grid_1.total_cost
                 else:
                     self.save_best(grid_1.total_cost, grid_1, config)
-                    
+
                 self.scores.append(grid_1.total_cost)
                 self.count += 1
 
@@ -84,8 +85,8 @@ class Sampleplot:
                 print(score)
 
     def save_best(self, score_new, grid_new, config_new):
-        """ 
-        Saves the best current grid judged on score. 
+        """
+        Saves the best current grid judged on score.
         """
         if score_new < self.best_score:
             self.best_grid = grid_new

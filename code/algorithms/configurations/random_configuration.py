@@ -2,6 +2,8 @@ from __future__ import annotations
 import random
 import copy
 
+#from .configuration_helpers import make_configuration
+
 class Random_configuration:
     """
     A class for a random algorithm to match houses with batteries without
@@ -75,3 +77,14 @@ class Random_configuration:
             configuration = self.try_configuration()
 
         return configuration
+
+
+    def process_configuration(self, configuration: list[list[House, Battery]]):
+        """
+        Add all houses to the house_connections of the batteries that they've matched with.
+        """
+
+        for battery in self.grid.batteries:
+            for house in self.grid.houses:
+                if [house, battery] in configuration:
+                    battery.house_connections.append(house)
