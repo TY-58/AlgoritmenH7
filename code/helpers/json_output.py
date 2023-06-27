@@ -1,6 +1,5 @@
 import json
 
-
 def output_json(grid):
 	"""
 	Formats and saves json in the right format.

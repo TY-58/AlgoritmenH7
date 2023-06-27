@@ -39,7 +39,7 @@ class Shared_cable_extended:
             x_location += house.location[0]
             y_location += house.location[1]
 
-        # Take mean of both x location and y location, rounded to an integer.
+        # Takes mean of both x location and y location, rounded to an integer
         center_location: list[int, int] = [round(x_location / len(battery.house_connections)), round(y_location / len(battery.house_connections))]
 
         return center_location
@@ -74,20 +74,20 @@ class Shared_cable_extended:
         different move on the grid and need multiple different inputs.
         """
 
-        # Create list that will be filled with coordinates that are passed on route
+        # Creates list that will be filled with coordinates that are passed on route
         cable_route: list[list[int, int]] = []
 
-        # Get horizontal distance and save direction (left or right) as sign
+        # Gets horizontal distance and save direction (left or right) as sign
         x_direction: int = int(end_location[0] - start_location[0])
         if x_direction > 0:
             x_sign = 1
         else:
             x_sign = -1
 
-        # x_direction should be a positive number to iterate in for loop
+        # Makes sure x_direction is always a positive number to iterate in for loop
         x_direction = abs(x_direction)
 
-        # Same for vertical direction
+        # Makes sure y_direction is always a positive number to iterate in for loop
         y_direction: int = int(end_location[1] - start_location[1])
         if y_direction > 0:
             y_sign = 1
@@ -96,7 +96,7 @@ class Shared_cable_extended:
 
         y_direction = abs(y_direction)
 
-        # Get a list of all batteries other than relevant battery
+        # Gets a list of all batteries other than relevant battery
         other_battery_locations: list[Battery] = self.get_locations_other_batteries(battery)
 
         x_location: int = start_location[0]
@@ -106,20 +106,20 @@ class Shared_cable_extended:
         x_counter: int = 0
         y_counter: int = 0
 
-        # First move horizontally, check if route should move to the left
+        # First moves horizontally, checks if route should move to the left
         if start_location[0] > end_location[0]:
 
-            # Move horizontally for entire x_direction
+            # Moves horizontally for entire x_direction
             while x_counter < x_direction:
                 x_location -= 1
 
-                # If other battery is encountered, move around it
+                # If other battery is encountered, moves around it
                 if [x_location, y_location] in other_battery_locations:
 
-                    # First, take a step back
+                    # First, takes a step back
                     x_location += 1
 
-                    # If route is already on the right vertical coordinate, move around
+                    # If route is already on the right vertical coordinate, moves around
                     if y_location == end_location[1]:
                         y_location += 1
                         cable_route.append([x_location, y_location])
@@ -133,21 +133,21 @@ class Shared_cable_extended:
                         y_location -= 1
                         cable_route.append([x_location, y_location])
 
-                        # Took two steps in horizontal direction
+                        # Takes two steps in horizontal direction
                         x_counter += 2
 
-                    # If not, move in correct vertical direction for one coordinate
+                    # If not, moves in correct vertical direction for one coordinate
                     else:
                         y_location += y_sign
                         y_direction -= 1
                         cable_route.append([x_location, y_location])
 
-                # Else perform a normal move
+                # Else performs a normal move
                 else:
                     cable_route.append([x_location, y_location])
                     x_counter += 1
 
-        # Move to the right, works analogous to the code above
+        # Moves to the right, works analogous to the code above
         if start_location[0] < end_location[0]:
             while x_counter < x_direction:
                 x_location += 1
@@ -177,13 +177,13 @@ class Shared_cable_extended:
                     cable_route.append([x_location, y_location])
                     x_counter += 1
 
-        # After horizontal movement, check whether vertical movement is up or down
+        # After horizontal movement, checks whether vertical movement is up or down
         if start_location[1] > end_location[1]:
             while y_counter < y_direction:
 
                 y_location -= 1
 
-                # Because we are already on the right x location, we always have to move around
+                # Because we are already on the correct x location, we always have to move around
                 if [x_location, y_location] in other_battery_locations:
                     y_location += 1
 
@@ -201,12 +201,12 @@ class Shared_cable_extended:
 
                     y_counter += 2
 
-                # Perform a normal move
+                # Performs a normal move
                 else:
                     cable_route.append([x_location, y_location])
                     y_counter += 1
 
-        # Moving up works analogous to moving down
+        # Moves up, works analogous to moving down
         if start_location[1] < end_location[1]:
             while y_counter < y_direction:
                 y_location += 1
@@ -231,7 +231,7 @@ class Shared_cable_extended:
                     cable_route.append([x_location, y_location])
                     y_counter += 1
 
-        # Finally, return list of all coordinates that the route passed
+        # Finally, returns list of all coordinates that the route passed
         return cable_route
 
 
@@ -241,7 +241,7 @@ class Shared_cable_extended:
         Returns location on the center route that is closest to input house.
         """
 
-        # Take upper bound for the minimum distance
+        # Takes upper bound for the minimum distance
         minimum_distance: int = MINIMUM_DISTANCE
         closest_location: list[int, int] = []
 
@@ -257,7 +257,7 @@ class Shared_cable_extended:
 
     def get_locations_other_batteries(self, battery_input: Battery) -> list[list[int, int]]:
         """
-        Find and return locations of all batteries but the inputted battery.
+        Finds and return locations of all batteries but the inputted battery.
         """
 
         battery_locations: list[list[int, int]] = []
@@ -273,43 +273,37 @@ class Shared_cable_extended:
         Connects the cable from a house to the center route with the center
         and creates a new cable from the house to the battery.
         """
+
         # House cable could already be connected to the battery
         if house_cable.route[-1] == center_cable.route[-1]:
-            #print('alleen house cable')
-            #print('alleen house cable')
             return house_cable
 
         else:
             counter = 0
             for location in center_cable.route:
                 if location == house_cable.route[-1]:
-                    # print(center_cable.route)
-                    # print(house_cable.route)
-                    # print('plakt kabels')
-                    # print(counter)
-
                     return Cable(house_cable.route + center_cable.route[counter+1:])
                 counter += 1
 
 
     def lay_cables(self):
         """
-        Lay all cables: for every battery, find center route, and lay route for
-        every house matched to the battery. Finally, add cables to the grid.
+        Lays all cables: for every battery, finds center route, and lays route for
+        every house matched to the battery. Finally, adds cables to the grid.
         """
         self.grid.cables: list[Cable] = []
         for battery in self.grid.batteries:
             battery_cables: list[Cable] = []
 
-            # Find center location of all houses matched to battery
+            # Finds center location of all houses matched to battery
             self.find_center_location(battery)
 
-            # Find route between center location and battery
+            # Finds route between center location and battery
             center_cable: Cable = self.get_center_cable(battery)
 
             for house in battery.house_connections:
 
-                # Find closest location on center route and lay cable between house and center route
+                # Finds closest location on center route and lay cable between house and center route
                 route_center_cable_location: list[int, int] = self.get_closest_location_cable(house.location, center_cable)
 
                 minimum_distance: int = MINIMUM_DISTANCE
@@ -330,10 +324,10 @@ class Shared_cable_extended:
                 else:
                     house_cable: Cable = Cable(self.make_route(house.location, route_center_cable_location, battery))
 
-                    # Connect both parts of the cable into one cable from house to battery
+                    # Connects both parts of the cable into one cable from house to battery
                     cable: Cable = self.get_connected_cable(center_cable, house_cable)
 
-                # Raise errors if start is not house location or end is not battery location
+                # Raises errors if start is not house location or end is not battery location
                 if not cable.route[0] in [x.location for x in self.grid.houses]:
                     raise ValueError("gaat fout")
                 if not cable.route[-1] in [x.location for x in self.grid.batteries]:
@@ -341,9 +335,8 @@ class Shared_cable_extended:
 
                 for loc in range(len(cable.route) - 1) :
                     if abs(cable.route[loc][0] - cable.route[loc + 1][0]) + abs(cable.route[loc][1] - cable.route[loc + 1][1]) != 1:
-                    #    print(cable.route)
                         raise ValueError ("gaat fout")
 
-                # Process cable in the grid
+                # Processes cable in the grid
                 self.grid.cables.append(cable)
                 battery_cables.append(cable)

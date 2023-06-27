@@ -10,6 +10,7 @@ class Random_cable_route:
     A class for deciding the routes from houses to the matched batteries.
     The path every route takes is random.
     """
+    
 
     def __init__(self, grid: Grid, configuration: list[list[House, Battery]]):
         """
@@ -38,13 +39,13 @@ class Random_cable_route:
 
         cable_route.append([x_location, y_location])
 
-        # Keep moving to a random diretion as long as battery is not found
+        # Keeps moving to a random diretion as long as battery is not found
         while x_location != end_location[0] or y_location != end_location[1]:
 
-            # Get all possible directions (other batteries than destination not allowed)
+            # Gets all possible directions (other batteries than destination not allowed)
             directions: list[str] = self.get_directions(x_location, y_location, end_location)
 
-            # Make a random choice and process choice
+            # Makes a random choice and processes choice
             direction: str = random.choice(directions)
             if direction == 'd':
                 y_location -= 1
@@ -65,12 +66,13 @@ class Random_cable_route:
 
     def get_directions(self, x_location: int, y_location: int, end_location: list[int, int]) -> list[str]:
         """
-        Get all possible directions from current position.
+        Gets all possible directions from current position.
         Batteries other than the destination battery are not allowed to move over.
         """
+
         directions: list[str] = []
 
-        # Make sure route stays within the grid
+        # Makes sure route stays within grid
         if y_location > 0 and (self.grid.grid[y_location-1][x_location] != 2 or [x_location, y_location-1] == end_location):
             directions.append('d')
         if y_location < 50 and (self.grid.grid[y_location+1][x_location] != 2 or [x_location, y_location+1] == end_location):
@@ -87,6 +89,7 @@ class Random_cable_route:
         """
         A function that lays all the cables from houses to the matched batteries.
         """
+
         for combination in configuration:
             route: list[list[int, int]] = self.make_route(combination[0], combination[1])
             cable: Cable = Cable(route)

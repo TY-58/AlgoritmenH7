@@ -8,9 +8,10 @@
             cable: Cable = Cable(route)
             grid.grid.cables.append(cable)
 
+
     def get_directions(grid: Grid, x_location: int, y_location: int, end_location: list[int, int]) -> list[str]:
         """
-        Get all possible directions from current position.
+        Gets all possible directions from current position.
         Batteries other than the destination battery are not allowed to move over.
         """
 

@@ -136,7 +136,7 @@ class Shared_cable_route:
                         # Took two steps in horizontal direction
                         x_counter += 2
 
-                    # If not, move in correct vertical direction for one coordinate
+                    # If not, moves in correct vertical direction for one coordinate
                     else:
                         y_location += y_sign
                         y_direction -= 1
@@ -292,25 +292,25 @@ class Shared_cable_route:
 
     def lay_cables(self):
         """
-        Lay all cables: for every battery, find center route, and lay route for
+        Lays all cables: for every battery, find center route, and lay route for
         every house matched to the battery. Finally, add cables to the grid.
         """
         self.grid.cables: list[Cable] = []
         for battery in self.grid.batteries:
 
-            # Find center location of all houses matched to battery
+            # Finds center location of all houses matched to battery
             self.find_center_location(battery)
 
-            # Find route between center location and battery
+            # Finds route between center location and battery
             center_cable: Cable = self.get_center_cable(battery)
 
             for house in battery.house_connections:
 
-                # Find closest location on center route and lay cable between house and center route
+                # Finds closest location on center route and lay cable between house and center route
                 route_location: list[int, int] = self.get_closest_location_cable(house.location, center_cable)
                 house_cable: Cable = Cable(self.make_route(house.location, route_location, battery))
 
-                # Connect both parts of the cable into one cable from house to battery
+                # Connects both parts of the cable into one cable from house to battery
                 cable: Cable = self.get_connected_cable(center_cable, house_cable)
 
                 # Raise errors if start is not house location or end is not battery location
