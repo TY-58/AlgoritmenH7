@@ -3,7 +3,7 @@ import random
 import copy
 
 from .cable_routes.shared_cable_extended import Shared_cable_extended
-from .cable_routes.shared_cable_route import Shared_cable_route
+#from .cable_routes.shared_cable_route import Shared_cable_route
 from .configurations.greedy_configuration import Greedy_configuration
 from code.classes.grid import Grid
 from code.visualisation.visualize import Gridplot
@@ -42,7 +42,7 @@ class Hillclimber:
         """
 
         improvements = 0
-        
+
         # Performs mutations while at least 1 in every X iterations is an improvement
         while self.stop_mutation() == False:
             new_config = self.mutate_match(self.current_config)
