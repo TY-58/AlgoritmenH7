@@ -42,7 +42,7 @@ class Greedy_cable_route:
 
         cable_route.append([x_location, y_location])
 
-        # Keep adding to the route as long as destination is not yet reached
+        # Keeps adding to the route as long as destination is not yet reached
         while x_location != end_location[0] or y_location != end_location[1]:
 
             # Get all possible directions from current location
@@ -160,15 +160,15 @@ class Greedy_cable_route:
 
     def delete_loops(self, x_location: int, y_location: int, cable_route: list[list[int, int]]):
         """
-        Delete all loops in the route thusfar.
+        Deletes all loops in the route thusfar.
         """
 
         counter: int = 0
 
-        # Check every location in list
+        # Checks every location in list.
         for location in cable_route:
 
-            # If current location is already in list, delete everything after that first location
+            # If current location is already in list, deletes everything after that first location.
             if [x_location, y_location] == location:
                 del cable_route[counter+1:len(cable_route)]
                 break

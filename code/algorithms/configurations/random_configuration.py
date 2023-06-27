@@ -2,13 +2,12 @@ from __future__ import annotations
 import random
 import copy
 
-#from .configuration_helpers import make_configuration
-
 class Random_configuration:
     """
     A class for a random algorithm to match houses with batteries without
     exceeding maximum capacity of the batteries.
     """
+
 
     def __init__(self, input_grid):
         """
@@ -41,10 +40,10 @@ class Random_configuration:
         for house in self.shuffled_houses:
             battery: Battery = random.choice(self.grid.batteries)
 
-            # Try to find a battery with enough capacity
+            # Tries to find a battery with enough capacity
             error_counter: int = 0
 
-            # Keep choosing battery and see if house fits
+            # Keeps choosing battery and see if house fits
             while battery.current_capacity < house.max_output:
                 battery: Battery = random.choice(self.grid.batteries)
                 error_counter += 1
@@ -52,7 +51,7 @@ class Random_configuration:
                 # If more than 50 tries are needed, there is probably no battery left
                 if error_counter > 50:
 
-                    # Reset configuration and return empty list.
+                    # Resets configuration and return empty list
                     self.linked_houses: list[House] = []
                     self.configuration: list[list[House, Battery]] = []
                     for battery in self.grid.batteries:
@@ -60,7 +59,7 @@ class Random_configuration:
 
                     return []
 
-            # If a battery is found, append it to the configuration
+            # If a battery is found, appends it to the configuration
             configuration.append([house, battery])
             battery.current_capacity -= float(house.max_output)
 
@@ -70,8 +69,8 @@ class Random_configuration:
 
     def make_configuration(self) -> list[list[House, Battery]]:
         """
-        Run try_configuration until a configuration is found.
-        Return it if this is the case
+        Runs try_configuration until a configuration is found.
+        Returns the found configuration.
         """
 
         configuration: list[list[House, Battery]] = []
@@ -84,7 +83,7 @@ class Random_configuration:
 
     def process_configuration(self, configuration: list[list[House, Battery]]):
         """
-        Add all houses to the house_connections of the batteries that they've matched with.
+        Adds all houses to the house_connections of the batteries that they're matched with.
         """
 
         for battery in self.grid.batteries:

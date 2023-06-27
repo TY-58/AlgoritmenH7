@@ -1,10 +1,17 @@
 class House:
-    """Class for houses
-    autoincrement: https://stackoverflow.com/questions/1045344/how-do-you-create-an-incremental-id-in-a-python-class"""
+    """
+    Class for houses
+    autoincrement: https://stackoverflow.com/questions/1045344/how-do-you-create-an-incremental-id-in-a-python-class
+    """
 
     house_id_counter: int = 0
 
+
     def __init__(self, x_location: int, y_location: int, max_output: int):
+        """ 
+        Creates a class for houses and takes the house location and energy output.
+        Stores the information in the class.
+        """
 
         self.id: int = House.house_id_counter
         self.location: [int, int] = [x_location, y_location]
