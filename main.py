@@ -19,7 +19,13 @@ from code.algorithms.hillclimber import Hillclimber
 
 
 if __name__ == '__main__':
-    #sample = Sampleplot()
+    sample = Sampleplot()
+    visual_before = Gridplot(sample.best_grid)
+    hclimb = Hillclimber(sample.best_grid)
+    hclimb.do_mutate()
+    visual_after = Gridplot(hclimb.current_grid)
+    visual_before.make_plot()
+    visual_after.make_plot()
 
     #een-na
     # grid_1 = Grid(51,1)
@@ -49,6 +55,20 @@ if __name__ == '__main__':
         print(grid_1.total_cost)
     #
         # output_json(grid_1)
+    # for _ in range(1):
+    #     grid_1 = Grid(51,1)
+    #     x = Greedy_configuration(grid_1)
+    #     config = []
+    #     while config == []:
+    #         config = x.try_configuration()
+    #     x.process_configuration(config)
+    #     cb = Shared_cable_extended(grid_1, config)
+    #     grid_1.calc_shared_cable_cost()
+    #     grid_1_visual = Gridplot(grid_1)
+    #     grid_1_visual.make_plot()
+    #     print(grid_1.total_cost)
+
+    #     output_json(grid_1)
 
     # #random route and config
     # grid_1 = Grid(51,1)

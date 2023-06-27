@@ -286,8 +286,9 @@ class Shared_cable_route:
                 else:
 
                     return Cable(house_cable.route + center_cable.route[counter+1:])
-
+            
             counter += 1
+
 
     def lay_cables(self):
         """

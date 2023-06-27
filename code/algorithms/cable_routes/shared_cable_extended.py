@@ -276,6 +276,7 @@ class Shared_cable_extended:
         # House cable could already be connected to the battery
         if house_cable.route[-1] == center_cable.route[-1]:
             #print('alleen house cable')
+            #print('alleen house cable')
             return house_cable
 
         else:

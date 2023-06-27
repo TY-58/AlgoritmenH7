@@ -12,6 +12,8 @@ from .visualize import Gridplot
 from code.helpers.json_output import output_json
 from operator import itemgetter
 from code.classes.grid import Grid
+
+from code.algorithms.cable_routes.shared_cable_extended import Shared_cable_extended
 from code.algorithms.configurations.greedy_configuration import Greedy_configuration
 from code.algorithms.configurations.random_configuration import Random_configuration
 from code.algorithms.cable_routes.shared_cable_extended import Shared_cable_extended
@@ -28,8 +30,6 @@ class Sampleplot:
         self.get_scores()
         self.make_hist()
         self.make_csv_hist()
-        self.best_grid = []
-        self.best_configuration = []
 
     def get_scores(self):
 
@@ -48,15 +48,50 @@ class Sampleplot:
 
             #sample of greedy config and shared route
 
-            grid_1 = Grid(51,3)
+            # grid_1 = Grid(51,3)
+            # x = Greedy_configuration(grid_1)
+            # config = []
+            # while config == []:
+            #     config = x.try_configuration()
+            # x.process_configuration(config)
+            # cb = Shared_cable_route(grid_1, config)
+            # grid_1.calc_shared_cable_cost()
+
+            #best
+            # grid_1 = Grid(51,1)
+            # x = Greedy_configuration(grid_1)
+            # config = []
+            # while config == []:
+            #     config = x.try_configuration()
+            # x.process_configuration(config)
+            # grid_1.configuration = x.configuration
+            # cb = Shared_cable_route(grid_1, config)
+            # grid_1.calc_shared_cable_cost()
+
+            #best extended
+            grid_1 = Grid(51,1)
             x = Greedy_configuration(grid_1)
             config = []
             while config == []:
                 config = x.try_configuration()
             x.process_configuration(config)
+            grid_1.configuration = x.configuration
+            cb = Shared_cable_extended(grid_1, config)
             cb = Shared_cable_extended(grid_1, config)
             grid_1.calc_shared_cable_cost()
 
+            #random extended
+            # grid_1 = Grid(51,1)
+            # x = Random_configuration(grid_1)
+            # config = []
+            # while config == []:
+            #     config = x.try_configuration()
+            # x.process_configuration(config)
+            # grid_1.configuration = x.configuration
+            # cb = Shared_cable_extended(grid_1, config)
+            # grid_1.calc_shared_cable_cost()
+            
+            
 
             #sample of greedy and A+
             # grid_1 = Grid(51,1)
@@ -79,10 +114,6 @@ class Sampleplot:
                 self.scores.append(grid_1.total_cost)
                 self.count += 1
 
-            #NTS: may print if not viable solution, make check.
-            print(self.count)
-            for score in self.scores:
-                print(score)
 
     def save_best(self, score_new, grid_new, config_new):
         """
@@ -92,6 +123,9 @@ class Sampleplot:
             self.best_grid = grid_new
             self.best_configuration = config_new
             self.best_score = score_new
+
+    def return_best(self):
+        return self.best_grid
 
 
     def make_hist(self):
