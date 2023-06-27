@@ -7,6 +7,7 @@ class Grid:
     """
     A class that stores and processes the necessary data required for the SmartGrid.
     """
+    
 
     def __init__(self, size: int, district: int):
         """
@@ -105,27 +106,27 @@ class Grid:
 
         for battery in self.batteries:
 
-            # Create a big route with all routes from cables connected to battery
+            # Creatse a big route with all routes from cables connected to battery
             battery_route: list = []
             for cable in self.cables:
                 if cable.route[-1] == battery.location:
 
-                    # Need tuples instead of lists in order to use set()
+                    # Needs tuples instead of lists in order to use set()
                     cable_route: list[Tuple(int,int)] = [tuple(x) for x in cable.route]
                     battery_route += cable_route
 
-            # Get rid of all duplicates, because shared cables are allowed
+            # Gets rid of all duplicates, because shared cables are allowed
             battery_route = set(battery_route)
 
             total_length += len(battery_route) - 1
 
-        # Update cost
+        # Updates cost
         self.total_cost = 9 * total_length + 25000
 
 
     def process_configuration_grid(self, configuration: list[list[House, Battery]]) -> None:
         """
-        Add all houses to house_connections of the battery they are matched to.
+        Adds all houses to house_connections of the battery they are matched to.
         """
 
         for battery in self.batteries:

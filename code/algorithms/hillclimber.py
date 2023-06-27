@@ -170,7 +170,7 @@ class Hillclimber:
         # Reconnects houses to batteries according to new configuration
         self.current_grid.process_configuration_grid(configuration)
 
-        # 
+        # Lays the cables in the grid
         Shared_cable_extended(self.current_grid, configuration)
 
         # Calculates new cost

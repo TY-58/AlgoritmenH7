@@ -8,6 +8,7 @@ class Cable:
 
     cable_id_counter = 0
 
+
     def __init__(self, route: list[list[int,int]]):
         """
         Takes a list of lists of length two (list of locations) as input.
