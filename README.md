@@ -25,7 +25,7 @@ We have implemented different configurations that match houses with batteries an
 
 ### Hillclimber
 
-The Hillclimber algorithm starts running after the matches are made and the cables have been laid. The hillclimber then looks if it can find better matches, where the distance from the house to the battery is shorter and will make the change if its within the maximum capacity of the battery. The hillclimber will run as long it can find a better configuration, and will stop if it can't after a certain amount of no better matches (you can provide the max iterations withouth improved for the hillclimber to stop in the command line). If the hillclimber is done running, the shared cable route will then rearrange the cables in order to minimize the costs.
+The Hillclimber algorithm starts running after the matches are made and the cables have been laid. The hillclimber then looks if it can find better matches, where the distance from the house to the battery is shorter and will make the change if its within the maximum capacity of the battery. The hillclimber will run as long it can find a better configuration, and will stop if it can't after a certain amount of no better matches (you can provide the max iterations withouth improved for the hillclimber to stop in the command line). If the hillclimber is done running, the shared cable route will then rearrange the cables in order to minimize the costs. The hillclimber is only possible with the shared cable route.
 
 ## Reproducing Results
 You will need to Download at least Python3 version == 3.10.9
@@ -45,7 +45,13 @@ conda install --file requirements.txt
 
 3. Run the main script with the desired algorithm: `python main.py`
 
-You can replace ` the algorithm` with the name of the algorithm you want to use (`Random Algorithm`, `Greedy Configuration with Pathfinder`, or `Greedy Confuguration with Shared Cables`) by changing the name of the algorithm in main.
+After running main.py you will have to answer a couple questions:
+1. The first question is about the Grid. There are 3 different Grids, which one would you like to run ? press the grid number and hit enter.
+2. Choose configuration you want to run (matching houses with batteries). 1 = random, 2 = Greedy. Press the number of the configuration you wish to run and press enter.
+3. Choose the cable route algorithm you would like to run. 1 = Random, 2, greedy cable route without sharing cables, 3 = Greedy route with sharing cables.
+4. type in the number of times you would like the programme to run, and press enter.
+5. If you chose for greedy route with sharing cables, there is the additional option of hillclimber. If you would like to run hill climber press y, if not press n and hit enter.
+6. If you did run Hillclimber, type in the number of times you would the hillclimber to run without finding a better solution.
 
 ## Authors
 

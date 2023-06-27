@@ -8,11 +8,7 @@ from .configurations.greedy_configuration import Greedy_configuration
 from code.classes.grid import Grid
 from code.visualisation.visualize import Gridplot
 
-<<<<<<< HEAD
-MAX_STUCK: int = 100
-=======
 MAX_STUCK: int = 5000
->>>>>>> 7c1c3a242cf2c49861fac28f61ed63e26142e4c4
 
 class Hillclimber:
     """
