@@ -24,14 +24,22 @@ class Sampleplot:
 
 
     def __init__(self, score_list, bin_size):
+        """
+        Takes a generated score list and bin size and saves the information.
+        Generates a histogram based on this input.
+        """
+
         self.scores: list[int] = score_list
         self.bin_size = bin_size
         self.make_hist()
         self.make_csv_hist()
 
+
     def make_hist(self):
         """
-        .
+        Makes the histogram.
+        Calculates y as a probability density function.
+        Costs/ scores are assigned to the x-axis.
         """
 
         mu = np.mean(self.scores)
@@ -46,13 +54,12 @@ class Sampleplot:
         ax.set_ylabel('Probability density')
         ax.set_title(r'Grid Cost Probability')
         fig.tight_layout()
-        #plt.show()
         plt.savefig("saved_output/sample.")
 
 
     def make_csv_hist(self):
         """
-        .
+        Makes a csv file of the scores plotted in the histogram. 
         """
 
         with open('saved_output/hist_plot.csv', 'w', newline='') as file:

@@ -4,8 +4,6 @@ class Battery:
     a list of houses that it is connected to and a current_capacity, which is dynamic.
     """
 
-    battery_id_counter: int = 0
-
 
     def __init__(self, x_location: int, y_location: int, max_capacity: int):
         """
@@ -18,5 +16,3 @@ class Battery:
         self.max_capacity: float = max_capacity
         self.house_connections: list = []
         self.current_capacity: float = float(max_capacity)
-
-        Battery.battery_id_counter += 1
