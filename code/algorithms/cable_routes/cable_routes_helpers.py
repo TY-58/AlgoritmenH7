@@ -1,11 +1,11 @@
-    def lay_cables(grid: Grid, configuration: list[list[House, Battery]]):
+    def lay_cables(grid: Grid, configuration: list[list[House, Battery]]) -> None:
         """
         A function that lays all the cables from houses to the matched batteries.
         """
 
         for combination in configuration:
-            route: list[list[int, int]] = self.make_route(combination[0], combination[1])
-            cable: Cable = Cable(route)
+            route = self.make_route(combination[0], combination[1])
+            cable = Cable(route)
             grid.grid.cables.append(cable)
 
 
@@ -15,7 +15,7 @@
         Batteries other than the destination battery are not allowed to move over.
         """
 
-        directions: list[str] = []
+        directions = []
 
         if y_location > 0 and (grid.grid[y_location-1][x_location] != 2 or [x_location, y_location-1] == end_location):
             directions.append('d')

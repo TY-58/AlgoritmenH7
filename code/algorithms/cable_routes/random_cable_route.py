@@ -10,7 +10,7 @@ class Random_cable_route:
     A class for deciding the routes from houses to the matched batteries.
     The path every route takes is random.
     """
-    
+
 
     def __init__(self, grid: Grid, configuration: list[list[House, Battery]]):
         """
@@ -18,8 +18,8 @@ class Random_cable_route:
         Lays cables from houses to matched batteries.
         """
 
-        self.grid: Grid = grid
-        self.configuration: list[list[House, Battery]] = configuration
+        self.grid = grid
+        self.configuration = configuration
         self.lay_cables(configuration)
 
 
@@ -29,13 +29,13 @@ class Random_cable_route:
         as a list.
         """
 
-        cable_route: list[list[int, int]] = []
-        current_location: list[int, int] = house.location
+        cable_route = []
+        current_location = house.location
 
-        x_location: int = current_location[0]
-        y_location: int  = current_location[1]
+        x_location = current_location[0]
+        y_location = current_location[1]
 
-        end_location: list[int, int] = battery.location
+        end_location = battery.location
 
         cable_route.append([x_location, y_location])
 
@@ -43,10 +43,10 @@ class Random_cable_route:
         while x_location != end_location[0] or y_location != end_location[1]:
 
             # Gets all possible directions (other batteries than destination not allowed)
-            directions: list[str] = self.get_directions(x_location, y_location, end_location)
+            directions = self.get_directions(x_location, y_location, end_location)
 
             # Makes a random choice and processes choice
-            direction: str = random.choice(directions)
+            direction = random.choice(directions)
             if direction == 'd':
                 y_location -= 1
 
@@ -70,7 +70,7 @@ class Random_cable_route:
         Batteries other than the destination battery are not allowed to move over.
         """
 
-        directions: list[str] = []
+        directions = []
 
         # Makes sure route stays within grid
         if y_location > 0 and (self.grid.grid[y_location-1][x_location] != 2 or [x_location, y_location-1] == end_location):
@@ -85,12 +85,12 @@ class Random_cable_route:
         return directions
 
 
-    def lay_cables(self, configuration: list[list[House, Battery]]):
+    def lay_cables(self, configuration: list[list[House, Battery]]) -> None:
         """
         A function that lays all the cables from houses to the matched batteries.
         """
 
         for combination in configuration:
-            route: list[list[int, int]] = self.make_route(combination[0], combination[1])
-            cable: Cable = Cable(route)
+            route = self.make_route(combination[0], combination[1])
+            cable = Cable(route)
             self.grid.cables.append(cable)

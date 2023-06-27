@@ -3,10 +3,10 @@ from __future__ import annotations
 def make_configuration(configuraton_class: Greedy_configuration|Random_configuration) -> list[list[House, Battery]]:
     """
     Run try_configuration until a configuration is found.
-    Return it if this is the case
+    Return it if this is the case.
     """
 
-    configuraton_class.configuration: list[list[House, Battery]] = []
+    configuraton_class.configuration = []
 
     while configuraton_class.configuration == []:
         configuraton_class.try_configuration()
@@ -14,7 +14,7 @@ def make_configuration(configuraton_class: Greedy_configuration|Random_configura
     return configuraton_class.configuration
 
 
-def process_configuration(configuraton_class: Greedy_configuration|Random_configuration, configuration: list[list[House, Battery]]):
+def process_configuration(configuraton_class: Greedy_configuration|Random_configuration, configuration: list[list[House, Battery]]) -> None:
     """
     Adds all houses to the house_connections of the batteries that they've matched with.
     """

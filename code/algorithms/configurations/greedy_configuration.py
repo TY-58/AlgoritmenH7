@@ -17,11 +17,11 @@ class Greedy_configuration:
         Sorts houses by max_output (descending).
         """
 
-        grid_var: Grid = copy.copy(input_grid)
-        self.grid: Grid = grid_var
-        self.choice: int = greedy_choice
-        self.sorted_houses: list[House] = self.sort_houses()
-        self.configuration: list[list[House, Battery]] = []
+        grid_var = copy.copy(input_grid)
+        self.grid = grid_var
+        self.choice = greedy_choice
+        self.sorted_houses = self.sort_houses()
+        self.configuration = []
 
 
     def sort_houses(self) -> list[House]:
@@ -46,7 +46,7 @@ class Greedy_configuration:
         Sorts batteries by distance, closest to input house first.
         """
 
-        batteries_sorted: list[list[Battery, int]] = []
+        batteries_sorted = []
 
         for bat in self.grid.batteries:
             batteries_sorted.append([bat, self.distance_to_battery(house, bat)])
@@ -64,29 +64,29 @@ class Greedy_configuration:
         """
 
         # Creates temporary configuration.
-        temp_configuration: list[list[House, Battery]] = []
+        temp_configuration = []
 
         for house in self.sorted_houses:
 
-            batteries_sorted: list[list[Battery, int]] = self.sort_batteries(house)
+            batteries_sorted = self.sort_batteries(house)
 
             # Gives a margin to make a suboptimal choice when choosing a battery to connect to.
-            battery: Battery = random.choices(batteries_sorted, weights=(90, 4, 3,2,1), k=1)[0][0]
+            battery = random.choices(batteries_sorted, weights=(90, 4, 3,2,1), k=1)[0][0]
 
             # Keeps choosing until a battery with enough capacity is found.
-            error_counter: int = 0
+            error_counter = 0
             while float(battery.current_capacity) < house.max_output:
-                battery: Battery = random.choices(batteries_sorted, weights=(0, 90,5,3,2), k=1)[0][0]
+                battery = random.choices(batteries_sorted, weights=(0, 90,5,3,2), k=1)[0][0]
                 error_counter += 1
 
                 # If battery is not found after 50 times, probably no battery has capacity left.
                 if error_counter > 50:
 
                     # Resets configuration and return empty list
-                    self.linked_houses: list[House] = []
-                    self.configuration: list[list[House, Battery]] = []
+                    self.linked_houses = []
+                    self.configuration = []
                     for battery in self.grid.batteries:
-                        battery.current_capacity: float = float(battery.max_capacity)
+                        battery.current_capacity = float(battery.max_capacity)
 
                     return []
 
@@ -94,7 +94,7 @@ class Greedy_configuration:
             temp_configuration.append([house, battery])
             battery.current_capacity -= float(house.max_output)
 
-        self.configuration: list[list[House, Battery]] = temp_configuration
+        self.configuration = temp_configuration
 
         return temp_configuration
 
@@ -105,7 +105,7 @@ class Greedy_configuration:
         Returns found configuration.
         """
 
-        self.configuration: list[list[House, Battery]] = []
+        self.configuration = []
 
         while self.configuration == []:
             self.try_configuration()
@@ -121,7 +121,7 @@ class Greedy_configuration:
         return abs(house.location[0]- battery.location[0]) + abs(house.location[1] - battery.location[1])
 
 
-    def process_configuration(self, configuration: list[list[House, Battery]]):
+    def process_configuration(self, configuration: list[list[House, Battery]]) -> None:
         """
         Adds all houses to the house_connections of the batteries that they've matched with.
         """
