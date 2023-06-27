@@ -6,7 +6,7 @@ from .cable_routes.shared_cable_route import Shared_cable_route
 from .configurations.greedy_configuration import Greedy_configuration
 from code.classes.grid import Grid
 
-MAX_STUCK: int = 1000
+MAX_STUCK: int = 100
 
 class Hillclimber:
     """

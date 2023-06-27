@@ -29,12 +29,12 @@ class Greedy_configuration:
         """
         Sort houses by max_output (descending).
         """
-        # random.shuffle(self.grid.houses)
-        # return self.grid.houses
+        random.shuffle(self.grid.houses)
+        return self.grid.houses
 
         # Hierboven uit random_configuration hieronder originele
 
-        return sorted(self.grid.houses, key=lambda x: x.max_output, reverse=True)
+        # return sorted(self.grid.houses, key=lambda x: x.max_output, reverse=False)
 
     def sort_batteries(self, house: House) -> list[list[Battery, int]]:
         """

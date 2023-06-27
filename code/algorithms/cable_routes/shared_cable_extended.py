@@ -275,17 +275,17 @@ class Shared_cable_extended:
         """
         # House cable could already be connected to the battery
         if house_cable.route[-1] == center_cable.route[-1]:
-            print('alleen house cable')
+            #print('alleen house cable')
             return house_cable
 
         else:
             counter = 0
             for location in center_cable.route:
                 if location == house_cable.route[-1]:
-                    print(center_cable.route)
-                    print(house_cable.route)
-                    print('plakt kabels')
-                    print(counter)
+                    # print(center_cable.route)
+                    # print(house_cable.route)
+                    # print('plakt kabels')
+                    # print(counter)
 
                     return Cable(house_cable.route + center_cable.route[counter+1:])
                 counter += 1
@@ -340,7 +340,7 @@ class Shared_cable_extended:
 
                 for loc in range(len(cable.route) - 1) :
                     if abs(cable.route[loc][0] - cable.route[loc + 1][0]) + abs(cable.route[loc][1] - cable.route[loc + 1][1]) != 1:
-                        print(cable.route)
+                    #    print(cable.route)
                         raise ValueError ("gaat fout")
 
                 # Process cable in the grid
