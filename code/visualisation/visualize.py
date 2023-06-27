@@ -6,7 +6,7 @@ import numpy as np
 class Gridplot:
        """A class for visualizing the grid as a plot"""
 
-       def __init__(self, grid: list[list[int, int]]):
+       def __init__(self, grid):
               """."""
               self.cables = grid.cables
               self.houses = grid.houses
@@ -39,7 +39,8 @@ class Gridplot:
        def make_plot(self):
               """."""
               plt.style.use('_mpl-gallery')
-              fig, ax = plt.subplots()
+              fig, ax = plt.subplots(figsize=(15, 10))
+
 
               x1 = []
               y1 = []
@@ -63,7 +64,7 @@ class Gridplot:
                      for route in cable:
                             x3.append(int(route[0]))
                             y3.append(int(route[1]))
-                     ax.step(x3, y3, linewidth=2.5)
+                     ax.step(x3, y3, linewidth=2.5, color='blue')
 
               # places the house and battery coordinates and makes route steps
               plt.plot(x2, y2, 'g*')
@@ -72,5 +73,5 @@ class Gridplot:
               ax.set(xlim=(0, 50), xticks=np.arange(1, 50),
                      ylim=(0, 50), yticks=np.arange(1, 50))
 
-              plt.savefig("saved_output/pic.")
-              #plt.show()
+              #plt.savefig("saved_output/pic.")
+              plt.show()
