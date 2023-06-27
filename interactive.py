@@ -1,5 +1,6 @@
 import random
 import copy
+from tqdm import tqdm
 
 from code.helpers.loaders import load_houses, load_batteries
 from code.classes.battery import Battery
@@ -20,7 +21,6 @@ from code.visualisation.sampling import Sampleplot
 from code.algorithms.hillclimber import Hillclimber
 from code.helpers.minimum_score import update_minimum_score
 from code.helpers.best_grid import update_best_grid
-
 
 print("Welcome! Our problem is divided into two seperate problems:")
 print("matching houses to batteries (configuration) and laying cables from houses to batteries.\n")
@@ -50,7 +50,7 @@ best_grid.total_cost = 500000
 score_list: list[int] = []
 
 # Running the chosen algorithm(s)
-for _ in range(iteration):
+for _ in tqdm(range(iteration)):
     grid = Grid(51, grid_version)
 
     if configuration_version == 1:
