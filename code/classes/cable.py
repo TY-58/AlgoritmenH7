@@ -6,18 +6,14 @@ class Cable:
     and a total cost of the cable.
     """
 
-    cable_id_counter = 0
-
 
     def __init__(self, route: list[list[int,int]]):
         """
         Takes a list of lists of length two (list of locations) as input.
         """
 
-        self.id: int = Cable.cable_id_counter
-        self.route: list[list[int,int]] = route
-        self.cost: int = self.cable_cost()
-        Cable.cable_id_counter += 1
+        self.route = route
+        self.cost = self.cable_cost()
 
 
     def cable_length(self) -> int:

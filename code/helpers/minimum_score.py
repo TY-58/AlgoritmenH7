@@ -15,7 +15,7 @@ def update_minimum_score(minimum_score: int, grid: Grid) -> int:
         minimum_score = current_score
 
         # Saves output of visualizer and json
-        grid_visual: Gridplot = Gridplot(grid)
+        grid_visual = Gridplot(grid)
         grid_visual.make_plot()
         output_json(grid)
         print(f"New minimum score: {minimum_score}")

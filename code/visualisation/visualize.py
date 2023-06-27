@@ -1,5 +1,6 @@
 # Partially taken from: https://matplotlib.org/stable/plot_types/basic/step.html#sphx-glr-plot-types-basic-step-py
 
+from __future__ import annotations
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -9,7 +10,7 @@ class Gridplot:
        """
 
 
-       def __init__(self, grid):
+       def __init__(self, grid: Grid):
               """
               Takes a grid as input and stores the grid information in self.
               Initializes code to print the grid.
@@ -23,7 +24,7 @@ class Gridplot:
               self.cable_routes = self.find_cable_routes()
 
 
-       def find_house_cor(self):
+       def find_house_cor(self) -> list[int, int]:
               """
               Finds the coordinates of all houses and returns them as a list.
               """
@@ -34,7 +35,7 @@ class Gridplot:
               return house_locations
 
 
-       def find_battery_cor(self):
+       def find_battery_cor(self) -> list[int, int]:
               """
               Finds the coordinates of all batteries and returns them as a list.
               """
@@ -45,7 +46,7 @@ class Gridplot:
               return battery_locations
 
 
-       def find_cable_routes (self):
+       def find_cable_routes (self) -> list[list[int, int]]:
               """
               Finds all cable routes and returns a list of cables with a list of houses.
               """
@@ -56,7 +57,7 @@ class Gridplot:
               return cable_routes
 
 
-       def make_plot(self):
+       def make_plot(self) -> None:
               """
               Makes the plot of batteries, houses and cables.
               """

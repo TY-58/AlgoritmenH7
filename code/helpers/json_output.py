@@ -1,6 +1,7 @@
+from __future__ import annotations
 import json
 
-def output_json(grid):
+def output_json(grid: Grid) -> None:
 	"""
 	Formats and saves json in the right format.
 	Taken from: https://www.geeksforgeeks.org/reading-and-writing-json-to-a-file-in-python/.
@@ -24,7 +25,7 @@ def output_json(grid):
 		outfile.write(json_object)
 
 
-def connected_houses_dict(battery, grid):
+def connected_houses_dict(battery: Battery, grid: Grid) -> list[dict[str, int, list]]:
 	"""
 	Formats all houses matched to specific battery.
 	"""
@@ -40,7 +41,7 @@ def connected_houses_dict(battery, grid):
 	return houses_list
 
 
-def cable_route(house, grid):
+def cable_route(house: House, grid: Grid) -> list[str,str]:
 	"""
 	Formats cable from a house.
 	"""

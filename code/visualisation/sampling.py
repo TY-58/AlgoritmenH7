@@ -23,19 +23,19 @@ class Sampleplot:
     """
 
 
-    def __init__(self, score_list, bin_size):
+    def __init__(self, score_list: list[int], bin_size: int):
         """
         Takes a generated score list and bin size and saves the information.
         Generates a histogram based on this input.
         """
 
-        self.scores: list[int] = score_list
+        self.scores = score_list
         self.bin_size = bin_size
         self.make_hist()
         self.make_csv_hist()
 
 
-    def make_hist(self):
+    def make_hist(self) -> None:
         """
         Makes the histogram.
         Calculates y as a probability density function.
@@ -57,7 +57,7 @@ class Sampleplot:
         plt.savefig("saved_output/sample.")
 
 
-    def make_csv_hist(self):
+    def make_csv_hist(self) -> None:
         """
         Makes a csv file of the scores plotted in the histogram. 
         """

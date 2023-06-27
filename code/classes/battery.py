@@ -11,7 +11,7 @@ class Battery:
         When initialized, current_capacity is max_capacity.
         """
 
-        self.location: [int, int] = [x_location, y_location]
-        self.max_capacity: float = max_capacity
-        self.house_connections: list = []
-        self.current_capacity: float = float(max_capacity)
+        self.location = [x_location, y_location]
+        self.max_capacity = max_capacity
+        self.house_connections = []
+        self.current_capacity = float(max_capacity)

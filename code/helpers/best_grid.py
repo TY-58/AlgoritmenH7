@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-def update_best_grid(grid: Grid, best_grid: Grid):
+def update_best_grid(grid: Grid, best_grid: Grid) -> Grid:
     """
     Checks if current score is lower than minimum, updates and saves minimum score if so.
     """

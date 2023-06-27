@@ -8,9 +8,6 @@ from .configurations.greedy_configuration import Greedy_configuration
 from code.classes.grid import Grid
 from code.visualisation.visualize import Gridplot
 
-
-MAX_STUCK: int = 5000
-
 class Hillclimber:
     """
     A class for performing a simple Hill Climber algorithm on a given grid.
@@ -20,7 +17,7 @@ class Hillclimber:
     """
 
 
-    def __init__(self, grid, var):
+    def __init__(self, grid: Grid, var: int):
         """
         Takes a grid as input and stores the grid.
         Takes a variable for iterations and stores the iterations.
@@ -38,7 +35,7 @@ class Hillclimber:
         self.stuck = 0
 
 
-    def do_mutate(self):
+    def do_mutate(self) -> None:
         """
         Calls for configuration mutations while score is improved at least once every X iterations.
         X: a given number of iterations.
@@ -83,7 +80,7 @@ class Hillclimber:
             print("New costs: ", self.current_score)
 
 
-    def mutate_match(self, configuration):
+    def mutate_match(self, configuration: list[list[House, Battery]]) -> list[list[House, Battery]]:
         """
         Mutates a single match in the given configuration and returns the mutated configuration.
         """
@@ -107,7 +104,7 @@ class Hillclimber:
         return configuration
 
 
-    def valid_mutation(self, match1, match2):
+    def valid_mutation(self, match1: [House, Battery], match2: [House, Battery]) -> bool:
         """
         Checks if the mutation is valid and returns a Bool.
         """
@@ -131,7 +128,7 @@ class Hillclimber:
         return True
 
 
-    def find_match(self, configuration):
+    def find_match(self, configuration: list[list[House, Battery]]) -> Tuple(int, [House, Battery]):
         """
         Finds a match to mutate. Returns place of match in configuration and match.
         """
@@ -143,7 +140,7 @@ class Hillclimber:
         return x, match_
 
 
-    def find_battery_capacity(self, battery):
+    def find_battery_capacity(self, battery: Battery) -> float:
         """
         Finds the capacity of a given battery.
         """
@@ -151,7 +148,7 @@ class Hillclimber:
         return battery.current_capacity
 
 
-    def find_house_output(self, house):
+    def find_house_output(self, house: House) -> float:
         """
         Finds the output of a given house.
         """
@@ -159,7 +156,7 @@ class Hillclimber:
         return house.max_output
 
 
-    def score(self, configuration):
+    def score(self, configuration: list[list[House, Battery]]) -> int:
         """
         Gets a configuration and measures cost.
         Calls to calculate new score.
@@ -183,7 +180,7 @@ class Hillclimber:
         return score
 
 
-    def check_if_improved(self, score_new):
+    def check_if_improved(self, score_new: int) -> bool:
         """
         Checks if the newly calculated score is better than the last score.
         Updates self.stuck if the new score is not an improvement.
@@ -200,7 +197,7 @@ class Hillclimber:
             return False
 
 
-    def stop_mutation(self):
+    def stop_mutation(self) -> bool:
         """
         Returns Bool if self.stuck exceeds a given number of iterations.
         """
