@@ -8,7 +8,24 @@ This creates the main problem of the smartgrid assignment. How can you reduce as
 
 ## Approach
 
-We have implemented the following algorithms to solve this problem:
+We have implemented different configurations that match houses with batteries and we have implemented different ways a route for the cables are laid from houses to the battery:
+
+### Configurations
+
+1. **Random Configuration**: We started to write a random Configuration that keeps running (thus tryin a lot of different states) until there is a match for every house with a battery. This configuration therefore does not take the distance from house to battery in consideration when making the match. 
+
+2. **Greedy Configuration**: This configuration takes the output of all the houses into account before making a match. There are 2 options with this configuration. Its either choosing for the houses with the biggest output first and the houses with the smallest output last. Because it is easier to find a match for a house 
+
+
+### Cable Routes
+
+1. **Random Cable Route**:
+
+2. **Shared Cable route**:
+
+
+### Hillclimber
+
 
 1. **Random Algorithm**: We started by writing a random Algorithm. As could be understood from the name both the matching of houses and batteries (configuration) is random as the route to the matched battery from the house is randomized. This algorithm is not optimal and it is the most expansive algorithm that could be used for this problem
 
