@@ -2,6 +2,7 @@ import random
 import copy
 from tqdm import tqdm
 
+
 from code.helpers.loaders import load_houses, load_batteries
 from code.classes.battery import Battery
 from code.classes.cable import Cable
@@ -21,6 +22,7 @@ from code.visualisation.sampling import Sampleplot
 from code.algorithms.hillclimber import Hillclimber
 from code.helpers.minimum_score import update_minimum_score
 from code.helpers.best_grid import update_best_grid
+from code.algorithms.configurations.configuration_helpers import make_configuration, process_configuration
 
 print("Welcome! Our problem is divided into two seperate problems:")
 print("matching houses to batteries (configuration) and laying cables from houses to batteries.\n")
@@ -43,6 +45,13 @@ if cable_route_version == 2:
     if hillclimber == 'y':
         hill_iterations: int = int(input("How many iterations of hillclimber do you want to run? Type number: "))
         print()
+
+histogram: str = input("Do you want to plot a histogram? Type (y/n): ")
+print()
+if histogram == 'y':
+    bin_size: int = int(input("What bin size would you like? Choose a bin size lower than the number of iterations. Type number: "))
+    print()
+
 # Set upper bound for minimum score
 minimum_score = 500000
 best_grid = Grid(51, grid_version)
@@ -58,8 +67,8 @@ for _ in tqdm(range(iteration)):
     else:
         configuration: Greedy_configuration = Greedy_configuration(grid, greedy_version)
 
-    configured = configuration.make_configuration()
-    configuration.process_configuration(configured)
+    configured = make_configuration(configuration)
+    process_configuration(configuration, configured)
     grid.configuration = configured
 
     if cable_route_version == 1:
@@ -82,5 +91,8 @@ if cable_route_version == 2:
         grid_visual.make_plot()
         output_json(grid)
 
+if histogram == 'y':
+    hist_plot = Sampleplot(score_list, bin_size)
 
-print(f"Best cost is {grid.total_cost}! You can find the outputted json and visualisation of this solution in saved_output.")
+
+print(f"Best cost is {grid.total_cost}! You can find the outputted json, histogram and visualisation of this solution in saved_output.")
