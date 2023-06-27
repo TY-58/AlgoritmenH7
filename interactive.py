@@ -1,6 +1,7 @@
 import random
 import copy
 
+
 from code.helpers.loaders import load_houses, load_batteries
 from code.classes.battery import Battery
 from code.classes.cable import Cable
@@ -43,6 +44,13 @@ if cable_route_version == 2:
     if hillclimber == 'y':
         hill_iterations: int = int(input("How many iterations of hillclimber do you want to run? Type number: "))
         print()
+
+histogram: str = input("Do you want to plot a histogram? Type (y/n): ")
+print()
+if histogram == 'y':
+    bin_size: int = int(input("What bin size would you like? Choose a bin size lower than the number of iterations. Type number: "))
+    print()
+
 # Set upper bound for minimum score
 minimum_score = 500000
 best_grid = Grid(51, grid_version)
@@ -82,5 +90,8 @@ if cable_route_version == 2:
         grid_visual.make_plot()
         output_json(grid)
 
+if histogram == 'y':
+    hist_plot = Sampleplot(score_list, bin_size)
 
-print(f"Best cost is {grid.total_cost}! You can find the outputted json and visualisation of this solution in saved_output.")
+
+print(f"Best cost is {grid.total_cost}! You can find the outputted json, histogram and visualisation of this solution in saved_output.")
