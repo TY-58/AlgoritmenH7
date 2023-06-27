@@ -25,7 +25,7 @@ We have implemented different configurations that match houses with batteries an
 
 ### Hillclimber
 
-The Hillclimber algorithm starts running after the matches are made and the cables have been laid. The hillclimber then looks if it can find better matches, where the distance from the house to the battery is shorter and will make the change if its within the maximum capacity of the battery. The hillclimber will run as long it can find a better configuration, and will stop if it can't after a certain amount of no better matches (you can provide the max iterations withouth improved for the hillclimber to stop in the command line). If the hillclimber is done running, the shared cable route will then rearrange the cables in order to minimize the costs. The hillclimber is only possible with the shared cable route.
+The Hillclimber algorithm starts running after the matches are made and the cables have been laid. The hillclimber then looks if it can find better matches, where the distance from the house to the battery is shorter and will make the change if its within the maximum capacity of the battery. The hillclimber will run as long it can find a better configuration, and will stop if it can't find a better match after a certain amount tries (you can provide the max iterations withouth improvement for the hillclimber to stop in the command line). If the hillclimber is done running, the shared cable route will then rearrange the cables in order to minimize the costs. The hillclimber is only possible with the shared cable route.
 
 ## Reproducing Results
 You will need to Download at least Python3 version == 3.10.9
@@ -53,6 +53,7 @@ After running main.py you will have to answer a couple questions:
 5. If you chose for greedy route with sharing cables, there is the additional option of hillclimber. If you would like to run hill climber press y, if not press n and hit enter.
 6. If you did run Hillclimber, type in the number of times you would the hillclimber to run without finding a better solution.
 
+After following all these steps the results will be saved in the Saved_output folder. You will find the JSON output (the full route per house), pic.png (visual of the best result) and finally a graph with the grid cost probability (probability of value for x amount of runs).
 ## Authors
 
 - Otto Jong
