@@ -41,6 +41,20 @@ if __name__ == '__main__':
 
 
     #beste
+    for _ in range(10000):
+        grid_1 = Grid(51,3)
+        x = Random_configuration(grid_1)
+        config = []
+        while config == []:
+            config = x.try_configuration()
+        x.process_configuration(config)
+        cb = Shared_cable_extended(grid_1, config)
+        grid_1.calc_shared_cable_cost()
+        # grid_1_visual = Gridplot(grid_1)
+        # grid_1_visual.make_plot()
+        print(grid_1.total_cost)
+    #
+        # output_json(grid_1)
     # for _ in range(1):
     #     grid_1 = Grid(51,1)
     #     x = Greedy_configuration(grid_1)

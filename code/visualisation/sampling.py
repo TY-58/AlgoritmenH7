@@ -16,7 +16,7 @@ from code.classes.grid import Grid
 from code.algorithms.cable_routes.shared_cable_extended import Shared_cable_extended
 from code.algorithms.configurations.greedy_configuration import Greedy_configuration
 from code.algorithms.configurations.random_configuration import Random_configuration
-from code.algorithms.cable_routes.shared_cable_route import Shared_cable_route
+from code.algorithms.cable_routes.shared_cable_extended import Shared_cable_extended
 
 
 class Sampleplot:
@@ -76,6 +76,7 @@ class Sampleplot:
                 config = x.try_configuration()
             x.process_configuration(config)
             grid_1.configuration = x.configuration
+            cb = Shared_cable_extended(grid_1, config)
             cb = Shared_cable_extended(grid_1, config)
             grid_1.calc_shared_cable_cost()
 
