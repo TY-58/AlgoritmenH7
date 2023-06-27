@@ -26,8 +26,10 @@ class Greedy_configuration:
 
     def sort_houses(self) -> list[House]:
         """
-        Sorts houses by max_output (descending).
+        Sorts houses by max_output (descending), max_output (ascending) or shuffles them,
+        depending on input from main.
         """
+
         if self.choice == 1:
             return sorted(self.grid.houses, key=lambda x: x.max_output, reverse=True)
 
