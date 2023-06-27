@@ -89,8 +89,8 @@ class Gridplot:
                      ax.step(x3, y3, linewidth=2.5, color='blue')
 
               # Places the house and battery coordinates and makes route steps
-              plt.plot(x2, y2, 'g*')
-              plt.plot(x1, y1, 'r*')
+              plt.plot(x2, y2, 'g*', markersize = 15)
+              plt.plot(x1, y1, 'r*', markersize = 15)
 
               ax.set(xlim=(0, 50), xticks=np.arange(1, 50),
                      ylim=(0, 50), yticks=np.arange(1, 50))
