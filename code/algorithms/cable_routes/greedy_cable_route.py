@@ -21,7 +21,7 @@ class Greedy_cable_route:
         Lays cables from houses to matched batteries.
         """
 
-        self.grid: Grid = grid
+        self.grid = grid
         self.configuration = configuration
         self.lay_cables(configuration)
 
