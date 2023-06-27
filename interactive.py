@@ -1,5 +1,6 @@
 import random
 import copy
+from tqdm import tqdm
 
 
 from code.helpers.loaders import load_houses, load_batteries
@@ -21,7 +22,7 @@ from code.visualisation.sampling import Sampleplot
 from code.algorithms.hillclimber import Hillclimber
 from code.helpers.minimum_score import update_minimum_score
 from code.helpers.best_grid import update_best_grid
-
+from code.algorithms.configurations.configuration_helpers import make_configuration, process_configuration
 
 print("Welcome! Our problem is divided into two seperate problems:")
 print("matching houses to batteries (configuration) and laying cables from houses to batteries.\n")
@@ -58,7 +59,7 @@ best_grid.total_cost = 500000
 score_list: list[int] = []
 
 # Running the chosen algorithm(s)
-for _ in range(iteration):
+for _ in tqdm(range(iteration)):
     grid = Grid(51, grid_version)
 
     if configuration_version == 1:
@@ -66,8 +67,8 @@ for _ in range(iteration):
     else:
         configuration: Greedy_configuration = Greedy_configuration(grid, greedy_version)
 
-    configured = configuration.make_configuration()
-    configuration.process_configuration(configured)
+    configured = make_configuration(configuration)
+    process_configuration(configuration, configured)
     grid.configuration = configured
 
     if cable_route_version == 1:

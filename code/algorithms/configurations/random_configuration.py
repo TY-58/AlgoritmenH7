@@ -73,12 +73,12 @@ class Random_configuration:
         Returns the found configuration.
         """
 
-        configuration: list[list[House, Battery]] = []
+        self.configuration: list[list[House, Battery]] = []
 
-        while configuration == []:
-            configuration = self.try_configuration()
+        while self.configuration == []:
+            self.try_configuration()
 
-        return configuration
+        return self.configuration
 
 
     def process_configuration(self, configuration: list[list[House, Battery]]):
