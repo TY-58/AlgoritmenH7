@@ -19,6 +19,7 @@ class Random_configuration:
         grid_var: Grid = copy.copy(input_grid)
         self.grid: Grid = grid_var
         self.shuffled_houses: list[House] = self.shuffle_houses()
+        self.configuration: list[list[House, Battery]] = []
 
 
     def shuffle_houses(self) -> list[House]:
@@ -53,6 +54,7 @@ class Random_configuration:
 
                     # Reset configuration and return empty list.
                     self.linked_houses: list[House] = []
+                    self.configuration: list[list[House, Battery]] = []
                     for battery in self.grid.batteries:
                         battery.current_capacity: float = float(battery.max_capacity)
 
@@ -62,6 +64,7 @@ class Random_configuration:
             configuration.append([house, battery])
             battery.current_capacity -= float(house.max_output)
 
+        self.configuration: list[list[House, Battery]] = configuration
         return configuration
 
 

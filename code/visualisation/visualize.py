@@ -64,7 +64,7 @@ class Gridplot:
                      for route in cable:
                             x3.append(int(route[0]))
                             y3.append(int(route[1]))
-                     ax.step(x3, y3, linewidth=2.5)
+                     ax.step(x3, y3, linewidth=2.5, color='blue')
 
               # places the house and battery coordinates and makes route steps
               plt.plot(x2, y2, 'g*')
@@ -73,5 +73,5 @@ class Gridplot:
               ax.set(xlim=(0, 50), xticks=np.arange(1, 50),
                      ylim=(0, 50), yticks=np.arange(1, 50))
 
-              plt.savefig("saved_output/pic.")
+              #plt.savefig("saved_output/pic.")
               plt.show()

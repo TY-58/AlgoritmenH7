@@ -2,11 +2,13 @@ from __future__ import annotations
 import random
 import copy
 
+from .cable_routes.shared_cable_extended import Shared_cable_extended
 from .cable_routes.shared_cable_route import Shared_cable_route
 from .configurations.greedy_configuration import Greedy_configuration
 from code.classes.grid import Grid
+from code.visualisation.visualize import Gridplot
 
-MAX_STUCK: int = 1000
+MAX_STUCK: int = 5000
 
 class Hillclimber:
     """
@@ -41,9 +43,10 @@ class Hillclimber:
 
         print("score_old: ", self.current_score)
         count = 0
+        count1 = 0
         # Performs mutations while at least 1 in every X iterations is an improvement
         while self.stop_mutation() == False:
-
+            count1 += 1
             #print("before: ", self.current_config[0])
             new_config = self.mutate_match(self.current_config)
 
@@ -52,6 +55,8 @@ class Hillclimber:
             #print("after: ", new_config[0])
 
             score_new = self.score(new_config)
+            #print("new score: ", score_new)
+            #print("the", count1, "th time")
 
             # Checks if the score is an improvement from last
             improvement = self.implement_score(score_new)
@@ -59,17 +64,23 @@ class Hillclimber:
             # Saves the improvement
             if improvement == True:
                 count += 1
+                print("improved after", self.stuck, "iterations")
                 print("Improved ", count, " times")
+                print("improved score: ", score_new)
+                # if count == 5 or count == 10 or count == 15 or count == 20 or count == 25 or count == 30 or count == 35 or count == 40 or count == 45 or count == 50 or count == 55:
+                #     visual = Gridplot(self.current_grid)
+                #     visual.make_plot()
                 self.last_grid = self.current_grid
                 self.last_config = self.current_config
                 self.current_score = score_new
                 self.current_grid = copy.deepcopy(self.last_grid)
                 self.current_config = self.current_grid.configuration
+                self.stuck = 0
 
             # Resets grid and configuration to last
             elif improvement == False:
-                self.current_config = self.last_config
-                self.current_grid = self.last_grid
+                self.current_grid = copy.deepcopy(self.last_grid)
+                self.current_config = self.current_grid.configuration
 
         print("score_new: ", self.current_score)
 
@@ -166,7 +177,10 @@ class Hillclimber:
         self.current_grid.process_configuration_grid(configuration)
 
         # Lays new cable routes for new configuration
-        Shared_cable_route(self.current_grid, configuration)
+        #Shared_cable_route(self.current_grid, configuration)
+
+        #extended version
+        Shared_cable_extended(self.current_grid, configuration)
 
         # Calculates new cost
         self.current_grid.calc_shared_cable_cost()
@@ -185,7 +199,6 @@ class Hillclimber:
 
         score_old = self.current_score
         if score_new < score_old:
-            self.stuck = 0
             return True
 
         else:

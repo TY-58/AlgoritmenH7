@@ -275,17 +275,17 @@ class Shared_cable_extended:
         """
         # House cable could already be connected to the battery
         if house_cable.route[-1] == center_cable.route[-1]:
-            print('alleen house cable')
+            #print('alleen house cable')
             return house_cable
 
         else:
             counter = 0
             for location in center_cable.route:
                 if location == house_cable.route[-1]:
-                    print(center_cable.route)
-                    print(house_cable.route)
-                    print('plakt kabels')
-                    print(counter)
+                    #print(center_cable.route)
+                    #print(house_cable.route)
+                    #print('plakt kabels')
+                   # print(counter)
 
                     return Cable(house_cable.route + center_cable.route[counter+1:])
                 counter += 1
