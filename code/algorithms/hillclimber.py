@@ -56,8 +56,8 @@ class Hillclimber:
             # Saves the improvement
             if improved == True:
                 improvements += 1
-                print("improved after", self.stuck, "iterations")
-                print("improved costs: ", score_new)
+                print("Improved after", self.stuck, "iterations")
+                print("Improved costs: ", score_new)
                 self.last_grid = self.current_grid
                 self.last_config = self.current_config
                 self.current_score = score_new

@@ -14,23 +14,18 @@ We have implemented different configurations that match houses with batteries an
 
 1. **Random Configuration**: We started to write a random Configuration that keeps running (thus tryin a lot of different states) until there is a match for every house with a battery. This configuration therefore does not take the distance from house to battery in consideration when making the match. 
 
-2. **Greedy Configuration**: This configuration takes the output of all the houses into account before making a match. There are 2 options with this configuration. Its either choosing for the houses with the biggest output first and the houses with the smallest output last. Because it is easier to find a match for a house 
-
+2. **Greedy Configuration**: This configuration takes the output of all the houses into account before making a match. There are 3 different options with this configuration. You can choose for a configuration where the houses with the biggest output are matched first and the houses with the smallest output last. Then there is the option to do the opposite, thus the houses with the smallest outputs are matched first, and the houses with the biggest output are last. Finally we have an implementation that randomly matches the houses with the batteries.
 
 ### Cable Routes
 
-1. **Random Cable Route**:
+1. **Random Cable Route**: This is cable route algorithm does not take into consideration whether it takes the shortest route, nor does it look whether it follows a path where other cables to the same battery run in order to save cost, as the name suggest every step in this algorithm is random. However it does not lay cables that connect 2 batteries with each other since that is a hard constraint.
 
-2. **Shared Cable route**:
+2. **Shared Cable route**: The Shared cable route algorithm takes into consideration the shortest distance from an house to a battery, but it also tries to minimize the cost by sharing cables as much as it can. The algorithm looks for houses that have to go to the same battery, and then tries to find the cheapest way to get to the battery by sharing the cables as much as possible.
 
 
 ### Hillclimber
 
-
-1. **Random Algorithm**: We started by writing a random Algorithm. As could be understood from the name both the matching of houses and batteries (configuration) is random as the route to the matched battery from the house is randomized. This algorithm is not optimal and it is the most expansive algorithm that could be used for this problem
-
-2. **Greedy Configuration with Pathfinder**: This Algorithm matches the houses to batteries by sorting from biggest output to smallest output and tries to match all the houses to a battery. While the configurations are mostly succesfull, it might be that the distance from houses to batteries are on the longer side. After the houses and batteries are matched the "pathfinder" tries to find the smallest distance for laying the cables. This is not determenistic since we introduced a probabilty for every choice the pathfinder can make. even though most of the time it will choose the smallest distance, it will try another route.
-3. **Greedy Configuration with Shared Cables**: This algorithm uses the same configuration as the previous algorithm, but the cable routes from houses to batteries is different. In this algoritm we try to not only find the shortest route, but also a way to share cables in order to reduce cost, since cables that go the same route share the costs.
+The Hillclimber algorithm starts running after the matches are made and the cables have been laid. The hillclimber then looks if it can find better matches, where the distance from the house to the battery is shorter and will make the change if its within the maximum capacity of the battery. The hillclimber will run as long it can find a better configuration, and will stop if it can't after a certain amount of no better matches (you can provide the max iterations withouth improved for the hillclimber to stop in the command line). If the hillclimber is done running, the shared cable route will then rearrange the cables in order to minimize the costs. The hillclimber is only possible with the shared cable route.
 
 ## Reproducing Results
 You will need to Download at least Python3 version == 3.10.9
@@ -50,7 +45,13 @@ conda install --file requirements.txt
 
 3. Run the main script with the desired algorithm: `python main.py`
 
-You can replace ` the algorithm` with the name of the algorithm you want to use (`Random Algorithm`, `Greedy Configuration with Pathfinder`, or `Greedy Confuguration with Shared Cables`) by changing the name of the algorithm in main.
+After running main.py you will have to answer a couple questions:
+1. The first question is about the Grid. There are 3 different Grids, which one would you like to run ? press the grid number and hit enter.
+2. Choose configuration you want to run (matching houses with batteries). 1 = random, 2 = Greedy. Press the number of the configuration you wish to run and press enter.
+3. Choose the cable route algorithm you would like to run. 1 = Random, 2, greedy cable route without sharing cables, 3 = Greedy route with sharing cables.
+4. type in the number of times you would like the programme to run, and press enter.
+5. If you chose for greedy route with sharing cables, there is the additional option of hillclimber. If you would like to run hill climber press y, if not press n and hit enter.
+6. If you did run Hillclimber, type in the number of times you would the hillclimber to run without finding a better solution.
 
 ## Authors
 
