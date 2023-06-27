@@ -1,8 +1,6 @@
 #Partially taken from: https://matplotlib.org/stable/gallery/statistics/hist.html#sphx-glr-gallery-statistics-hist-py
 #Partially taken from: https://www.tutorialspoint.com/drawing-average-line-in-histogram-in-matplotlib
 
-NUMBER_OF_SAMPLES: int = 1000
-
 import matplotlib.pyplot as plt
 import numpy as np
 import random
@@ -24,55 +22,106 @@ class Sampleplot:
     Takes random sample solutions and visualizes them in a histogram plot.
     """
 
-    def __init__(self):
+
+    def __init__(self, grid_version, ):
         self.scores: list[int] = []
         self.count: int = 0
+        self.grid_version = grid_version
         self.get_scores()
         self.make_hist()
         self.make_csv_hist()
 
+
     def get_scores(self):
+        """
+        .
+        """
 
-        count = 0
-        for n in range(NUMBER_OF_SAMPLES):
-            count += 1
-            print("enters range #", count)
+        print("For which configuration algorithm would you like to retrieve a histogram?")
+        print("Press 1 for Random.")
+        print("Press 2 for Greedy.")
 
-            #greedy configuration and shared extended
-            grid_1 = Grid(51,1)
-            x = Greedy_configuration(grid_1)
-            config = []
-            while config == []:
-                config = x.try_configuration()
-            x.process_configuration(config)
-            grid_1.configuration = x.configuration
-            cb = Shared_cable_extended(grid_1, config)
-            cb = Shared_cable_extended(grid_1, config)
-            grid_1.calc_shared_cable_cost()
+        valid = False
+        while valid == False:
+            algorithm_type = int(input("Enter Choice: "))
 
-            #random configuration and shared extended
-            # grid_1 = Grid(51,1)
-            # x = Random_configuration(grid_1)
-            # config = []
-            # while config == []:
-            #     config = x.try_configuration()
-            # x.process_configuration(config)
-            # grid_1.configuration = x.configuration
-            # cb = Shared_cable_extended(grid_1, config)
-            # grid_1.calc_shared_cable_cost()
+            if algorithm_type == 1 or algorithm_type == 2:
+                valid = True
+            else:
+                print("Invalid choice.")
+
+        print("How many samples would you like?")
+        print("Please insert positive integer.")
+        number_of_samples = int(input("Number of samples: "))
+
+        if algorithm_type == 1:
+            valid = True
+            self.random_config_sampling()
+        elif algorithm_type == 2:
+            valid = True
+            self.greedy_config_sampling()
+
+        taken_samples = 0
+        for n in range(number_of_samples):  
+            taken_samples += 1
+            print("Performs sample #", taken_samples)
+
+            if algorithm_type == 1:
+                score, grid, configuration = self.random_config_sampling()
+            elif algorithm_type == 2:
+                score, grid, configuration = self.greedy_config_sampling()
 
 
             # Stores the cost
-            if grid_1.total_cost != 0:
+            if score != 0:
                 if self.count == 0:
-                    self.best_grid = grid_1
-                    self.best_configuration = config
-                    self.best_score = grid_1.total_cost
+                    self.best_grid = grid
+                    self.best_configuration = configuration
+                    self.best_score = score
                 else:
-                    self.save_best(grid_1.total_cost, grid_1, config)
+                    self.save_best(score, grid, configuration)
 
-                self.scores.append(grid_1.total_cost)
+                self.scores.append(score)
                 self.count += 1
+
+
+    def random_config_sampling(self):
+        """
+        .
+        """
+
+        grid = Grid(51, self.grid_version)
+        x = Random_configuration(grid)
+        config = []
+        while config == []:
+            config = x.try_configuration()
+        x.process_configuration(config)
+        grid.configuration = x.configuration
+        cb = Shared_cable_extended(grid, config)
+        grid.calc_shared_cable_cost()
+        score = grid.total_cost
+
+        return score, grid, config
+
+
+    def greedy_config_sampling(self):
+        """
+        .
+        """
+
+        grid = Grid(51,self.grid_version)
+        x = Greedy_configuration(grid)
+        config = []
+        while config == []:
+            config = x.try_configuration()
+        x.process_configuration(config)
+        grid.configuration = x.configuration
+        cb = Shared_cable_extended(grid, config)
+        cb = Shared_cable_extended(grid, config)
+        grid.calc_shared_cable_cost()
+        score = grid.total_cost
+
+        return score, grid, config
 
 
     def save_best(self, score_new, grid_new, config_new):
@@ -86,11 +135,10 @@ class Sampleplot:
             self.best_score = score_new
 
 
-    def return_best(self):
-        return self.best_grid
-
-
     def make_hist(self):
+        """
+        .
+        """
 
         if self.count == 0:
             return "No viable results"
@@ -110,17 +158,13 @@ class Sampleplot:
         plt.show()
         plt.savefig("saved_output/sample.")
 
-    def make_hist2(self):
-
-        if self.count == 0:
-            return "No viable results"
-
-        plt.hist(self.scores, bins=2)
-        plt.show()
 
     def make_csv_hist(self):
+        """
+        .
+        """
 
-        with open('saved_output/hist_plot1.csv', 'w', newline='') as file:
+        with open('saved_output/hist_plot.csv', 'w', newline='') as file:
             writer = csv.writer(file)
             field = ["iteration", "cost"]
             count = 1
