@@ -268,21 +268,21 @@ class Shared_cable_extended:
         return battery_locations
 
 
-    def get_connected_cable(self, center_cable: Cable, house_cable: Cable) -> Cable:
+    def get_connected_cable(self, cable: Cable, house_cable: Cable) -> Cable:
         """
-        Connects the cable from a house to the center route with the center
+        Connects the cable from a house to the center route or another house route
         and creates a new cable from the house to the battery.
         """
 
         # House cable could already be connected to the battery
-        if house_cable.route[-1] == center_cable.route[-1]:
+        if house_cable.route[-1] == cable.route[-1]:
             return house_cable
 
         else:
             counter = 0
-            for location in center_cable.route:
+            for location in cable.route:
                 if location == house_cable.route[-1]:
-                    return Cable(house_cable.route + center_cable.route[counter+1:])
+                    return Cable(house_cable.route + cable.route[counter+1:])
                 counter += 1
 
 
@@ -307,20 +307,28 @@ class Shared_cable_extended:
                 route_center_cable_location = self.get_closest_location_cable(house.location, center_cable)
 
                 minimum_distance = MINIMUM_DISTANCE
+
+                # Checks if there's a route nearby going to the same battery, closest cable
                 for cable in battery_cables:
+
+                    # Finds closest location on the cable
                     route_house_cable_location = self.get_closest_location_cable(house.location, cable)
 
                     cable_distance = abs(house.location[0] - route_house_cable_location[0]) + abs(house.location[1] - route_house_cable_location[1])
+
+                    # If cable is closer than minimum distance, sets new minimum
                     if cable_distance < minimum_distance:
                         closest_cable = cable
                         closest_cable_location = route_house_cable_location
                         minimum_distance = cable_distance
 
+                # Checks if closest house cable is closer than center route
                 if minimum_distance < abs(route_center_cable_location[0] - house.location[0]) + abs(route_center_cable_location[1] - house.location[1]):
 
+                    # If so, connects house to that house cable
                     house_cable = Cable(self.make_route(house.location, closest_cable_location, battery))
-
                     cable = self.get_connected_cable(closest_cable, house_cable)
+
                 else:
                     house_cable = Cable(self.make_route(house.location, route_center_cable_location, battery))
 
@@ -329,13 +337,14 @@ class Shared_cable_extended:
 
                 # Raises errors if start is not house location or end is not battery location
                 if not cable.route[0] in [x.location for x in self.grid.houses]:
-                    raise ValueError("gaat fout")
+                    raise ValueError("Cable doesn't start in a house!")
                 if not cable.route[-1] in [x.location for x in self.grid.batteries]:
-                    raise ValueError("gaat fout")
+                    raise ValueError("Cable doesn't end in a battery!")
 
+                # Raises error if cable makes steps unequal to 1
                 for loc in range(len(cable.route) - 1) :
                     if abs(cable.route[loc][0] - cable.route[loc + 1][0]) + abs(cable.route[loc][1] - cable.route[loc + 1][1]) != 1:
-                        raise ValueError ("gaat fout")
+                        raise ValueError ("Cable makes steps bigger or smaller than one!")
 
                 # Processes cable in the grid
                 self.grid.cables.append(cable)

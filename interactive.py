@@ -15,8 +15,7 @@ from code.algorithms.configurations.greedy_configuration import Greedy_configura
 from code.algorithms.configurations.random_configuration import Random_configuration
 from code.classes.grid import Grid
 from code.algorithms.cable_routes.random_cable_route import Random_cable_route
-from code.algorithms.cable_routes.greedy_cable_route import Greedy_cable_route
-#from code.algorithms.cable_routes.shared_cable_route import Shared_cable_route
+
 from code.algorithms.cable_routes.shared_cable_extended import Shared_cable_extended
 from code.visualisation.sampling import Sampleplot
 from code.algorithms.hillclimber import Hillclimber
