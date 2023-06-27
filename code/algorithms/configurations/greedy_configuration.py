@@ -11,7 +11,7 @@ class Greedy_configuration:
     """
 
 
-    def __init__(self, input_grid: Grid):
+    def __init__(self, input_grid: Grid, greedy_choice: int):
         """
         Takes a grid as input.
         Sorts houses by max_output (descending).
@@ -19,6 +19,7 @@ class Greedy_configuration:
 
         grid_var: Grid = copy.copy(input_grid)
         self.grid: Grid = grid_var
+        self.choice: int = greedy_choice
         self.sorted_houses: list[House] = self.sort_houses()
         self.configuration: list[list[House, Battery]] = []
 
@@ -27,9 +28,15 @@ class Greedy_configuration:
         """
         Sorts houses by max_output (descending).
         """
+        if self.choice == 1:
+            return sorted(self.grid.houses, key=lambda x: x.max_output, reverse=True)
 
-        random.shuffle(self.grid.houses)
-        return self.grid.houses
+        elif self.choice == 2:
+            return sorted(self.grid.houses, key=lambda x: x.max_output, reverse=False)
+
+        elif self.choice == 3:
+            random.shuffle(self.grid.houses)
+            return self.grid.houses
 
 
     def sort_batteries(self, house: House) -> list[list[Battery, int]]:
