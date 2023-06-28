@@ -5,7 +5,10 @@ __pycache__/
 *$py.class
 .pyc
 .DS_Store
-hist_plot1.csv
+hist_plot.csv
+output.json
+pic.png
+sample.png
 
 # C extensions
 *.so
