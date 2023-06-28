@@ -16,16 +16,21 @@ from code.helpers.minimum_score import update_minimum_score
 from code.helpers.best_grid import update_best_grid
 from code.algorithms.configurations.configuration_helpers import make_configuration, process_configuration
 
+# Introduces Case
 print("\nWelcome! Our problem is divided into two seperate problems:")
 print("matching houses to batteries (configuration) and laying cables from houses to batteries (cable route).\n")
 print("Please answer by typing in the chosen number.\n")
 
+# Asks for grid type
 grid_version: int = int(input("Firstly, which grid do you want to run: grid 1, 2 or 3? \nType grid: "))
+
+# Asks for configuration algorithm
 configuration_version: int = int(input("\nWhich configuration do you want to run:\n"
 "1.random (baseline) (type: '1') or\n"
 "2.greedy (type: '2')?\n"
 "Type configuration: "))
 
+# Asks for assignment order if greedy configuration
 if configuration_version == 2:
     greedy_version: int = int(input("\nIn which order do you want to assign houses to batteries in the configuration? Ordered by:\n"
     "1.max output with highest output first (type: '1'),\n"
@@ -33,20 +38,23 @@ if configuration_version == 2:
     "3.random (type: '3')? \n"
     "Type choice: "))
 
+# Asks for cable route algorithm
 cable_route_version: int = int(input("\nAnd which cable route version do you want to use:\n"
 "1.random (baseline) (type: '1') or\n"
 "2.greedy with shared cables (type: '2')?\n"
 "Type cable route: "))
 
+# Asks for number iterations 
 iteration: int = int(input("\nHow many times do you want to run it? \nType number: "))
 
+# Asks for Hillclimber
 if cable_route_version == 2:
     hillclimber: str = input("\nDo you want to run hillclimber afterwards? \nType (y/n): ")
 
     if hillclimber == 'y':
         hill_iterations: int = int(input("\nWhat is the maximum of iterations you want it to run for a single improvement? \nType number: "))
 
-
+# Asks for Histogram
 if cable_route_version != 1:
     histogram: str = input("\nDo you want to plot a histogram? \nType (y/n): ")
 
