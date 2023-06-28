@@ -3,23 +3,12 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
-import random
 import csv
-from code.helpers.loaders import load_houses, load_batteries
-from .visualize import Gridplot
-from code.helpers.json_output import output_json
-from operator import itemgetter
-from code.classes.grid import Grid
-
-from code.algorithms.cable_routes.shared_cable_route import Shared_cable_route
-from code.algorithms.configurations.greedy_configuration import Greedy_configuration
-from code.algorithms.configurations.random_configuration import Random_configuration
-from code.algorithms.cable_routes.shared_cable_route import Shared_cable_route
 
 
 class Sampleplot:
     """
-    Takes random sample solutions and visualizes them in a histogram plot.
+    Takes scores and visualizes them in a histogram plot.
     """
 
 
@@ -49,11 +38,17 @@ class Sampleplot:
 
         y = ((1 / (np.sqrt(2 * np.pi) * sigma)) *np.exp(-0.5 * (1 / sigma * (bins - mu))**2))
         ax.plot(bins, y, '--')
+        print("y: ", y)
+        print("sigma: ", sigma)
+        print("scores: ", self.scores)
+        print("mu: ", mu)
+        print("bin size: ", bins)
 
         ax.set_xlabel('Costs')
         ax.set_ylabel('Probability density')
         ax.set_title(r'Grid Cost Probability')
         fig.tight_layout()
+        plt.show()
         plt.savefig("saved_output/sample.")
 
 
