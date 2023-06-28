@@ -53,9 +53,12 @@ While running main.py you will have to answer a couple of questions as posed in 
 
 This is an example on how to run main.py.
 
-
-1. `Which configuration do you want to run:\n" "1. Random (baseline) (type: '1') or\n 2. Greedy (type: '2')?\n Type configuration:.`
-    press 1.
+1. Choose the configuration
+`Which configuration do you want to run:\n"`
+`"1. Random (baseline) (type: '1') or\n"`
+`"2. Greedy (type: '2')?\n"`
+`"Type configuration:.`
+press 2 and hit enter.
 
 2. Choose the configuration you want to run (matching houses with batteries): 1 = Random, 2 = Greedy. Press the number of the configuration you wish to run. Hit enter.
 
