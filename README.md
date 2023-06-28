@@ -50,7 +50,7 @@ While running main.py you will have to answer a couple of questions as posed in 
 
 ### Usage Example
 
-This is an example on how to run main.py for district 1 where houses and batteries are configured with a greedy algorithm and where cables are laid with a greedy algorithm combined. A hillclimber and histogram plot are also generated. This may take approximately 1 to 2 minutes. Time may depend on local maximum for the Hillclimber algorithm.
+This is an example on how to run main.py for district 1 where houses and batteries are configured with a greedy algorithm and where cables are laid with a greedy algorithm combined. A hillclimber and histogram plot are also generated. This may take approximately 1 to 2 minutes. Time may depend on local minimum for the Hillclimber algorithm.
 
 1. Type `1` for district 1. Hit enter.
 2. Type `2` for greedy configuration. Hit enter.
