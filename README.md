@@ -47,7 +47,36 @@ conda install --file requirements.txt
 
 Start by running the main script in the terminal with: `python main.py`
 
-While running main.py you will have to answer a couple of questions:
+While running main.py you will have to answer a couple of questions as posed in the terminal. Please do not deviate from the specified input (for example pressing '1' where 'y' or 'n' is asked):
+
+### Usage Example
+
+This is an example on how to run main.py.
+
+
+1. `Which configuration do you want to run:\n" "1. Random (baseline) (type: '1') or\n 2. Greedy (type: '2')?\n Type configuration:.`
+    press 1.
+
+2. Choose the configuration you want to run (matching houses with batteries): 1 = Random, 2 = Greedy. Press the number of the configuration you wish to run. Hit enter.
+
+3. (Only if Greedy configuration is chosen) Choose in which order you want to assign the houses to the batteries: 1 = Max output first, 2 = Lowest output first and 3 = random. Hit enter.
+
+4. Choose the cable route algorithm you would like to run: 1 = Random, 2 = Greedy.
+
+5. Type in the number of times you would like the programme to run. Hit enter.
+
+6. (Only if Greedy cable route is chosen) Choose if you want to run hillclimber. If you would like to run hill climber press 'y', if not press 'n' and hit enter.
+
+7. (Only if Hillclimber is chosen) Type the number of times you would like the hillclimber to try improvements without finding a better solution. this number is reset after every improvement. Hit enter.
+
+8. (Only if iterations > 0) Choose if you want to plot a histogram of the results. press 'y' if you do and 'n' if you do not. Hit enter.
+
+9. (only if a Histogram is chosen) Choose the number of bins to be displaced in the histogram. Type in the number, preferably lower than the specified number of iterations. Hit enter.
+
+
+
+
+
 1. The first question is about the Grid. There are 3 different Grids, which one would you like to run? Press the grid number and hit enter.
 
 2. Choose the configuration you want to run (matching houses with batteries): 1 = Random, 2 = Greedy. Press the number of the configuration you wish to run. Hit enter.
