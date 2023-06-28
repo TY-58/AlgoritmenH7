@@ -55,11 +55,12 @@ if cable_route_version == 2:
         hill_iterations: int = int(input("\nWhat is the maximum of iterations you want it to run for a single improvement? \nType number: "))
 
 # Asks for Histogram
-if cable_route_version != 1:
-    histogram: str = input("\nDo you want to plot a histogram? \nType (y/n): ")
+if iteration > 1:
+    if cable_route_version != 1:
+        histogram: str = input("\nDo you want to plot a histogram? \nType (y/n): ")
 
-    if histogram == 'y':
-        bin_size: int = int(input("\nWhat bin size would you like? Choose a bin size lower than the number of iterations. \nType number: "))
+        if histogram == 'y':
+            bin_size: int = int(input("\nWhat bin size would you like? Choose a bin size lower than the number of iterations. \nType number: "))
 
 
 # Set upper bound for minimum score
@@ -101,9 +102,11 @@ if cable_route_version == 2:
         grid_visual: Gridplot = Gridplot(grid)
         grid_visual.make_plot()
         output_json(grid)
+
 if cable_route_version != 1:
-    if histogram == 'y':
-        hist_plot = Sampleplot(score_list, bin_size)
+    if iteration > 1:
+        if histogram == 'y':
+            hist_plot = Sampleplot(score_list, bin_size)
 
 
 print(f"\nBest cost is {grid.total_cost}!\n"
