@@ -54,9 +54,9 @@ class Hillclimber:
             if improved == True:
                 improvements += 1
                 if self.stuck == 0:
-                    print("Improved on the first iteration")
+                    print("Improved on the first try")
                 else:
-                    print("Improved after", self.stuck, "iterations")
+                    print("Improved after", self.stuck, "tries")
                 print("Improved costs: ", score_new)
                 self.last_grid = self.current_grid
                 self.last_config = self.current_config

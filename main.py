@@ -26,22 +26,22 @@ grid_version: int = int(input("Firstly, which grid do you want to run: grid 1, 2
 
 # Asks for configuration algorithm
 configuration_version: int = int(input("\nWhich configuration do you want to run:\n"
-"1.random (baseline) (type: '1') or\n"
-"2.greedy (type: '2')?\n"
+"1. Random (baseline) (type: '1') or\n"
+"2. Greedy (type: '2')?\n"
 "Type configuration: "))
 
 # Asks for assignment order if greedy configuration
 if configuration_version == 2:
     greedy_version: int = int(input("\nIn which order do you want to assign houses to batteries in the configuration? Ordered by:\n"
-    "1.max output with highest output first (type: '1'),\n"
-    "2.with lowest output first (type: '2') or\n"
-    "3.random (type: '3')? \n"
+    "1. Highest house max energy output first (type: '1'),\n"
+    "2. Lowest house max energy output first (type: '2') or\n"
+    "3. Random (type: '3')? \n"
     "Type choice: "))
 
 # Asks for cable route algorithm
 cable_route_version: int = int(input("\nAnd which cable route version do you want to use:\n"
-"1.random (baseline) (type: '1') or\n"
-"2.greedy with shared cables (type: '2')?\n"
+"1. Random (baseline) (type: '1') or\n"
+"2. Greedy (type: '2')?\n"
 "Type cable route: "))
 
 # Asks for number iterations 
