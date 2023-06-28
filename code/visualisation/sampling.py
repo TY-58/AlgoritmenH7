@@ -32,7 +32,7 @@ class Sampleplot:
 
         mu = np.mean(self.scores)
         sigma = np.std(self.scores)
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(15, 10))
         _, bins, _ = ax.hist(self.scores, bins=self.bin_size, density=True)
 
         y = ((1 / (np.sqrt(2 * np.pi) * sigma)) *np.exp(-0.5 * (1 / sigma * (bins - mu))**2))
@@ -42,7 +42,6 @@ class Sampleplot:
         ax.set_ylabel('Probability density')
         ax.set_title(r'Grid Cost Probability')
         fig.tight_layout()
-        plt.show()
         plt.savefig("saved_output/sample.")
 
 
