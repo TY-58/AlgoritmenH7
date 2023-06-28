@@ -97,4 +97,3 @@ class Gridplot:
                      ylim=(0, 50), yticks=np.arange(1, 50))
 
               plt.savefig("saved_output/pic.")
-              #plt.show()
