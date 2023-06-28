@@ -2,20 +2,13 @@ import random
 import copy
 from tqdm import tqdm
 
-
-from code.helpers.loaders import load_houses, load_batteries
-from code.classes.battery import Battery
-from code.classes.cable import Cable
-from code.classes.house import House
 from code.visualisation.visualize import Gridplot
 from code.helpers.json_output import output_json
 from operator import itemgetter
 from code.algorithms.configurations.greedy_configuration import Greedy_configuration
-#from code.algorithms.match_fred import Fred_configuration
 from code.algorithms.configurations.random_configuration import Random_configuration
 from code.classes.grid import Grid
 from code.algorithms.cable_routes.random_cable_route import Random_cable_route
-
 from code.algorithms.cable_routes.shared_cable_route import Shared_cable_route
 from code.visualisation.sampling import Sampleplot
 from code.algorithms.hillclimber import Hillclimber
@@ -55,7 +48,7 @@ if cable_route_version == 2:
 
 
 if cable_route_version != 1:
-    histogram: str = input("\nDo you want to plot a histogram? Type (y/n): ")
+    histogram: str = input("\nDo you want to plot a histogram? \nType (y/n): ")
 
     if histogram == 'y':
         bin_size: int = int(input("\nWhat bin size would you like? Choose a bin size lower than the number of iterations. \nType number: "))
@@ -100,9 +93,9 @@ if cable_route_version == 2:
         grid_visual: Gridplot = Gridplot(grid)
         grid_visual.make_plot()
         output_json(grid)
-
-if histogram == 'y':
-    hist_plot = Sampleplot(score_list, bin_size)
+if cable_route_version != 1:
+    if histogram == 'y':
+        hist_plot = Sampleplot(score_list, bin_size)
 
 
 print(f"\nBest cost is {grid.total_cost}!\n"
