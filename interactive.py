@@ -67,6 +67,7 @@ minimum_score = 500000
 best_grid = Grid(51, grid_version)
 best_grid.total_cost = 500000
 score_list: list[int] = []
+states_visited: list[int] = []
 
 # Running the chosen algorithm(s)
 for _ in tqdm(range(iteration)):
@@ -77,7 +78,7 @@ for _ in tqdm(range(iteration)):
     else:
         configuration: Greedy_configuration = Greedy_configuration(grid, greedy_version)
 
-    configured = make_configuration(configuration)
+    configured = make_configuration(configuration, states_visited)
     process_configuration(configuration, configured)
     grid.configuration = configured
 
@@ -107,3 +108,4 @@ if histogram == 'y':
 
 print(f"Best cost is {grid.total_cost}!\n"
 "You can find the outputted json, histogram and/or visualisation of the solution(s) in saved_output.\n")
+print(f"The algorithm visited a mean of {float(sum(states_visited))/len(states_visited)} states per solution.")

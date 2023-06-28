@@ -67,18 +67,18 @@ class Random_configuration:
         return configuration
 
 
-    def make_configuration(self) -> list[list[House, Battery]]:
-        """
-        Runs try_configuration until a configuration is found.
-        Returns the found configuration.
-        """
-
-        self.configuration = []
-
-        while self.configuration == []:
-            self.try_configuration()
-
-        return self.configuration
+    # def make_configuration(self) -> list[list[House, Battery]]:
+    #     """
+    #     Runs try_configuration until a configuration is found.
+    #     Returns the found configuration.
+    #     """
+    #
+    #     self.configuration = []
+    #
+    #     while self.configuration == []:
+    #         self.try_configuration()
+    #
+    #     return self.configuration
 
 
     def process_configuration(self, configuration: list[list[House, Battery]]) -> None:

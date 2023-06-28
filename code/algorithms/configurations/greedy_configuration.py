@@ -99,18 +99,18 @@ class Greedy_configuration:
         return temp_configuration
 
 
-    def make_configuration(self) -> list[list[House, Battery]]:
-        """
-        Runs try_configuration until a configuration is found.
-        Returns found configuration.
-        """
-
-        self.configuration = []
-
-        while self.configuration == []:
-            self.try_configuration()
-
-        return self.configuration
+    # def make_configuration(self) -> list[list[House, Battery]]:
+    #     """
+    #     Runs try_configuration until a configuration is found.
+    #     Returns found configuration.
+    #     """
+    #
+    #     self.configuration = []
+    #
+    #     while self.configuration == []:
+    #         self.try_configuration()
+    #
+    #     return self.configuration
 
 
     def distance_to_battery(self, house: House, battery: Battery) -> int:
