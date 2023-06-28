@@ -22,7 +22,7 @@ print("matching houses to batteries (configuration) and laying cables from house
 print("Please answer by typing in the chosen number.\n")
 
 # Asks for grid type
-grid_version: int = int(input("Firstly, which grid do you want to run: grid 1, 2 or 3? \nType grid: "))
+grid_version: int = int(input("Firstly, which district do you want to run: district 1, 2 or 3? \nType grid: "))
 
 # Asks for configuration algorithm
 configuration_version: int = int(input("\nWhich configuration do you want to run:\n"

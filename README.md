@@ -6,6 +6,7 @@ In this project we are tasked with a case named SmartGrid. We are given a 3 grid
 
 This creates the main problem of the SmartGrid case: How can you reduce as much of the cost while also making sure every house is connected to a battery and without exceeding the maximum capacity of the batteries?
 
+
 ## Approach
 
 We have implemented different configurations that match houses with batteries and have implemented different ways for a route to be laid from houses to batteries:
@@ -25,6 +26,7 @@ We have implemented different configurations that match houses with batteries an
 ### Hillclimber
 
 This Hillclimber algorithm takes an already made grid from any combination of configuration with the Shared Cable Route. A provided variable (conned iterations) dictates how many times the algorithm can try to improve the current state without any improvement before quitting. This variable resets when a better state has been found within this set number of iterations. During the algorithm two matches within the configuration list are tasked to swap batteries after which cables are laid again. If the cost of the new grid is improved, it is taken as the current state and the provided variable is reset. The hillclimber is only possible with the shared cable route.
+
 
 ## Requirements
 You will need to Download at least Python3 version == 3.10.9
@@ -47,60 +49,26 @@ conda install --file requirements.txt
 
 Start by running the main script in the terminal with: `python main.py`
 
-While running main.py you will have to answer a couple of questions as posed in the terminal. Please do not deviate from the specified input (for example pressing '1' where 'y' or 'n' is asked):
+While running main.py you will have to answer a couple of questions as posed in the terminal. Please do not deviate from the specified input (for example pressing `1` where `y` or `n` is asked):
 
 ### Usage Example
 
-This is an example on how to run main.py.
+This is an example on how to run main.py for district 1 with a hillclimber and histogram plot. This may take approximately 
 
-1. Choose the configuration
-```bash
-Which configuration do you want to run:
-1. Random (baseline) (type: '1') or
-2. Greedy (type: '2')?
-Type configuration:.
-```
-press 2 and hit enter.
+1. Type `1` for district 1. Hit enter.
+2. Type `2` for greedy configuration. Hit enter.
+3. Type `1` for max output first configuration order. Hit enter.
+4. Type `1` for greedy cable route. Hit enter.
+5. Type `1000` for number of iterations. Hit enter.
+6. Type `y` for Hillclimber. Hit enter.
+7. Type `100` for Hillclimber single improvement iterations. Hit enter.
+8. Type `y` for Histogram. Hit enter.
+9. Type `50` for bin size. Hit enter.
 
-2. Choose the configuration you want to run (matching houses with batteries): 1 = Random, 2 = Greedy. Press the number of the configuration you wish to run. Hit enter.
+You will likely get a cost score between 30100 and 33000 but small deviations might occur. 
 
-3. (Only if Greedy configuration is chosen) Choose in which order you want to assign the houses to the batteries: 1 = Max output first, 2 = Lowest output first and 3 = random. Hit enter.
+After following all these steps the results will be saved in the saved_output folder. You will find the JSON output (the full route per house), pic.png (visual of the best result) and finally a histogram plot showing the probability density for attained cost scores.
 
-4. Choose the cable route algorithm you would like to run: 1 = Random, 2 = Greedy.
-
-5. Type in the number of times you would like the programme to run. Hit enter.
-
-6. (Only if Greedy cable route is chosen) Choose if you want to run hillclimber. If you would like to run hill climber press 'y', if not press 'n' and hit enter.
-
-7. (Only if Hillclimber is chosen) Type the number of times you would like the hillclimber to try improvements without finding a better solution. this number is reset after every improvement. Hit enter.
-
-8. (Only if iterations > 0) Choose if you want to plot a histogram of the results. press 'y' if you do and 'n' if you do not. Hit enter.
-
-9. (only if a Histogram is chosen) Choose the number of bins to be displaced in the histogram. Type in the number, preferably lower than the specified number of iterations. Hit enter.
-
-
-
-
-
-1. The first question is about the Grid. There are 3 different Grids, which one would you like to run? Press the grid number and hit enter.
-
-2. Choose the configuration you want to run (matching houses with batteries): 1 = Random, 2 = Greedy. Press the number of the configuration you wish to run. Hit enter.
-
-3. (Only if Greedy configuration is chosen) Choose in which order you want to assign the houses to the batteries: 1 = Max output first, 2 = Lowest output first and 3 = random. Hit enter.
-
-4. Choose the cable route algorithm you would like to run: 1 = Random, 2 = Greedy.
-
-5. Type in the number of times you would like the programme to run. Hit enter.
-
-6. (Only if Greedy cable route is chosen) Choose if you want to run hillclimber. If you would like to run hill climber press 'y', if not press 'n' and hit enter.
-
-7. (Only if Hillclimber is chosen) Type the number of times you would like the hillclimber to try improvements without finding a better solution. this number is reset after every improvement. Hit enter.
-
-8. (Only if iterations > 0) Choose if you want to plot a histogram of the results. press 'y' if you do and 'n' if you do not. Hit enter.
-
-9. (only if a Histogram is chosen) Choose the number of bins to be displaced in the histogram. Type in the number, preferably lower than the specified number of iterations. Hit enter.
-
-After following all these steps the results will be saved in the saved_output folder. You will find the JSON output (the full route per house), pic.png (visual of the best result) and finally a graph with the grid cost probability (probability of value for x amount of runs).
 
 ## Structure
 The following list contains the most important maps and brief explanations.
@@ -114,11 +82,13 @@ The following list contains the most important maps and brief explanations.
 - data_grids: contains csv files with information house and battery information per district
 - saved_ouput: contains generated output after a run
 
+
 ## Authors
 
-- Otto Jong
+- Otto de Jong
 - Frederieke Loth
 - Turhan Yildiz
+
 
 ## Acknowledgments
 Code from third parties:
