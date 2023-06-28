@@ -14,14 +14,15 @@ class Greedy_cable_route:
     get stuck in the grid.
     """
 
+
     def __init__(self, grid: Grid, configuration: list[list[House, Battery]]):
         """
         Takes grid and configuration as input.
         Lays cables from houses to matched batteries.
         """
 
-        self.grid: Grid = grid
-        self.configuration: list[list[House, Battery]] = configuration
+        self.grid = grid
+        self.configuration = configuration
         self.lay_cables(configuration)
 
 
@@ -32,13 +33,13 @@ class Greedy_cable_route:
         ensure that the route doesn't get stuck in a loop.
         """
 
-        cable_route: list[list[int, int]] = []
-        current_location: list[int, int] = house.location
+        cable_route = []
+        current_location = house.location
 
-        x_location: int = current_location[0]
-        y_locatio: int = current_location[1]
+        x_location = current_location[0]
+        y_location = current_location[1]
 
-        end_location: list[int, int] = battery.location
+        end_location = battery.location
 
         cable_route.append([x_location, y_location])
 
@@ -46,7 +47,7 @@ class Greedy_cable_route:
         while x_location != end_location[0] or y_location != end_location[1]:
 
             # Get all possible directions from current location
-            directions: list[str] = self.get_directions(x_location, y_location, end_location)
+            directions_choices = self.get_directions(x_location, y_location, end_location)
 
             # Route can never go back, so remove option to go back from directions
             if len(cable_route) > 2:
@@ -61,9 +62,9 @@ class Greedy_cable_route:
                         directions.remove('d')
 
             # Create a list of tuples of the direction and the distance to destination
-            directions_choices: list[list[str, int]] = []
+            directions_choices = []
             for direct in directions:
-                distance: int = self.get_current_distance(direct, x_location, y_location, end_location)
+                distance = self.get_current_distance(direct, x_location, y_location, end_location)
 
                 directions_choices.append([direct, distance])
 
@@ -73,15 +74,15 @@ class Greedy_cable_route:
             # Depending on how many directions are possible, create a distribution and choose direction
             # If there are none, take a step back to previous location
             if len(directions_choices) == 0:
-                direction: str = random.choice(self.get_directions(x_location, y_location, end_location))
+                direction = random.choice(self.get_directions(x_location, y_location, end_location))
             if len(directions_choices) == 1:
-                direction: str = directions_choices[0][0]
+                direction = directions_choices[0][0]
             if len(directions_choices) == 2:
-                direction: str = random.choices(directions_choices, weights=(98,2), k=1)[0][0]
+                direction = random.choices(directions_choices, weights=(98,2), k=1)[0][0]
             if len(directions_choices) == 3:
-                direction: str = random.choices(directions_choices, weights=(90,6,4), k=1)[0][0]
+                direction = random.choices(directions_choices, weights=(90,6,4), k=1)[0][0]
             if len(directions_choices) == 4:
-                direction: str = random.choices(directions_choices, weights=(80,10,6,4), k=1)[0][0]
+                direction = random.choices(directions_choices, weights=(80,10,6,4), k=1)[0][0]
 
             # Move in chosen direction and append to route
             if direction == 'd':
@@ -111,7 +112,7 @@ class Greedy_cable_route:
         Batteries other than the destination battery are not allowed to move over.
         """
 
-        directions: list[str] = []
+        directions = []
 
         if y_location > 0 and (self.grid.grid[y_location-1][x_location] != 2 or [x_location, y_location-1] == end_location):
             directions.append('d')
@@ -158,12 +159,12 @@ class Greedy_cable_route:
             return []
 
 
-    def delete_loops(self, x_location: int, y_location: int, cable_route: list[list[int, int]]):
+    def delete_loops(self, x_location: int, y_location: int, cable_route: list[list[int, int]]) -> None:
         """
         Deletes all loops in the route thusfar.
         """
 
-        counter: int = 0
+        counter = 0
 
         # Checks every location in list.
         for location in cable_route:
@@ -174,12 +175,12 @@ class Greedy_cable_route:
                 break
 
 
-    def lay_cables(self, configuration: list[list[House, Battery]]):
+    def lay_cables(self, configuration: list[list[House, Battery]]) -> None:
         """
         A function that lays all the cables from houses to the matched batteries.
         """
 
         for combination in configuration:
-            route: list[list[int, int]] = self.make_route(combination[0], combination[1])
-            cable: Cable = Cable(route)
+            route = self.make_route(combination[0], combination[1])
+            cable = Cable(route)
             self.grid.cables.append(cable)

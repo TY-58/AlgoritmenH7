@@ -65,28 +65,3 @@ class Random_configuration:
 
         self.configuration = configuration
         return configuration
-
-
-    # def make_configuration(self) -> list[list[House, Battery]]:
-    #     """
-    #     Runs try_configuration until a configuration is found.
-    #     Returns the found configuration.
-    #     """
-    #
-    #     self.configuration = []
-    #
-    #     while self.configuration == []:
-    #         self.try_configuration()
-    #
-    #     return self.configuration
-
-
-    def process_configuration(self, configuration: list[list[House, Battery]]) -> None:
-        """
-        Adds all houses to the house_connections of the batteries that they're matched with.
-        """
-
-        for battery in self.grid.batteries:
-            for house in self.grid.houses:
-                if [house, battery] in configuration:
-                    battery.house_connections.append(house)
