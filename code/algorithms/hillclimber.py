@@ -2,7 +2,7 @@ from __future__ import annotations
 import random
 import copy
 
-from .cable_routes.shared_cable_extended import Shared_cable_extended
+from .cable_routes.shared_cable_route import Shared_cable_route
 #from .cable_routes.shared_cable_route import Shared_cable_route
 from .configurations.greedy_configuration import Greedy_configuration
 from code.classes.grid import Grid
@@ -171,7 +171,7 @@ class Hillclimber:
         self.current_grid.process_configuration_grid(configuration)
 
         # Lays the cables in the grid
-        Shared_cable_extended(self.current_grid, configuration)
+        Shared_cable_route(self.current_grid, configuration)
 
         # Calculates new cost
         self.current_grid.calc_shared_cable_cost()

@@ -11,10 +11,10 @@ from code.helpers.json_output import output_json
 from operator import itemgetter
 from code.classes.grid import Grid
 
-from code.algorithms.cable_routes.shared_cable_extended import Shared_cable_extended
+from code.algorithms.cable_routes.shared_cable_route import Shared_cable_route
 from code.algorithms.configurations.greedy_configuration import Greedy_configuration
 from code.algorithms.configurations.random_configuration import Random_configuration
-from code.algorithms.cable_routes.shared_cable_extended import Shared_cable_extended
+from code.algorithms.cable_routes.shared_cable_route import Shared_cable_route
 
 
 class Sampleplot:
@@ -59,7 +59,7 @@ class Sampleplot:
 
     def make_csv_hist(self) -> None:
         """
-        Makes a csv file of the scores plotted in the histogram. 
+        Makes a csv file of the scores plotted in the histogram.
         """
 
         with open('saved_output/hist_plot.csv', 'w', newline='') as file:

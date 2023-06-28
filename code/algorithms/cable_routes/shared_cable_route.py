@@ -4,7 +4,7 @@ from code.classes.cable import Cable
 
 MINIMUM_DISTANCE: int = 102
 
-class Shared_cable_extended:
+class Shared_cable_route:
     """
     A class for deciding the routes for the cables from houses to batteries.
     Takes a grid and a configuration as input and adds cables to the grid.
