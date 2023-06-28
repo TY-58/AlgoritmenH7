@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import csv
 
-
 class Sampleplot:
     """
     Takes scores and visualizes them in a histogram plot.
@@ -38,11 +37,6 @@ class Sampleplot:
 
         y = ((1 / (np.sqrt(2 * np.pi) * sigma)) *np.exp(-0.5 * (1 / sigma * (bins - mu))**2))
         ax.plot(bins, y, '--')
-        print("y: ", y)
-        print("sigma: ", sigma)
-        print("scores: ", self.scores)
-        print("mu: ", mu)
-        print("bin size: ", bins)
 
         ax.set_xlabel('Costs')
         ax.set_ylabel('Probability density')
