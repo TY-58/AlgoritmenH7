@@ -4,7 +4,6 @@ import copy
 from itertools import combinations
 
 from code.classes.cable import Cable
-from code.classes.house import House
 
 class Greedy_cable_route:
     """

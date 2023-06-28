@@ -3,10 +3,7 @@ import random
 import copy
 
 from .cable_routes.shared_cable_route import Shared_cable_route
-#from .cable_routes.shared_cable_route import Shared_cable_route
-from .configurations.greedy_configuration import Greedy_configuration
 from code.classes.grid import Grid
-from code.visualisation.visualize import Gridplot
 
 class Hillclimber:
     """
@@ -56,7 +53,10 @@ class Hillclimber:
             # Saves the improvement
             if improved == True:
                 improvements += 1
-                print("Improved after", self.stuck, "iterations")
+                if self.stuck == 0:
+                    print("Improved on the first iteration")
+                else:
+                    print("Improved after", self.stuck, "iterations")
                 print("Improved costs: ", score_new)
                 self.last_grid = self.current_grid
                 self.last_config = self.current_config

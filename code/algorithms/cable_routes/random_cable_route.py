@@ -3,7 +3,6 @@ import random
 import copy
 
 from code.classes.cable import Cable
-from code.classes.house import House
 
 class Random_cable_route:
     """

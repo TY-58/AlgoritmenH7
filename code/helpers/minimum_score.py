@@ -1,5 +1,4 @@
 from __future__ import annotations
-import copy
 
 from code.visualisation.visualize import Gridplot
 from .json_output import output_json
