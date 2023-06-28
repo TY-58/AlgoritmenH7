@@ -23,45 +23,43 @@ from code.helpers.minimum_score import update_minimum_score
 from code.helpers.best_grid import update_best_grid
 from code.algorithms.configurations.configuration_helpers import make_configuration, process_configuration
 
-print()
-print("Welcome! Our problem is divided into two seperate problems:")
+print("\nWelcome! Our problem is divided into two seperate problems:")
 print("matching houses to batteries (configuration) and laying cables from houses to batteries (cable route).\n")
 print("Please answer by typing in the chosen number.\n")
 
-grid_version: int = int(input("Firstly, which grid do you want to run: grid 1, 2 or 3? Type grid: "))
-print()
-configuration_version: int = int(input("Which configuration do you want to run:\n"
+grid_version: int = int(input("Firstly, which grid do you want to run: grid 1, 2 or 3? \nType grid: "))
+configuration_version: int = int(input("\nWhich configuration do you want to run:\n"
 "1.random (baseline) (type: '1') or\n"
 "2.greedy (type: '2')?\n"
 "Type configuration: "))
-print()
+
 if configuration_version == 2:
-    greedy_version: int = int(input("In which order do you want to assign houses to batteries in the configuration? Ordered by:\n"
+    greedy_version: int = int(input("\nIn which order do you want to assign houses to batteries in the configuration? Ordered by:\n"
     "1.max output with highest output first (type: '1'),\n"
     "2.with lowest output first (type: '2') or\n"
     "3.random (type: '3')? \n"
     "Type choice: "))
-print()
-cable_route_version: int = int(input("And which cable route version do you want to use:\n"
+
+cable_route_version: int = int(input("\nAnd which cable route version do you want to use:\n"
 "1.random (baseline) (type: '1') or\n"
 "2.greedy with shared cables (type: '2')?\n"
 "Type cable route: "))
-print()
-iteration: int = int(input("How many times do you want to run it? Type number: "))
-print()
+
+iteration: int = int(input("\nHow many times do you want to run it? \nType number: "))
+
 if cable_route_version == 2:
-    hillclimber: str = input("Do you want to run hillclimber afterwards? Type (y/n): ")
-    print()
+    hillclimber: str = input("\nDo you want to run hillclimber afterwards? \nType (y/n): ")
+
     if hillclimber == 'y':
-        hill_iterations: int = int(input("What is the maximum of iterations you want it to run for a single improvement? Type number: "))
-        print()
+        hill_iterations: int = int(input("\nWhat is the maximum of iterations you want it to run for a single improvement? \nType number: "))
+
 
 if cable_route_version != 1:
-    histogram: str = input("Do you want to plot a histogram? Type (y/n): ")
-    print()
+    histogram: str = input("\nDo you want to plot a histogram? Type (y/n): ")
+
     if histogram == 'y':
-        bin_size: int = int(input("What bin size would you like? Choose a bin size lower than the number of iterations. Type number: "))
-        print()
+        bin_size: int = int(input("\nWhat bin size would you like? Choose a bin size lower than the number of iterations. \nType number: "))
+
 
 # Set upper bound for minimum score
 minimum_score = 500000
@@ -107,6 +105,6 @@ if histogram == 'y':
     hist_plot = Sampleplot(score_list, bin_size)
 
 
-print(f"Best cost is {grid.total_cost}!\n"
+print(f"\nBest cost is {grid.total_cost}!\n"
 "You can find the outputted json, histogram and/or visualisation of the solution(s) in saved_output.\n")
 print(f"The algorithm visited an average of {float(sum(states_visited))/len(states_visited)} states per solution.")
