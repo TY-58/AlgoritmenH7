@@ -6,7 +6,6 @@ In this project we are tasked with a case named SmartGrid. We are given a 3 grid
 
 This creates the main problem of the SmartGrid case: How can you reduce as much of the cost while also making sure every house is connected to a battery and without exceeding the maximum capacity of the batteries?
 
-
 ## Approach
 
 We have implemented different configurations that match houses with batteries and have implemented different ways for a route to be laid from houses to batteries:
@@ -27,7 +26,6 @@ We have implemented different configurations that match houses with batteries an
 
 This Hillclimber algorithm takes an already made grid from any combination of configuration with the Shared Cable Route. A provided variable (conned iterations) dictates how many times the algorithm can try to improve the current state without any improvement before quitting. This variable resets when a better state has been found within this set number of iterations. During the algorithm two matches within the configuration list are tasked to swap batteries after which cables are laid again. If the cost of the new grid is improved, it is taken as the current state and the provided variable is reset. The hillclimber is only possible with the shared cable route.
 
-
 ## Requirements
 You will need to Download at least Python3 version == 3.10.9
 
@@ -44,16 +42,15 @@ Or with Conda:
 conda install --file requirements.txt
 ```
 
-
 ## Usage
 
 Start by running the main script in the terminal with: `python main.py`
 
-While running main.py you will have to answer a couple of questions as posed in the terminal. Please do not deviate from the specified input (for example pressing `1` where `y` or `n` is asked):
+While running main.py you will have to answer a couple of questions as posed in the terminal that dictate which algorithms you choose to run. Please do not deviate from the specified input (for example pressing `1` where `y` or `n` is asked).
 
 ### Usage Example
 
-This is an example on how to run main.py for district 1 with a hillclimber and histogram plot. This may take approximately 
+This is an example on how to run main.py for district 1 where houses and batteries are configured with a greedy algorithm and where cables are laid with a greedy algorithm combined. A hillclimber and histogram plot are also generated. This may take approximately 1 to 2 minutes. Time may depend on local maximum for the Hillclimber algorithm.
 
 1. Type `1` for district 1. Hit enter.
 2. Type `2` for greedy configuration. Hit enter.
@@ -69,7 +66,6 @@ You will likely get a cost score between 30100 and 33000 but small deviations mi
 
 After following all these steps the results will be saved in the saved_output folder. You will find the JSON output (the full route per house), pic.png (visual of the best result) and finally a histogram plot showing the probability density for attained cost scores.
 
-
 ## Structure
 The following list contains the most important maps and brief explanations.
 
@@ -82,13 +78,11 @@ The following list contains the most important maps and brief explanations.
 - data_grids: contains csv files with information house and battery information per district
 - saved_ouput: contains generated output after a run
 
-
 ## Authors
 
 - Otto de Jong
 - Frederieke Loth
 - Turhan Yildiz
-
 
 ## Acknowledgments
 Code from third parties:
